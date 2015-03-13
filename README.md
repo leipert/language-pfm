@@ -1,52 +1,29 @@
-# GitHub flavored Markdown package [![Build Status](https://travis-ci.org/atom/language-gfm.svg?branch=master)](https://travis-ci.org/atom/language-gfm)
+# Pandoc flavored Markdown package
 
-Adds syntax highlighting and snippets to [GitHub flavored Markdown](https://help.github.com/articles/github-flavored-markdown)
-files in Atom.
+Adds syntax highlighting and snippets to [Pandoc flavored Markdown](http://johnmacfarlane.net/pandoc/README.html)
+files in Atom. This was forked from [Atom language-gfm](https://github.com/atom/language-gfm). The goal is to maintain compatibility with the **Github Flavored Markdown** package while adding as much pandoc functionality as possible.
 
-Contributions are greatly appreciated. Please fork this repository and open a
-pull request to add snippets, make grammar tweaks, etc.
+**Supported Pandoc Features**
 
-asdasd
-:   asdsa
+* Mathsyntax with inline `$...$` and `\(...\)` and block `$$...$$` and `\[...\]`
+* [Definition Lists]
+* [Raw HTML] with [inline markdown]
+* ... more to come!
 
-    **sadsad**
+[Definition Lists]: http://johnmacfarlane.net/pandoc/README.html#extension-definition_lists
+[Raw HTML]: http://johnmacfarlane.net/pandoc/README.html#extension-raw_html
+[inline markdown]: http://johnmacfarlane.net/pandoc/README.html#extension-markdown_in_html_blocks
 
-```javascript
-var x = Math.foo();
-```
+**Works great with other ATOM pandoc related packages**
 
-  * asdsaddas
-  * asdasdasd
-  1. asdsad
-  2. sadasd
-  3. asdasd
-  4. asdasd
-  55555. asdasd
+* [Autocomplete Bibtex] brings citation autocompletion
+* [Pen Paper Coffee] is a good looking theme for markdown editing
+* [Markdown Preview Plus] is wonderful markdown preview with Mathjax support, hopefully able to work with pandoc soon: [#27]
 
-@kkh
+[Autocomplete Bibtex]: https://atom.io/packages/autocomplete-bibtex
 
-sad #12
+[Pen Paper Coffee]: https://atom.io/packages/pen-paper-coffee-syntax
 
-<div class="foo">
-<ul>
-<li>
-**foo**
-</li>
-</ul>
-</div>
+[Markdown Preview Plus]: https://atom.io/packages/markdown-preview-plus
 
-$ x \subset y$
-
-$x \subset y $
-
-$x \subset y$
-
-$$
-x \subset y
-$$
-
-$$
-x \subset  y
-$$
-
-$$ x \subset y $$
+[#27]: https://github.com/Galadirith/markdown-preview-plus/pull/27
