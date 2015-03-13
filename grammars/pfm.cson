@@ -1,0 +1,775 @@
+name: 'Pandoc Markdown'
+scopeName: 'source.pfm'
+fileTypes: [
+  'markdown'
+  'md'
+  'mdown'
+  'mkd'
+  'mkdown'
+  'rmd'
+  'ron'
+]
+patterns: [
+  {
+    match: '\\\\.'
+    name: 'constant.character.escape.pfm'
+  }
+  {
+    begin: '(?<=^|[^\\w\\d\\*])\\*\\*\\*(?!$|\\*|\\s)'
+    end: '(?<!^|\\s)\\*\\*\\**\\*(?=$|[^\\w|\\d])'
+    name: 'markup.bold.italic.pfm'
+  }
+  {
+    begin: '(?<=^|[^\\w\\d_])___(?!$|_|\\s)'
+    end: '(?<!^|\\s)___*_(?=$|[^\\w|\\d])'
+    name: 'markup.bold.italic.pfm'
+  }
+  {
+    begin: '(?<=^|[^\\w\\d\\*])\\*\\*(?!$|\\*|\\s)'
+    end: '(?<!^|\\s)\\*\\**\\*(?=$|[^\\w|\\d])'
+    name: 'markup.bold.pfm'
+  }
+  {
+    begin: '(?<=^|[^\\w\\d_])__(?!$|_|\\s)'
+    end: '(?<!^|\\s)__*_(?=$|[^\\w|\\d])'
+    name: 'markup.bold.pfm'
+  }
+  {
+    begin: '(?<=^|[^\\w\\d\\*])\\*(?!$|\\*|\\s)'
+    end: '(?<!^|\\s)\\**\\*(?=$|[^\\w|\\d])'
+    name: 'markup.italic.pfm'
+  }
+  {
+    begin: '(?<=^|[^\\w\\d_\\{\\}])_(?!$|_|\\s)'
+    end: '(?<!^|\\s)_*_(?=$|[^\\w|\\d])'
+    name: 'markup.italic.pfm'
+  }
+  {
+    begin: '(?<=^|[^\\w\\d~])~~(?!$|~|\\s)'
+    end: '(?<!^|\\s)~~*~(?=$|[^\\w|\\d])'
+    name: 'markup.strike.pfm'
+  }
+  {
+    begin: '^#{6}\\s*'
+    end: '$'
+    name: 'markup.heading.heading-6.pfm'
+    patterns: [
+      {
+        include: '$self'
+      }
+    ]
+  }
+  {
+    begin: '^#{5}\\s*'
+    end: '$'
+    name: 'markup.heading.heading-5.pfm'
+    patterns: [
+      {
+        include: '$self'
+      }
+    ]
+  }
+  {
+    begin: '^#{4}\\s*'
+    end: '$'
+    name: 'markup.heading.heading-4.pfm'
+    patterns: [
+      {
+        include: '$self'
+      }
+    ]
+  }
+  {
+    begin: '^#{3}\\s*'
+    end: '$'
+    name: 'markup.heading.heading-3.pfm'
+    patterns: [
+      {
+        include: '$self'
+      }
+    ]
+  }
+  {
+    begin: '^#{2}\\s*'
+    end: '$'
+    name: 'markup.heading.heading-2.pfm'
+    patterns: [
+      {
+        include: '$self'
+      }
+    ]
+  }
+  {
+    begin: '^#{1}\\s*'
+    end: '$'
+    name: 'markup.heading.heading-1.pfm'
+    patterns: [
+      {
+        include: '$self'
+      }
+    ]
+  }
+  {
+    match: '(&)[a-zA-Z0-9]+(;)'
+    name: 'constant.character.entity.pfm'
+    captures:
+      '1':
+        name: 'punctuation.definition.entity.pfm'
+      '2':
+        name: 'punctuation.definition.entity.pfm'
+  }
+  {
+    match: '(&)#[0-9]+(;)'
+    name: 'constant.character.entity.pfm'
+    captures:
+      '1':
+        name: 'punctuation.definition.entity.pfm'
+      '2':
+        name: 'punctuation.definition.entity.pfm'
+  }
+  {
+    match: '(&)#x[0-9a-fA-F]+(;)'
+    name: 'constant.character.entity.pfm'
+    captures:
+      '1':
+        name: 'punctuation.definition.entity.pfm'
+      '2':
+        name: 'punctuation.definition.entity.pfm'
+  }
+  {
+    begin: '\\A---$'
+    end: '^(---|\\.\\.\\.)$'
+    captures:
+      '0':
+        name: 'comment.hr.pfm'
+    name: 'front-matter.yaml.pfm'
+    patterns: [
+      {
+        include: 'source.yaml'
+      }
+    ]
+  }
+  {
+    match: '^\\s*[*]{3,}\\s*$'
+    name: 'comment.hr.pfm'
+  }
+  {
+    match: '^\\s*[-]{3,}\\s*$'
+    name: 'comment.hr.pfm'
+  }
+  {
+    begin: '^\\s*[`~]{3,}\\s*coffee-?(script)?\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*[`~]{3,}$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.coffee.pfm'
+    contentName: 'source.coffee'
+    patterns: [
+      {
+        include: 'source.coffee'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*(javascript|js)\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.js.pfm'
+    contentName: 'source.js'
+    patterns: [
+      {
+        include: 'source.js'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*(markdown|mdown|md)\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.pfm'
+    patterns: [
+      {
+        include: '$self'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*json\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.json.pfm'
+    contentName: 'source.json'
+    patterns: [
+      {
+        include: 'source.json'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*css\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.css.pfm'
+    contentName: 'source.css'
+    patterns: [
+      {
+        include: 'source.css'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*less\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.less.pfm'
+    contentName: 'source.css.less'
+    patterns: [
+      {
+        include: 'source.css.less'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*xml\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.xml.pfm'
+    contentName: 'text.xml'
+    patterns: [
+      {
+        include: 'text.xml'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*(ruby|rb)\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.ruby.pfm'
+    contentName: 'source.ruby'
+    patterns: [
+      {
+        include: 'source.ruby'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*java\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.java.pfm'
+    contentName: 'source.java'
+    patterns: [
+      {
+        include: 'source.java'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*erlang\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.erlang.pfm'
+    contentName: 'source.erlang'
+    patterns: [
+      {
+        include: 'source.erlang'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*go(lang)?\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.go.pfm'
+    contentName: 'source.go'
+    patterns: [
+      {
+        include: 'source.go'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*cs(harp)?\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.cs.pfm'
+    contentName: 'source.cs'
+    patterns: [
+      {
+        include: 'source.cs'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*php\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.php.pfm'
+    contentName: 'source.php'
+    patterns: [
+      {
+        include: 'source.php'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*(sh|bash)\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.shell.pfm'
+    contentName: 'source.shell'
+    patterns: [
+      {
+        include: 'source.shell'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*py(thon)?\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.python.pfm'
+    contentName: 'source.python'
+    patterns: [
+      {
+        include: 'source.python'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*c\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.c.pfm'
+    contentName: 'source.c'
+    patterns: [
+      {
+        include: 'source.c'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*c(pp|\\+\\+)\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.cpp.pfm'
+    contentName: 'source.cpp'
+    patterns: [
+      {
+        include: 'source.cpp'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*(objc|objective-c)\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.objc.pfm'
+    contentName: 'source.objc'
+    patterns: [
+      {
+        include: 'source.objc'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*html\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.html.pfm'
+    contentName: 'source.html.basic'
+    patterns: [
+      {
+        include: 'text.html.basic'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*ya?ml\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.yaml.pfm'
+    contentName: 'source.yaml'
+    patterns: [
+      {
+        include: 'source.yaml'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*elixir\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.elixir.pfm'
+    contentName: 'source.elixir'
+    patterns: [
+      {
+        include: 'source.elixir'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,})\\s*(diff|patch|rej)\\s*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.code.diff.pfm'
+    contentName: 'source.diff'
+    patterns: [
+      {
+        include: 'source.diff'
+      }
+    ]
+  }
+  {
+    begin: '^\\s*([`~]{3,}).*$'
+    beginCaptures:
+      '0':
+        name: 'support.pfm'
+    end: '^\\s*\\1$'
+    endCaptures:
+      '0':
+        name: 'support.pfm'
+    name: 'markup.raw.pfm'
+  }
+  {
+    begin: '(`+)(?!$)'
+    end: '\\1'
+    name: 'markup.raw.pfm'
+  }
+  {
+    match: '(\\[!)(\\[)([^\\]]*)(\\])((\\()[^\\)]+(\\)))(\\])(((\\()[^\\)]+(\\)))|((\\[)[^\\]]+(\\])))'
+    name: 'link'
+    captures:
+      '1':
+        name: 'punctuation.definition.begin.pfm'
+      '2':
+        name: 'punctuation.definition.begin.pfm'
+      '3':
+        name: 'entity.pfm'
+      '4':
+        name: 'punctuation.definition.end.pfm'
+      '5':
+        name: 'markup.underline.link.pfm'
+      '6':
+        name: 'punctuation.definition.begin.pfm'
+      '7':
+        name: 'punctuation.definition.end.pfm'
+      '8':
+        name: 'punctuation.definition.end.pfm'
+      '10':
+        name: 'markup.underline.link.pfm'
+      '11':
+        name: 'punctuation.definition.begin.pfm'
+      '12':
+        name: 'punctuation.definition.end.pfm'
+      '13':
+        name: 'markup.underline.link.pfm'
+      '14':
+        name: 'punctuation.definition.begin.pfm'
+      '15':
+        name: 'punctuation.definition.end.pfm'
+  }
+  {
+    match: '(\\[!)(\\[)([^\\]]*)(\\])((\\[)[^\\)]+(\\]))(\\])(((\\()[^\\)]+(\\)))|((\\[)[^\\]]+(\\])))'
+    name: 'link'
+    captures:
+      '1':
+        name: 'punctuation.definition.begin.pfm'
+      '2':
+        name: 'punctuation.definition.begin.pfm'
+      '3':
+        name: 'entity.pfm'
+      '4':
+        name: 'punctuation.definition.end.pfm'
+      '5':
+        name: 'markup.underline.link.pfm'
+      '6':
+        name: 'punctuation.definition.begin.pfm'
+      '7':
+        name: 'punctuation.definition.end.pfm'
+      '8':
+        name: 'punctuation.definition.end.pfm'
+      '10':
+        name: 'markup.underline.link.pfm'
+      '11':
+        name: 'punctuation.definition.begin.pfm'
+      '12':
+        name: 'punctuation.definition.end.pfm'
+      '13':
+        name: 'markup.underline.link.pfm'
+      '14':
+        name: 'punctuation.definition.begin.pfm'
+      '15':
+        name: 'punctuation.definition.end.pfm'
+  }
+  {
+    match: '!?(\\[)([^\\]]*)(\\])((\\()[^\\)]+(\\)))'
+    name: 'link'
+    captures:
+      '1':
+        name: 'punctuation.definition.begin.pfm'
+      '2':
+        name: 'entity.pfm'
+      '3':
+        name: 'punctuation.definition.end.pfm'
+      '4':
+        name: 'markup.underline.link.pfm'
+      '5':
+        name: 'punctuation.definition.begin.pfm'
+      '6':
+        name: 'punctuation.definition.end.pfm'
+  }
+  {
+    match: '!?(\\[)([^\\]]*)(\\])((\\[)[^\\]]*(\\]))'
+    name: 'link'
+    captures:
+      '1':
+        name: 'punctuation.definition.begin.pfm'
+      '2':
+        name: 'entity.pfm'
+      '3':
+        name: 'punctuation.definition.end.pfm'
+      '4':
+        name: 'markup.underline.link.pfm'
+      '5':
+        name: 'punctuation.definition.begin.pfm'
+      '6':
+        name: 'punctuation.definition.end.pfm'
+  }
+  {
+    match: '^\\s*(\\[)([^\\]]+)(\\])\\s*:\\s*<([^>]+)>'
+    name: 'link'
+    captures:
+      '1':
+        name: 'punctuation.definition.begin.pfm'
+      '2':
+        name: 'entity.pfm'
+      '3':
+        name: 'punctuation.definition.end.pfm'
+      '4':
+        name: 'markup.underline.link.pfm'
+  }
+  {
+    match: '^\\s*(\\[)([^\\]]+)(\\])\\s*(:)\\s*(\\S+)'
+    name: 'link'
+    captures:
+      '1':
+        name: 'punctuation.definition.begin.pfm'
+      '2':
+        name: 'entity.pfm'
+      '3':
+        name: 'punctuation.definition.end.pfm'
+      '4':
+        name: 'punctuation.separator.key-value.pfm'
+      '5':
+        name: 'markup.underline.link.pfm'
+  }
+  {
+    match: '^\\s*([*+-])[ \\t]+'
+    captures:
+      '1':
+        name: 'variable.unordered.list.pfm'
+  }
+  {
+    match: '^\\s*(\\d+\\.)[ \\t]+'
+    captures:
+      '1':
+        name: 'variable.ordered.list.pfm'
+  }
+  {
+    begin: '^\\s*(>)'
+    end: '^\\s*?$'
+    beginCaptures:
+      '1':
+        name: 'support.quote.pfm'
+    name: 'comment.quote.pfm'
+    patterns: [
+      {
+        include: '$self'
+      }
+    ]
+  }
+  {
+    match: '(  )$'
+    captures:
+      '1':
+        name: 'linebreak.pfm'
+  }
+  {
+    begin: '<!--'
+    captures:
+      '0':
+        name: 'punctuation.definition.comment.pfm'
+    end: '--\\s*>'
+    name: 'comment.block.pfm'
+  }
+  {
+    begin: '<!{0}\\s*(\\w+).*\\s*>'
+    beginCaptures:
+      '0':
+        name: 'source.html.basic'
+        patterns: [
+          {
+            include: 'text.html.basic'
+          }
+        ]
+    end: '<\\s*[/]?\\1\\s*>'
+    endCaptures:
+      '0':
+        name: 'source.html.basic'
+        patterns: [
+          {
+            include: 'text.html.basic'
+          }
+        ]
+    contentName: 'source.html.basic'
+    patterns: [
+      {
+        include: '$self'
+      }
+    ]
+  }
+  {
+    begin: '(\\${2})'
+    beginCaptures:
+      '0':
+        name: 'support.gfm'
+    end: '\\1'
+    endCaptures:
+      '0':
+        name: 'support.gfm'
+    name: 'math.block.gfm'
+    contentName: 'text.tex.latex'
+    patterns: [
+      {
+        include: 'text.tex.latex'
+      }
+    ]
+  }
+  {
+    match: '(\\$)([\\S].+[\\S])(\\$)'
+    name: 'math.inline.gfm'
+    captures:
+      '1':
+        name: 'support.gfm'
+      '2':
+        name: 'text.tex.latex'
+        patterns: [
+          {
+            include: 'text.tex.latex'
+          }
+        ]
+      '3':
+        name: 'support.gfm'
+  }
+]

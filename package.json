@@ -1,15 +1,17 @@
 {
-  "name": "language-gfm",
+  "name": "language-pfm",
   "version": "0.67.0",
-  "description": "Syntax highlighting and snippets for GitHub Flavored Markdown (GFM).",
-  "repository": "https://github.com/atom/language-gfm",
+  "description": "Syntax highlighting and snippets for Pandoc Flavored Markdown (PFM).",
+  "repository": "https://github.com/leipert/language-pfm",
   "engines": {
     "atom": "*"
   },
   "devDependencies": {
-    "coffee-script": "1.7.0",
-    "request": "^2.34.0",
-    "season": "^5.0.2",
-    "underscore-plus": "^1.0.6"
+    "cson": "^2.0.0",
+    "gulp": "^3.8.11",
+    "gulp-rename": "^1.2.0",
+    "gulp-replace": "^0.5.3",
+    "lodash": "^3.5",
+    "season": "^5.1.4"
   }
 }
