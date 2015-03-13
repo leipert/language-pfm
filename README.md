@@ -3,6 +3,8 @@
 Adds syntax highlighting and snippets to [Pandoc flavored Markdown](http://johnmacfarlane.net/pandoc/README.html)
 files in Atom. This was forked from [Atom language-gfm](https://github.com/atom/language-gfm). The goal is to maintain compatibility with the **Github Flavored Markdown** package while adding as much pandoc functionality as possible.
 
+In order for `language-pfm` to work you have to disable `language-gfm`
+
 **Supported Pandoc Features**
 
 * Mathsyntax with inline `$...$` and `\(...\)` and block `$$...$$` and `\[...\]`
