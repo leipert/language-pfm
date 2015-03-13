@@ -6,6 +6,7 @@
   "engines": {
     "atom": "*"
   },
+  "private": true,
   "devDependencies": {
     "cson": "^2.0.0",
     "gulp": "^3.8.11",
