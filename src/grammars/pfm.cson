@@ -1,7 +1,7 @@
 'name': 'Pandoc Markdown'
 'patterns': [
   {
-    'begin': '<!{0}\\s*(\\w+).*\\s*>'
+    'begin': '<!{0}\\s*([\\w]+)[^>]*\\s*>'
     'beginCaptures':
       '0':
         'name': 'source.html.basic'
@@ -27,6 +27,7 @@
     ]
   }
   {
+    'name': 'markup.math.block.pfm'
     'begin': '(\\${2})'
     'beginCaptures':
       '0':
@@ -35,7 +36,6 @@
     'endCaptures':
       '0':
         'name': 'support.gfm'
-    'name': 'math.block.gfm'
     'contentName': 'text.tex.latex'
     'patterns': [
       {
@@ -44,8 +44,25 @@
     ]
   }
   {
-    'match': '(\\$)([\\S].+[\\S])(\\$)'
-    'name': 'math.inline.gfm'
+    'name': 'markup.math.block.pfm'
+    'begin': '(?<!\\\\)\\\\\\['
+    'beginCaptures':
+      '0':
+        'name': 'support.gfm'
+    'end': '\\\\\\]'
+    'endCaptures':
+      '0':
+        'name': 'support.gfm'
+    'contentName': 'text.tex.latex'
+    'patterns': [
+      {
+        'include': 'text.tex.latex'
+      }
+    ]
+  }
+  {
+    'name': 'markup.math.inline.pfm'
+    'match': '(\\$)([\\S][^$]+[\\S])(\\$)'
     'captures':
       '1':
         'name': 'support.gfm'
@@ -59,4 +76,54 @@
       '3':
         'name': 'support.gfm'
   }
+  {
+    'name': 'markup.math.inline.pfm'
+    'match': '(\\\\\\()([\\S][^)]+)(\\\\\\))'
+    'captures':
+      '1':
+        'name': 'support.gfm'
+      '2':
+        'name': 'text.tex.latex'
+        'patterns': [
+          {
+            'include': 'text.tex.latex'
+          }
+        ]
+      '3':
+        'name': 'support.gfm'
+  }
+    {
+      'name': 'markup.definition.block.pfm'
+      'begin': '^:   '
+      'beginCaptures':
+        '0':
+          'name': 'support.gfm'
+      'end': '^(?= {0,3}\\S+.+$)'
+      'endCaptures':
+        '0':
+          'name': 'support.gfm'
+      'contentName': 'markup.definition.content.pfm'
+      'patterns': [
+        {
+          'include': '$self'
+        }
+      ]
+    }
+    {
+      'name': 'markup.definition.block.pfm'
+      'begin': '^  ~ '
+      'beginCaptures':
+        '0':
+          'name': 'support.gfm'
+      'end': '^(?= {0,3}\\S+.+$)'
+      'endCaptures':
+        '0':
+          'name': 'support.gfm'
+      'contentName': 'markup.definition.content.pfm'
+      'patterns': [
+        {
+          'include': '$self'
+        }
+      ]
+    }
 ]

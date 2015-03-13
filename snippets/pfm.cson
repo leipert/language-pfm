@@ -1,4 +1,4 @@
-'.source.pfm':
+'.source.gfm':
   'bold text':
     'prefix': 'b'
     'body': '**$1**$0'

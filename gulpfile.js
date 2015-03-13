@@ -4,31 +4,14 @@ var path = require('path'),
   fs = require('fs'),
   gulp = require('gulp');
 
-var replace = require('gulp-replace');
 var rename = require('gulp-rename');
 
-gulp.task('default', ['build.grammars', 'copyTests'])
+gulp.task('default', ['build.grammars'])
 
 gulp.task('copyFiles', function() {
   return gulp.src('**/gfm.cson')
-  .pipe(replace('gfm', 'pfm'))
   .pipe(rename({
     basename: 'pfm'
-  }))
-  .pipe(gulp.dest('.'));
-});
-
-gulp.task('copyTests', function() {
-
-  return gulp.src('**/gfm-spec.coffee')
-  .pipe(replace('gfm', 'pfm'))
-  .pipe(replace(/(it "tokenizes mentions")/g, "x$1"))
-  .pipe(replace(/(it "tokenzies matches inside of headers")/g, "x$1"))
-  .pipe(replace(/(it "tokenizies an :emoji:")/g, 'x$1'))
-  .pipe(replace(/(it "tokenizes issue numbers")/g, 'x$1'))
-  .pipe(replace(/(it "tokenizes > quoted text")/g, 'x$1'))
-  .pipe(rename({
-    basename: 'pfm-old-spec'
   }))
   .pipe(gulp.dest('.'));
 });
@@ -42,19 +25,11 @@ gulp.task('build.grammars', ['copyFiles'], function(cb) {
   var pfm = CSON.readFileSync(path.resolve(__dirname, 'src', 'grammars', 'pfm.cson'));
 
   gfm.name = pfm.name;
-  gfm.patterns = _(gfm.patterns)
-  .union(pfm.patterns)
-  .reject(function(x) {
-    return x.name === 'string.emoji.pfm'
-  })
-  .reject(function(x) {
-    return x.hasOwnProperty('captures') && x.captures.hasOwnProperty('1')
-    && (x.captures['1'].name === 'variable.mention.pfm'
-    || x.captures['1'].name === 'variable.issue.tag.pfm')
-  })
+  gfm.patterns = _(pfm.patterns)
+  .union(gfm.patterns)
   .value();
 
-  var string = CSON.stringify(gfm).replace(/"/g, "'");
+  var string = CSON.stringify(gfm);
   fs.writeFileSync(grammarPath, string);
 
   cb();
