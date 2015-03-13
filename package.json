@@ -6,6 +6,14 @@
   "engines": {
     "atom": "*"
   },
+  "files":[
+    "grammars/pfm.cson",
+    "settings/pfm.cson",
+    "snippets/pfm.cson",
+    "spec/pfm-new-spec.coffee",
+    "spec/pfm-old-spec.coffee",
+    "README.md"
+  ],
   "devDependencies": {
     "cson": "^2.0.0",
     "gulp": "^3.8.11",
