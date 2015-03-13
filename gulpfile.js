@@ -6,8 +6,6 @@ var path = require('path'),
 
 var replace = require('gulp-replace');
 var rename = require('gulp-rename');
-var footer = require('gulp-footer');
-
 
 gulp.task('default', ['build.grammars', 'copyTests'])
 
@@ -18,7 +16,7 @@ gulp.task('copyFiles', function() {
     basename: 'pfm'
   }))
   .pipe(gulp.dest('.'));
-})
+});
 
 gulp.task('copyTests', function() {
 
@@ -33,9 +31,7 @@ gulp.task('copyTests', function() {
     basename: 'pfm-old-spec'
   }))
   .pipe(gulp.dest('.'));
-})
-
-
+});
 
 gulp.task('build.grammars', ['copyFiles'], function(cb) {
 
