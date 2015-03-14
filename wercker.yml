@@ -3,14 +3,25 @@ box: kn1kn1/atom-apm-test
 build:
   # The steps that will be executed on build
   steps:
-    # A step that executes `npm install` command
-    - npm-install
-
     # A custom script step, name value is used in the UI
     # and the code value contains the command that get executed
     - script:
-        name: List all files
-        code: ls -A
+        name: Update box
+        code: |
+          apt-get update;
+          DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
+    - script:
+        name: Install atom
+        code: |
+          wget -nv -O atom-amd64.deb https://atom.io/download/deb;
+          DEBIAN_FRONTEND=noninteractive dpkg -i atom-amd64.deb;
+          DEBIAN_FRONTEND=noninteractive apt-get install -f;
+          rm -rf atom-amd64.deb;
+          apm --version
+    - script:
+        name: Run Tests
+        code: apm install && apm test
+
 
 # box: nodesource/trusty@latest
 # build:
