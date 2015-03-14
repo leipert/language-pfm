@@ -17,11 +17,18 @@ build:
           DEBIAN_FRONTEND=noninteractive dpkg -i atom-amd64.deb;
           DEBIAN_FRONTEND=noninteractive apt-get install -f;
           rm -rf atom-amd64.deb;
-          apm --version;
-          which npm
+          apm --version
     - script:
         name: Install Dependencies
         code: apm install --dev
+    - script:
+        name: Run gulp
+        code: ./node_modules/.bin/gulp
+    - script:
+        name: Remove unneeded files
+        code: |
+          cp -rf src/README.md README.md
+          rm -rf {grammars,settings,snippets}/gfm.cson script src gulpfile.js clean.sh
     - script:
         name: Test package
         code: |
@@ -29,7 +36,7 @@ build:
           --background --exec /usr/bin/Xvfb -- :99 -screen 0 1024x768x24 -ac
           +extension GLX +extension RANDR +render -noreset &&
           sleep 3 &&
-          export DISPLAY=:99 && 
+          export DISPLAY=:99 &&
           apm test
 
 

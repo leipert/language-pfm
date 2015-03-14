@@ -72,7 +72,7 @@ patterns: [
   }
   {
     name: "markup.math.inline.pfm"
-    match: "(\\$)([\\S][^$]+[\\S])(\\$)"
+    match: "(\\$)([^$\\s][^$]+[^\\\\$\\s])(\\$)"
     captures:
       "1":
         name: "support.gfm"
