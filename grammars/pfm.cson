@@ -72,259 +72,7 @@ patterns: [
   }
   {
     name: "markup.math.inline.pfm"
-    match: "(\\$)([\\S][^$]+[\\S])(\\$)"
-    captures:
-      "1":
-        name: "support.gfm"
-      "2":
-        name: "text.tex.latex"
-        patterns: [
-          {
-            include: "text.tex.latex"
-          }
-        ]
-      "3":
-        name: "support.gfm"
-  }
-  {
-    name: "markup.math.inline.pfm"
-    match: "(\\\\\\()([\\S][^)]+)(\\\\\\))"
-    captures:
-      "1":
-        name: "support.gfm"
-      "2":
-        name: "text.tex.latex"
-        patterns: [
-          {
-            include: "text.tex.latex"
-          }
-        ]
-      "3":
-        name: "support.gfm"
-  }
-  {
-    name: "markup.definition.block.pfm"
-    begin: "^:   "
-    beginCaptures:
-      "0":
-        name: "support.gfm"
-    end: "^(?= {0,3}\\S+.+$)"
-    endCaptures:
-      "0":
-        name: "support.gfm"
-    contentName: "markup.definition.content.pfm"
-    patterns: [
-      {
-        include: "$self"
-      }
-    ]
-  }
-  {
-    name: "markup.definition.block.pfm"
-    begin: "^  ~ "
-    beginCaptures:
-      "0":
-        name: "support.gfm"
-    end: "^(?= {0,3}\\S+.+$)"
-    endCaptures:
-      "0":
-        name: "support.gfm"
-    contentName: "markup.definition.content.pfm"
-    patterns: [
-      {
-        include: "$self"
-      }
-    ]
-  }
-  {
-    begin: "<!{0}\\s*([\\w]+)[^>]*\\s*>"
-    beginCaptures:
-      "0":
-        name: "source.html.basic"
-        patterns: [
-          {
-            include: "text.html.basic"
-          }
-        ]
-    end: "<\\s*[/]?\\1\\s*>"
-    endCaptures:
-      "0":
-        name: "source.html.basic"
-        patterns: [
-          {
-            include: "text.html.basic"
-          }
-        ]
-    contentName: "source.html.basic"
-    patterns: [
-      {
-        include: "$self"
-      }
-    ]
-  }
-  {
-    name: "markup.math.block.pfm"
-    begin: "(\\${2})"
-    beginCaptures:
-      "0":
-        name: "support.gfm"
-    end: "\\1"
-    endCaptures:
-      "0":
-        name: "support.gfm"
-    contentName: "text.tex.latex"
-    patterns: [
-      {
-        include: "text.tex.latex"
-      }
-    ]
-  }
-  {
-    name: "markup.math.block.pfm"
-    begin: "(?<!\\\\)\\\\\\["
-    beginCaptures:
-      "0":
-        name: "support.gfm"
-    end: "\\\\\\]"
-    endCaptures:
-      "0":
-        name: "support.gfm"
-    contentName: "text.tex.latex"
-    patterns: [
-      {
-        include: "text.tex.latex"
-      }
-    ]
-  }
-  {
-    name: "markup.math.inline.pfm"
-    match: "(\\$)([\\S][^$]+[\\S])(\\$)"
-    captures:
-      "1":
-        name: "support.gfm"
-      "2":
-        name: "text.tex.latex"
-        patterns: [
-          {
-            include: "text.tex.latex"
-          }
-        ]
-      "3":
-        name: "support.gfm"
-  }
-  {
-    name: "markup.math.inline.pfm"
-    match: "(\\\\\\()([\\S][^)]+)(\\\\\\))"
-    captures:
-      "1":
-        name: "support.gfm"
-      "2":
-        name: "text.tex.latex"
-        patterns: [
-          {
-            include: "text.tex.latex"
-          }
-        ]
-      "3":
-        name: "support.gfm"
-  }
-  {
-    name: "markup.definition.block.pfm"
-    begin: "^:   "
-    beginCaptures:
-      "0":
-        name: "support.gfm"
-    end: "^(?= {0,3}\\S+.+$)"
-    endCaptures:
-      "0":
-        name: "support.gfm"
-    contentName: "markup.definition.content.pfm"
-    patterns: [
-      {
-        include: "$self"
-      }
-    ]
-  }
-  {
-    name: "markup.definition.block.pfm"
-    begin: "^  ~ "
-    beginCaptures:
-      "0":
-        name: "support.gfm"
-    end: "^(?= {0,3}\\S+.+$)"
-    endCaptures:
-      "0":
-        name: "support.gfm"
-    contentName: "markup.definition.content.pfm"
-    patterns: [
-      {
-        include: "$self"
-      }
-    ]
-  }
-  {
-    begin: "<!{0}\\s*([\\w]+)[^>]*\\s*>"
-    beginCaptures:
-      "0":
-        name: "source.html.basic"
-        patterns: [
-          {
-            include: "text.html.basic"
-          }
-        ]
-    end: "<\\s*[/]?\\1\\s*>"
-    endCaptures:
-      "0":
-        name: "source.html.basic"
-        patterns: [
-          {
-            include: "text.html.basic"
-          }
-        ]
-    contentName: "source.html.basic"
-    patterns: [
-      {
-        include: "$self"
-      }
-    ]
-  }
-  {
-    name: "markup.math.block.pfm"
-    begin: "(\\${2})"
-    beginCaptures:
-      "0":
-        name: "support.gfm"
-    end: "\\1"
-    endCaptures:
-      "0":
-        name: "support.gfm"
-    contentName: "text.tex.latex"
-    patterns: [
-      {
-        include: "text.tex.latex"
-      }
-    ]
-  }
-  {
-    name: "markup.math.block.pfm"
-    begin: "(?<!\\\\)\\\\\\["
-    beginCaptures:
-      "0":
-        name: "support.gfm"
-    end: "\\\\\\]"
-    endCaptures:
-      "0":
-        name: "support.gfm"
-    contentName: "text.tex.latex"
-    patterns: [
-      {
-        include: "text.tex.latex"
-      }
-    ]
-  }
-  {
-    name: "markup.math.inline.pfm"
-    match: "(\\$)([\\S][^$]+[\\S])(\\$)"
+    match: "(\\$)([^$\\s][^$]+[^\\\\$\\s])(\\$)"
     captures:
       "1":
         name: "support.gfm"
@@ -428,7 +176,7 @@ patterns: [
     name: "markup.strike.gfm"
   }
   {
-    begin: "^6\\s*"
+    begin: "^#{6}\\s*"
     end: "$"
     name: "markup.heading.heading-6.gfm"
     patterns: [
@@ -438,7 +186,7 @@ patterns: [
     ]
   }
   {
-    begin: "^5\\s*"
+    begin: "^#{5}\\s*"
     end: "$"
     name: "markup.heading.heading-5.gfm"
     patterns: [
@@ -448,7 +196,7 @@ patterns: [
     ]
   }
   {
-    begin: "^4\\s*"
+    begin: "^#{4}\\s*"
     end: "$"
     name: "markup.heading.heading-4.gfm"
     patterns: [
@@ -458,7 +206,7 @@ patterns: [
     ]
   }
   {
-    begin: "^3\\s*"
+    begin: "^#{3}\\s*"
     end: "$"
     name: "markup.heading.heading-3.gfm"
     patterns: [
@@ -468,7 +216,7 @@ patterns: [
     ]
   }
   {
-    begin: "^2\\s*"
+    begin: "^#{2}\\s*"
     end: "$"
     name: "markup.heading.heading-2.gfm"
     patterns: [
@@ -478,7 +226,7 @@ patterns: [
     ]
   }
   {
-    begin: "^1\\s*"
+    begin: "^#{1}\\s*"
     end: "$"
     name: "markup.heading.heading-1.gfm"
     patterns: [

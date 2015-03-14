@@ -1,0 +1,34 @@
+box: leipert/atom-apm
+# Build definition
+build:
+  # The steps that will be executed on build
+  steps:
+    - npm-install
+    - script:
+        name: Run gulp
+        code: gulp
+    - script:
+        name: Remove unneeded files
+        code: >
+          cp -rf src/README.md README.md &&
+          rm -rf {grammars,settings,snippets}/gfm.cson script gulpfile.js
+    - script:
+        name: Test package
+        code: >
+          start-stop-daemon --start --pidfile /tmp/xvfb_99.pid --make-pidfile
+          --background --exec /usr/bin/Xvfb -- :99 -screen 0 1024x768x24 -ac
+          +extension GLX +extension RANDR +render -noreset &&
+          sleep 3 &&
+          export DISPLAY=:99 &&
+          apm test
+deploy:
+  steps:
+    - script:
+        name: Copy README & dist wercker.yml
+        code: >
+          cp -rf src/README.md README.md &&
+          cp -rf src/wercker.yml README.yml &&
+          rm -rf src
+    - leipert/git-push:
+        gh_oauth: $GH_TOKEN
+        branch: dist
