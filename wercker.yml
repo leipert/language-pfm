@@ -1,35 +1,23 @@
-box: kn1kn1/atom-apm-test
+box: leipert/atom-apm
 # Build definition
 build:
   # The steps that will be executed on build
   steps:
-    # A custom script step, name value is used in the UI
-    # and the code value contains the command that get executed
+    - npm-install
     - script:
-        name: Update box
-        code: |
-          apt-get update;
-          DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
-    - script:
-        name: Install atom
-        code: |
-          wget -nv -O atom-amd64.deb https://atom.io/download/deb;
-          DEBIAN_FRONTEND=noninteractive dpkg -i atom-amd64.deb;
-          DEBIAN_FRONTEND=noninteractive apt-get install -f;
-          rm -rf atom-amd64.deb;
-          apm --version
-    - script:
-        name: Install Dependencies
-        code: apm install --dev
-    # - script:
-    #     name: Run gulp
-    #     code: ./node_modules/.bin/gulp
+        name: Run gulp
+        code: gulp
     - script:
         name: Remove unneeded files
-        code: |
-          cp -rf src/README.md README.md
+        code: >
+          cp -rf src/README.md README.md &&
           rm -rf {grammars,settings,snippets}/gfm.cson script src gulpfile.js clean.sh
     - script:
         name: Test package
-        code: |
-          start-stop-daemon --start --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1024x768x24 -ac +extension GLX +extension RANDR +render -noreset && sleep 3 && export DISPLAY=:99 && apm test
+        code: >
+          start-stop-daemon --start --pidfile /tmp/xvfb_99.pid --make-pidfile
+          --background --exec /usr/bin/Xvfb -- :99 -screen 0 1024x768x24 -ac
+          +extension GLX +extension RANDR +render -noreset &&
+          sleep 3 &&
+          export DISPLAY=:99 &&
+          apm test
