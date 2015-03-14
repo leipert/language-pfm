@@ -11,7 +11,7 @@ build:
         name: Remove unneeded files
         code: >
           cp -rf src/README.md README.md &&
-          rm -rf {grammars,settings,snippets}/gfm.cson script src gulpfile.js clean.sh
+          rm -rf {grammars,settings,snippets}/gfm.cson script gulpfile.js
     - script:
         name: Test package
         code: >
@@ -21,3 +21,14 @@ build:
           sleep 3 &&
           export DISPLAY=:99 &&
           apm test
+deploy:
+  steps:
+    - script:
+        name: Copy README & dist wercker.yml
+        code: >
+          cp -rf src/README.md README.md &&
+          cp -rf src/wercker.yml README.yml &&
+          rm -rf src
+    - leipert/git-push:
+        gh_oauth: $GH_TOKEN
+        branch: dist
