@@ -1,6 +1,13 @@
-box: kn1kn1/atom-apm-test
+box: atom-apm-test@latest
 build:
   steps:
+    - npm-install
     - script:
       name: Run gulp
       code: gulp
+    - script:
+      name: Overwrite README
+      code: cp -rf src/README.md README.md
+    - script:
+      name: Delete unneeded stuff
+      code: rm -rf {grammars,settings,snippets}/gfm.cson script src gulpfile.js clean.sh
