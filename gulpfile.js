@@ -29,7 +29,7 @@ gulp.task('build.grammars', ['copyFiles'], function(cb) {
   .union(gfm.patterns)
   .value();
 
-  var string = CSON.stringify(gfm);
+  var string = CSON.stringify(gfm).replace(/"(\^#\{\d\}\\\\s\*)"/g, "'$1'");
   fs.writeFileSync(grammarPath, string);
 
   cb();
