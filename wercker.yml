@@ -1,13 +1,31 @@
-box: atom-apm-test@latest
+box: nodesource/trusty
+# Build definition
 build:
+  # The steps that will be executed on build
   steps:
+    # A step that executes `npm install` command
     - npm-install
+    # A step that executes `npm test` command
+    - npm-test
+
+    # A custom script step, name value is used in the UI
+    # and the code value contains the command that get executed
     - script:
-      name: Run gulp
-      code: gulp
-    - script:
-      name: Overwrite README
-      code: cp -rf src/README.md README.md
-    - script:
-      name: Delete unneeded stuff
-      code: rm -rf {grammars,settings,snippets}/gfm.cson script src gulpfile.js clean.sh
+        name: echo nodejs information
+        code: |
+          echo "node version $(node -v) running"
+          echo "npm version $(npm -v) running"
+
+# box: nodesource/trusty@latest
+# build:
+#   steps:
+#     - npm-install
+#     - script:
+#       name: Run gulp
+#       code: gulp
+#     - script:
+#       name: Overwrite README
+#       code: cp -rf src/README.md README.md
+#     - script:
+#       name: Delete unneeded stuff
+#       code: rm -rf {grammars,settings,snippets}/gfm.cson script src gulpfile.js clean.sh
