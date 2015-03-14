@@ -1,0 +1,6 @@
+box: kn1kn1/atom-apm-test
+build:
+  steps:
+    - script:
+      name: Run gulp
+      code: gulp
