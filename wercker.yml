@@ -21,9 +21,9 @@ build:
     - script:
         name: Install Dependencies
         code: apm install --dev
-    - script:
-        name: Run gulp
-        code: ./node_modules/.bin/gulp
+    # - script:
+    #     name: Run gulp
+    #     code: ./node_modules/.bin/gulp
     - script:
         name: Remove unneeded files
         code: |
@@ -38,18 +38,3 @@ build:
           sleep 3 &&
           export DISPLAY=:99 &&
           apm test
-
-
-# box: nodesource/trusty@latest
-# build:
-#   steps:
-#     - npm-install
-#     - script:
-#       name: Run gulp
-#       code: gulp
-#     - script:
-#       name: Overwrite README
-#       code: cp -rf src/README.md README.md
-#     - script:
-#       name: Delete unneeded stuff
-#       code: rm -rf {grammars,settings,snippets}/gfm.cson script src gulpfile.js clean.sh
