@@ -1,4 +1,4 @@
-# Pandoc flavored Markdown package
+# Pandoc flavored Markdown package [![wercker status](https://app.wercker.com/status/e2bfecae6e8a971093516b3b3ddd4721/s/dist "wercker status")](https://app.wercker.com/project/bykey/e2bfecae6e8a971093516b3b3ddd4721)
 
 Adds syntax highlighting and snippets to [Pandoc flavored Markdown](http://johnmacfarlane.net/pandoc/README.html)
 files in Atom. This was forked from [Atom language-gfm](https://github.com/atom/language-gfm). The goal is to maintain compatibility with the **Github Flavored Markdown** package while adding as much pandoc functionality as possible.
