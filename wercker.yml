@@ -28,7 +28,7 @@ deploy:
         code: >
           cp -rf src/README.md README.md &&
           cp -rf src/wercker.yml wercker.yml &&
-          rm -rf src
+          rm -rf src package.json
     - leipert/git-push:
         gh_oauth: $GH_TOKEN
         branch: dist
