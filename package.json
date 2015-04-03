@@ -5,12 +5,5 @@
   "repository": "https://github.com/leipert/language-pfm",
   "engines": {
     "atom": "*"
-  },
-  "devDependencies": {
-    "cson": "^2.0.0",
-    "gulp": "^3.8.11",
-    "gulp-rename": "^1.2.0",
-    "lodash": "^3.5",
-    "season": "^5.1.4"
   }
 }
