@@ -11,7 +11,7 @@ build:
         name: Remove unneeded files
         code: >
           cp -rf src/README.md README.md &&
-          rm -rf {grammars,settings,snippets}/gfm.cson script gulpfile.js spec/gfm-spec.json
+          rm -rf {grammars,settings,snippets}/gfm.cson script gulpfile.js spec/gfm-spec.coffee
     - script:
         name: Test package
         code: >
