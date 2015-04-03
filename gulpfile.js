@@ -22,7 +22,7 @@ gulp.task('fixTests', function() {
   .pipe(replace('it "tokenizes mentions"', 'xit "tokenizes mentions"'))
   .pipe(replace('activatePackage("language-gfm")', 'activatePackage("language-pfm")'))
   .pipe(rename({
-    basename: 'gfm-spec-fixed'
+    basename: 'gfm-fixed-spec'
   }))
   .pipe(gulp.dest('spec/'))
 })
