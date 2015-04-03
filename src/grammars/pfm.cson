@@ -27,6 +27,32 @@
     ]
   }
   {
+    'begin': '<!{0}\\s*([\\w]+)[^>]*\\s*>'
+    'beginCaptures':
+      '0':
+        'name': 'source.html.basic'
+        'patterns': [
+          {
+            'include': 'text.html.basic'
+          }
+        ]
+    'end': '<\\s*[/]?\\1\\s*>'
+    'endCaptures':
+      '0':
+        'name': 'source.html.basic'
+        'patterns': [
+          {
+            'include': 'text.html.basic'
+          }
+        ]
+    'contentName': 'source.html.basic'
+    'patterns': [
+      {
+        'include': '$self'
+      }
+    ]
+  }
+  {
     'begin': '^\\s*([`~]{3,})\\s*tex\\s*$'
     'beginCaptures':
       '0':
@@ -138,8 +164,81 @@
         }
       ]
     }
+    {
+      'name': 'markup.citation.pfm'
+      'match': '(\\[)(.*?@[A-z_][\\w:.#$%&\\-+?<>~/]*.*?)(\\])'
+      'captures':
+        '1':
+          'name': 'support.gfm'
+        '2':
+          'patterns': [
+            {
+              'include': '#citation'
+            },
+            {
+              'include': '#inline'
+            }
+          ]
+        '3':
+          'name': 'support.gfm'
+    }
+    {
+      'name': 'markup.citation.pfm'
+      'match': '(@[A-z_][\\w:.#$%&\\-+?<>~/]*?\\s*(\\[).*?(\\]))'
+      'captures':
+        '0':
+          'patterns': [
+            {
+              'include': '#citation'
+            },
+            {
+              'include': '#inline'
+            }
+          ]
+        '1':
+          'name': 'support.gfm'
+        '2':
+          'name': 'support.gfm'
+    }
+    {
+      'name': 'markup.footnote.reference.pfm'
+      'match': '(\\[\\^)([\\S]+)(\\])(?!:)'
+      'captures':
+        '1':
+          'name': 'support.gfm'
+        '2':
+          'name': 'support.gfm'
+        '3':
+          'name': 'support.gfm'
+    }
+    {
+      'name': 'markup.footnote.inline.pfm'
+      'match': '(\\^\\[)([^\\^].+|\\^\\S.+)(\\])'
+      'captures':
+        '1':
+          'name': 'support.gfm'
+        '2':
+          'patterns': [
+            {
+              'include':'$self'
+            }
+          ]
+        '3':
+          'name': 'support.gfm'
+    }
 ]
 'repository':
+  'citation':
+    'patterns': [
+      {
+        'match': '(-?@)([A-z_][\\w:.#$%&\\-+?<>~/]*)'
+        'captures':
+          '1':
+            'name': 'variable.mention.gfm'
+          '2':
+            'name': 'string.username.gfm'
+      }
+    ]
   'math':
     'patterns': [
       {
