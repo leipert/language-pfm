@@ -53,22 +53,6 @@
     ]
   }
   {
-    'begin': '^\\s*([`~]{3,})\\s*tex\\s*$'
-    'beginCaptures':
-      '0':
-        'name': 'support.gfm'
-    'end': '^\\s*\\1$'
-    'endCaptures':
-      '0':
-        'name': 'support.gfm'
-    'name': 'markup.code.latex.gfm'
-    'patterns': [
-      {
-        'include': 'text.tex.latex'
-      }
-    ]
-  }
-  {
     'name': 'markup.math.block.pfm'
     'begin': '(\\${2})'
     'beginCaptures':
@@ -166,7 +150,7 @@
     }
     {
       'name': 'markup.citation.pfm'
-      'match': '(\\[)(.*?@[A-z_][\\w:.#$%&\\-+?<>~/]*.*?)(\\])'
+      'match': '(\\[)(.*?-?@[A-z_][\\w:.#$%&\\-+?<>~/]*.*?[^\\\\])(\\])'
       'captures':
         '1':
           'name': 'support.gfm'

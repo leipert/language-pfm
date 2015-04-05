@@ -4,6 +4,8 @@ var path = require('path'),
   fs = require('fs'),
   gulp = require('gulp');
 
+languages = require('./src/languages.js');
+
 var rename = require('gulp-rename');
 var replace = require('gulp-replace');
 
@@ -39,10 +41,11 @@ gulp.task('build.grammars', ['copyFiles'], function(cb) {
 
   ret.name = pfm.name;
 
-  var repos = ['headings', 'inline'];
+  var repos = ['headings', 'inline', 'code'];
 
   ret.patterns = _(pfm.patterns)
   .union(ret.patterns)
+  .reject(isCode)
   .union(generateInclude(repos))
   .value();
 
@@ -60,16 +63,27 @@ gulp.task('build.grammars', ['copyFiles'], function(cb) {
     patterns: _.filter(ret.patterns, isInline)
   };
 
+  var codeRepository = {
+    patterns: _(languages)
+    .value()
+  }
+
+  console.warn(_.pluck(codeRepository.patterns, 'name'))
+
   ret.repository = pfm.repository;
   ret.repository.headings = headingRepository;
   ret.repository.inline = inlineRepository;
+  ret.repository.code = codeRepository;
 
   ret.patterns = _(ret.patterns)
+  .reject(isCode)
   .reject(isHeading)
   .reject(isInline)
+  .reject(startsWith('markup.raw'))
   .value();
 
   ret.fileTypes.push('pmd');
+  ret.fileTypes.push('p.md')
 
   var string = CSON.stringify(ret).replace(/"(\^#\{\d\}\\\\s\*)"/g, "'$1'");
   fs.writeFileSync(grammarPath, string);
@@ -95,10 +109,29 @@ function isHeading(value, key) {
 
 function isInline(value, key) {
   return value.hasOwnProperty('name') && (
+  value.name === 'link' ||
   _.startsWith(value.name, 'markup.bold') ||
   _.startsWith(value.name, 'string.emoji.gfm') ||
   _.startsWith(value.name, 'markup.italic') ||
   _.startsWith(value.name, 'markup.strike') ||
   _.startsWith(value.name, 'markup.math.inline')
   )
+}
+
+function isCode(value) {
+
+  return value.hasOwnProperty('name') &&
+  _.startsWith(value.name, 'markup.code');
+
+}
+
+function startsWith(filter) {
+
+  return function(value) {
+
+    return value.hasOwnProperty('name') &&
+    _.startsWith(value.name, filter);
+
+  }
+
 }
