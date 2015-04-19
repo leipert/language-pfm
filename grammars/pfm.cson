@@ -300,6 +300,30 @@ patterns: [
     name: "comment.block.gfm"
   }
   {
+    begin: "^\\|"
+    end: "\\|$"
+    captures:
+      "0":
+        name: "border.pipe.outer"
+    name: "table.gfm"
+    patterns: [
+      {
+        match: "(:?)(-+)(:?)"
+        captures:
+          "1":
+            name: "border.alignment"
+          "2":
+            name: "border.header"
+          "3":
+            name: "border.alignment"
+      }
+      {
+        match: "\\|"
+        name: "border.pipe.inner"
+      }
+    ]
+  }
+  {
     include: "#headings"
   }
   {
@@ -399,9 +423,14 @@ repository:
   headings:
     patterns: [
       {
-        begin: '^#{6}\\s*'
+        begin: "^(#{6})(\\s*)"
         end: "$"
         name: "markup.heading.heading-6.gfm"
+        captures:
+          "1":
+            name: "markup.heading.marker.gfm"
+          "2":
+            name: "markup.heading.space.gfm"
         patterns: [
           {
             include: "#inline"
@@ -409,9 +438,14 @@ repository:
         ]
       }
       {
-        begin: '^#{5}\\s*'
+        begin: "^(#{5})(\\s*)"
         end: "$"
         name: "markup.heading.heading-5.gfm"
+        captures:
+          "1":
+            name: "markup.heading.marker.gfm"
+          "2":
+            name: "markup.heading.space.gfm"
         patterns: [
           {
             include: "#inline"
@@ -419,9 +453,14 @@ repository:
         ]
       }
       {
-        begin: '^#{4}\\s*'
+        begin: "^(#{4})(\\s*)"
         end: "$"
         name: "markup.heading.heading-4.gfm"
+        captures:
+          "1":
+            name: "markup.heading.marker.gfm"
+          "2":
+            name: "markup.heading.space.gfm"
         patterns: [
           {
             include: "#inline"
@@ -429,9 +468,14 @@ repository:
         ]
       }
       {
-        begin: '^#{3}\\s*'
+        begin: "^(#{3})(\\s*)"
         end: "$"
         name: "markup.heading.heading-3.gfm"
+        captures:
+          "1":
+            name: "markup.heading.marker.gfm"
+          "2":
+            name: "markup.heading.space.gfm"
         patterns: [
           {
             include: "#inline"
@@ -439,9 +483,14 @@ repository:
         ]
       }
       {
-        begin: '^#{2}\\s*'
+        begin: "^(#{2})(\\s*)"
         end: "$"
         name: "markup.heading.heading-2.gfm"
+        captures:
+          "1":
+            name: "markup.heading.marker.gfm"
+          "2":
+            name: "markup.heading.space.gfm"
         patterns: [
           {
             include: "#inline"
@@ -449,9 +498,14 @@ repository:
         ]
       }
       {
-        begin: '^#{1}\\s*'
+        begin: "^(#{1})(\\s*)"
         end: "$"
         name: "markup.heading.heading-1.gfm"
+        captures:
+          "1":
+            name: "markup.heading.marker.gfm"
+          "2":
+            name: "markup.heading.space.gfm"
         patterns: [
           {
             include: "#inline"

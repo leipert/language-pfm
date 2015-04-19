@@ -174,42 +174,45 @@ describe "GitHub Flavored Markdown grammar", ->
 
   it "tokenizes headings", ->
     {tokens} = grammar.tokenizeLine("# Heading 1")
-    expect(tokens[0]).toEqual value: "# ", scopes: ["source.gfm", "markup.heading.heading-1.gfm"]
-    expect(tokens[1]).toEqual value: "Heading 1", scopes: ["source.gfm", "markup.heading.heading-1.gfm"]
+    expect(tokens[0]).toEqual value: "#", scopes: ["source.gfm", "markup.heading.heading-1.gfm", "markup.heading.marker.gfm"]
+    expect(tokens[1]).toEqual value: " ", scopes: ["source.gfm", "markup.heading.heading-1.gfm", "markup.heading.space.gfm"]
+    expect(tokens[2]).toEqual value: "Heading 1", scopes: ["source.gfm", "markup.heading.heading-1.gfm"]
 
     {tokens} = grammar.tokenizeLine("## Heading 2")
-    expect(tokens[0]).toEqual value: "## ", scopes: ["source.gfm", "markup.heading.heading-2.gfm"]
-    expect(tokens[1]).toEqual value: "Heading 2", scopes: ["source.gfm", "markup.heading.heading-2.gfm"]
+    expect(tokens[0]).toEqual value: "##", scopes: ["source.gfm", "markup.heading.heading-2.gfm", "markup.heading.marker.gfm"]
+    expect(tokens[1]).toEqual value: " ", scopes: ["source.gfm", "markup.heading.heading-2.gfm", "markup.heading.space.gfm"]
+    expect(tokens[2]).toEqual value: "Heading 2", scopes: ["source.gfm", "markup.heading.heading-2.gfm"]
 
     {tokens} = grammar.tokenizeLine("### Heading 3")
-    expect(tokens[0]).toEqual value: "### ", scopes: ["source.gfm", "markup.heading.heading-3.gfm"]
-    expect(tokens[1]).toEqual value: "Heading 3", scopes: ["source.gfm", "markup.heading.heading-3.gfm"]
+    expect(tokens[0]).toEqual value: "###", scopes: ["source.gfm", "markup.heading.heading-3.gfm", "markup.heading.marker.gfm"]
+    expect(tokens[1]).toEqual value: " ", scopes: ["source.gfm", "markup.heading.heading-3.gfm", "markup.heading.space.gfm"]
+    expect(tokens[2]).toEqual value: "Heading 3", scopes: ["source.gfm", "markup.heading.heading-3.gfm"]
 
     {tokens} = grammar.tokenizeLine("#### Heading 4")
-    expect(tokens[0]).toEqual value: "#### ", scopes: ["source.gfm", "markup.heading.heading-4.gfm"]
-    expect(tokens[1]).toEqual value: "Heading 4", scopes: ["source.gfm", "markup.heading.heading-4.gfm"]
+    expect(tokens[0]).toEqual value: "####", scopes: ["source.gfm", "markup.heading.heading-4.gfm", "markup.heading.marker.gfm"]
+    expect(tokens[1]).toEqual value: " ", scopes: ["source.gfm", "markup.heading.heading-4.gfm", "markup.heading.space.gfm"]
+    expect(tokens[2]).toEqual value: "Heading 4", scopes: ["source.gfm", "markup.heading.heading-4.gfm"]
 
     {tokens} = grammar.tokenizeLine("##### Heading 5")
-    expect(tokens[0]).toEqual value: "##### ", scopes: ["source.gfm", "markup.heading.heading-5.gfm"]
-    expect(tokens[1]).toEqual value: "Heading 5", scopes: ["source.gfm", "markup.heading.heading-5.gfm"]
+    expect(tokens[0]).toEqual value: "#####", scopes: ["source.gfm", "markup.heading.heading-5.gfm", "markup.heading.marker.gfm"]
+    expect(tokens[1]).toEqual value: " ", scopes: ["source.gfm", "markup.heading.heading-5.gfm", "markup.heading.space.gfm"]
+    expect(tokens[2]).toEqual value: "Heading 5", scopes: ["source.gfm", "markup.heading.heading-5.gfm"]
 
     {tokens} = grammar.tokenizeLine("###### Heading 6")
-    expect(tokens[0]).toEqual value: "###### ", scopes: ["source.gfm", "markup.heading.heading-6.gfm"]
-    expect(tokens[1]).toEqual value: "Heading 6", scopes: ["source.gfm", "markup.heading.heading-6.gfm"]
+    expect(tokens[0]).toEqual value: "######", scopes: ["source.gfm", "markup.heading.heading-6.gfm", "markup.heading.marker.gfm"]
+    expect(tokens[1]).toEqual value: " ", scopes: ["source.gfm", "markup.heading.heading-6.gfm", "markup.heading.space.gfm"]
+    expect(tokens[2]).toEqual value: "Heading 6", scopes: ["source.gfm", "markup.heading.heading-6.gfm"]
 
-    {tokens} = grammar.tokenizeLine("#Heading 1")
-    expect(tokens[0]).toEqual value: "#", scopes: ["source.gfm", "markup.heading.heading-1.gfm"]
-    expect(tokens[1]).toEqual value: "Heading 1", scopes: ["source.gfm", "markup.heading.heading-1.gfm"]
-
-  it "tokenzies matches inside of headers", ->
+  it "tokenizes matches inside of headers", ->
     {tokens} = grammar.tokenizeLine("# Heading :one:")
-    expect(tokens[0]).toEqual value: "# ", scopes: ["source.gfm", "markup.heading.heading-1.gfm"]
-    expect(tokens[1]).toEqual value: "Heading ", scopes: ["source.gfm", "markup.heading.heading-1.gfm"]
-    expect(tokens[2]).toEqual value: ":", scopes: ["source.gfm", "markup.heading.heading-1.gfm", "string.emoji.gfm", "string.emoji.start.gfm"]
-    expect(tokens[3]).toEqual value: "one", scopes: ["source.gfm", "markup.heading.heading-1.gfm", "string.emoji.gfm", "string.emoji.word.gfm"]
-    expect(tokens[4]).toEqual value: ":", scopes: ["source.gfm", "markup.heading.heading-1.gfm", "string.emoji.gfm", "string.emoji.end.gfm"]
+    expect(tokens[0]).toEqual value: "#", scopes: ["source.gfm", "markup.heading.heading-1.gfm", "markup.heading.marker.gfm"]
+    expect(tokens[1]).toEqual value: " ", scopes: ["source.gfm", "markup.heading.heading-1.gfm", "markup.heading.space.gfm"]
+    expect(tokens[2]).toEqual value: "Heading ", scopes: ["source.gfm", "markup.heading.heading-1.gfm"]
+    expect(tokens[3]).toEqual value: ":", scopes: ["source.gfm", "markup.heading.heading-1.gfm", "string.emoji.gfm", "string.emoji.start.gfm"]
+    expect(tokens[4]).toEqual value: "one", scopes: ["source.gfm", "markup.heading.heading-1.gfm", "string.emoji.gfm", "string.emoji.word.gfm"]
+    expect(tokens[5]).toEqual value: ":", scopes: ["source.gfm", "markup.heading.heading-1.gfm", "string.emoji.gfm", "string.emoji.end.gfm"]
 
-  it "tokenizies an :emoji:", ->
+  it "tokenizes an :emoji:", ->
     {tokens} = grammar.tokenizeLine("this is :no_good:")
     expect(tokens[0]).toEqual value: "this is ", scopes: ["source.gfm"]
     expect(tokens[1]).toEqual value: ":", scopes: ["source.gfm", "string.emoji.gfm", "string.emoji.start.gfm"]
@@ -597,3 +600,31 @@ describe "GitHub Flavored Markdown grammar", ->
     {tokens} = grammar.tokenizeLine("line  ")
     expect(tokens[0]).toEqual value: "line", scopes: ["source.gfm"]
     expect(tokens[1]).toEqual value: "  ", scopes: ["source.gfm", "linebreak.gfm"]
+
+  it "tokenizes tables", ->
+    [headerTokens, alignTokens, contentTokens] = grammar.tokenizeLines """
+    | Column 1  | Column 2  |
+    |:----------|:---------:|
+    | Content 1 | Content 2 |
+    """
+    # Header line
+    expect(headerTokens[0]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.outer"]
+    expect(headerTokens[1]).toEqual value: " Column 1  ", scopes: ["source.gfm", "table.gfm"]
+    expect(headerTokens[2]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.inner"]
+    expect(headerTokens[3]).toEqual value: " Column 2  ", scopes: ["source.gfm", "table.gfm"]
+    expect(headerTokens[4]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.outer"]
+    # Alignment line
+    expect(alignTokens[0]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.outer"]
+    expect(alignTokens[1]).toEqual value: ":", scopes: ["source.gfm", "table.gfm", "border.alignment"]
+    expect(alignTokens[2]).toEqual value: "----------", scopes: ["source.gfm", "table.gfm", "border.header"]
+    expect(alignTokens[3]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.inner"]
+    expect(alignTokens[4]).toEqual value: ":", scopes: ["source.gfm", "table.gfm", "border.alignment"]
+    expect(alignTokens[5]).toEqual value: "---------", scopes: ["source.gfm", "table.gfm", "border.header"]
+    expect(alignTokens[6]).toEqual value: ":", scopes: ["source.gfm", "table.gfm", "border.alignment"]
+    expect(alignTokens[7]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.outer"]
+    # Content line
+    expect(contentTokens[0]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.outer"]
+    expect(contentTokens[1]).toEqual value: " Content 1 ", scopes: ["source.gfm", "table.gfm"]
+    expect(contentTokens[2]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.inner"]
+    expect(contentTokens[3]).toEqual value: " Content 2 ", scopes: ["source.gfm", "table.gfm"]
+    expect(contentTokens[4]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.outer"]

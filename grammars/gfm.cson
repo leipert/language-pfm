@@ -50,9 +50,14 @@
     'name': 'markup.strike.gfm'
   }
   {
-    'begin': '^#{6}\\s*'
+    'begin': '^(#{6})(\\s*)'
     'end': '$'
     'name': 'markup.heading.heading-6.gfm'
+    'captures':
+      '1':
+        'name': 'markup.heading.marker.gfm'
+      '2':
+        'name': 'markup.heading.space.gfm'
     'patterns': [
       {
         'include': '$self'
@@ -60,9 +65,14 @@
     ]
   }
   {
-    'begin': '^#{5}\\s*'
+    'begin': '^(#{5})(\\s*)'
     'end': '$'
     'name': 'markup.heading.heading-5.gfm'
+    'captures':
+      '1':
+        'name': 'markup.heading.marker.gfm'
+      '2':
+        'name': 'markup.heading.space.gfm'
     'patterns': [
       {
         'include': '$self'
@@ -70,9 +80,14 @@
     ]
   }
   {
-    'begin': '^#{4}\\s*'
+    'begin': '^(#{4})(\\s*)'
     'end': '$'
     'name': 'markup.heading.heading-4.gfm'
+    'captures':
+      '1':
+        'name': 'markup.heading.marker.gfm'
+      '2':
+        'name': 'markup.heading.space.gfm'
     'patterns': [
       {
         'include': '$self'
@@ -80,9 +95,14 @@
     ]
   }
   {
-    'begin': '^#{3}\\s*'
+    'begin': '^(#{3})(\\s*)'
     'end': '$'
     'name': 'markup.heading.heading-3.gfm'
+    'captures':
+      '1':
+        'name': 'markup.heading.marker.gfm'
+      '2':
+        'name': 'markup.heading.space.gfm'
     'patterns': [
       {
         'include': '$self'
@@ -90,9 +110,14 @@
     ]
   }
   {
-    'begin': '^#{2}\\s*'
+    'begin': '^(#{2})(\\s*)'
     'end': '$'
     'name': 'markup.heading.heading-2.gfm'
+    'captures':
+      '1':
+        'name': 'markup.heading.marker.gfm'
+      '2':
+        'name': 'markup.heading.space.gfm'
     'patterns': [
       {
         'include': '$self'
@@ -100,9 +125,14 @@
     ]
   }
   {
-    'begin': '^#{1}\\s*'
+    'begin': '^(#{1})(\\s*)'
     'end': '$'
     'name': 'markup.heading.heading-1.gfm'
+    'captures':
+      '1':
+        'name': 'markup.heading.marker.gfm'
+      '2':
+        'name': 'markup.heading.space.gfm'
     'patterns': [
       {
         'include': '$self'
@@ -542,6 +572,40 @@
     ]
   }
   {
+    'begin': '^\\s*([`~]{3,})\\s*julia\\s*$'
+    'beginCaptures':
+      '0':
+        'name': 'support.gfm'
+    'end': '^\\s*\\1$'
+    'endCaptures':
+      '0':
+        'name': 'support.gfm'
+    'name': 'markup.code.julia.gfm'
+    'contentName': 'source.julia'
+    'patterns': [
+      {
+        'include': 'source.julia'
+      }
+    ]
+  }
+  {
+    'begin': '^\\s*([`~]{3,})\\s*r\\s*$'
+    'beginCaptures':
+      '0':
+        'name': 'support.gfm'
+    'end': '^\\s*\\1$'
+    'endCaptures':
+      '0':
+        'name': 'support.gfm'
+    'name': 'markup.code.r.gfm'
+    'contentName': 'source.r'
+    'patterns': [
+      {
+        'include': 'source.r'
+      }
+    ]
+  }
+  {
     'begin': '^\\s*([`~]{3,}).*$'
     'beginCaptures':
       '0':
@@ -739,5 +803,29 @@
         'name': 'punctuation.definition.comment.gfm'
     'end': '--\\s*>'
     'name': 'comment.block.gfm'
+  }
+  {
+    'begin': '^\\|'
+    'end': '\\|$'
+    'captures':
+      '0':
+        'name': 'border.pipe.outer'
+    'name': 'table.gfm'
+    'patterns': [
+      {
+        'match': '(:?)(-+)(:?)'
+        'captures':
+          '1':
+            'name': 'border.alignment'
+          '2':
+            'name': 'border.header'
+          '3':
+            'name': 'border.alignment'
+      }
+      {
+        'match': '\\|'
+        'name': 'border.pipe.inner'
+      }
+    ]
   }
 ]
