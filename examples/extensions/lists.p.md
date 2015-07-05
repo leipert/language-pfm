@@ -33,7 +33,6 @@ Term 2 with *inline markup*
 :   Definition 2
 
         { some code, part of Definition 2 }
-
     ```
     asdasdasd  
     ```
@@ -44,7 +43,7 @@ Term 1
 :   Definition
 with lazy continuation.
 
-    Second paragraph of the definition.
+  Second paragraph of the definition.
 
 Term 1
   ~ Definition 1

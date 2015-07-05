@@ -4,10 +4,10 @@
 
 Example:
 
-`<qsort [] = []>` {#mycode .haskell .numberLines startFrom="100"}
+`qsort [] = []` {#mycode .haskell .numberLines startFrom="100"}
 
 
-`bar = (x) ->` {.coffee}
+`bar = (x) -> ` {.coffee}
 
 
 ----------------------------------------
@@ -61,6 +61,4 @@ qsort [] = []
 qsort []     = []
 qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
                qsort (filter (>= x) xs)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-** NO CODE ANYMORE **
+~~~~

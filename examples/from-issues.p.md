@@ -1,23 +1,24 @@
-### extension-citations
+## Issue #5
 
-#### Known bugs / limitations
+According to \cite{a.j,_marley_m._johnson_j.t._bigger}, Pandoc is awesome
 
-* Citations [@Meyer2000 [p. 12] can have brackets inside]. We cannot find matching brackets, so a workaround would be escaping them: [@Meyer2000 \[p. 12\] - ]
+\test{}
 
-#### Citations
+#### Other part
 
-* solo: @Meyer2000
-* with page after: @Fenner2012 [p. 33]
-* without name: Fenner says in [-@Fenner2012]...
-* Multiple: [@Fenner2012; @Meyer2000]
-* with inline Format: [see @Meyer2000, \[pp. 33-35\]; also @Fenner2012, pp. 33 and *passim* ~~123~~ $x^2$ .]
-* inside Footnote^[compare to [@Fenner2012]]
-* @Fenner2012; @Meyer2000 [ p. 33 ]
-* @Fenner2012[]
+We can have some nice equations:
 
-GFM Mentions: @Meyer2000 '@Meyer2000' @Meyer2000's @Meyer2000. @Meyer2000, (@Meyer2000) [@Meyer2000]
+$$
+\hat{\mu}= \frac{\sum_{i=1}^n w_i RR_i}{\sum_{i=1}^n w_i}, \,\,\,\,\,\,\,\, \frac{1}{\hat{\lambda}}= \frac{1}{n} \sum_{i=1}^n w_i \left( \frac{1}{RR_i}-\frac{1}{\hat{\mu}} \right)
+$$
 
-###### In Headline: [@Meyer2000]
+## Issue #4
+
+This is a testing document for testing purposes only.[^1] This is a testing document for testing purposes only.
+
+[^1]: This is a footnote.
+
+## Issue #3
 
 In Blockquote:
 
@@ -27,19 +28,20 @@ footnote:
 
 > "This is a quote is a quote is a quote, saying very useful things in relation to the rest of the text."^[compare to  @Fenner2012]
 
-#### No Citations
+## Issue #2
 
-sentence with no space before@Meyer2000
+Rmarkdown support
 
-@Fenner2012 foo [p. 33] should not get grouped.
+`r 1 + 1`
 
-No citation: [S.175]
-
-Inside math: $@Meyer2000$
-
-----
-
-#### References
+```{r knitr_options, include=FALSE}
+library(knitr)
+opts_chunk$set(fig.width=12, fig.height=4, fig.path='RmdFigs/',
+               warning=FALSE, message=FALSE)
+set.seed(53079239)
+# install R/qtl package if necessary:
+if(!require("qtl")) install.packages("qtl", repos="http://cran.us.r-project.org")
+```
 
 ---
 references:
