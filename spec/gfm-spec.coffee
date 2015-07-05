@@ -225,7 +225,7 @@ describe "GitHub Flavored Markdown grammar", ->
     {tokens} = grammar.tokenizeLine("http://localhost:8080")
     expect(tokens[0]).toEqual value: "http://localhost:8080", scopes: ["source.gfm"]
 
-  it "tokenizes a ``` code block```", ->
+  it "tokenizes a ``` code block", ->
     {tokens, ruleStack} = grammar.tokenizeLine("```mylanguage")
     expect(tokens[0]).toEqual value: "```mylanguage", scopes: ["source.gfm", "markup.raw.gfm", "support.gfm"]
     {tokens, ruleStack} = grammar.tokenizeLine("-> 'hello'", ruleStack)
@@ -241,7 +241,23 @@ describe "GitHub Flavored Markdown grammar", ->
     {tokens} = grammar.tokenizeLine("~~~", ruleStack)
     expect(tokens[0]).toEqual value: "~~~", scopes: ["source.gfm", "markup.raw.gfm", "support.gfm"]
 
-  it "tokenizes a ``` code block with a language ```", ->
+  it "tokenizes a ``` code block with trailing whitespace", ->
+    {tokens, ruleStack} = grammar.tokenizeLine("```mylanguage")
+    expect(tokens[0]).toEqual value: "```mylanguage", scopes: ["source.gfm", "markup.raw.gfm", "support.gfm"]
+    {tokens, ruleStack} = grammar.tokenizeLine("-> 'hello'", ruleStack)
+    expect(tokens[0]).toEqual value: "-> 'hello'", scopes: ["source.gfm", "markup.raw.gfm"]
+    {tokens} = grammar.tokenizeLine("```  ", ruleStack)
+    expect(tokens[0]).toEqual value: "```  ", scopes: ["source.gfm", "markup.raw.gfm", "support.gfm"]
+
+  it "tokenizes a ~~~ code block with trailing whitespace", ->
+    {tokens, ruleStack} = grammar.tokenizeLine("~~~mylanguage")
+    expect(tokens[0]).toEqual value: "~~~mylanguage", scopes: ["source.gfm", "markup.raw.gfm", "support.gfm"]
+    {tokens, ruleStack} = grammar.tokenizeLine("-> 'hello'", ruleStack)
+    expect(tokens[0]).toEqual value: "-> 'hello'", scopes: ["source.gfm", "markup.raw.gfm"]
+    {tokens} = grammar.tokenizeLine("~~~  ", ruleStack)
+    expect(tokens[0]).toEqual value: "~~~  ", scopes: ["source.gfm", "markup.raw.gfm", "support.gfm"]
+
+  it "tokenizes a ``` code block with a language", ->
     {tokens, ruleStack} = grammar.tokenizeLine("```  bash")
     expect(tokens[0]).toEqual value: "```  bash", scopes: ["source.gfm", "markup.code.shell.gfm",  "support.gfm"]
 
@@ -254,6 +270,24 @@ describe "GitHub Flavored Markdown grammar", ->
 
     {tokens, ruleStack} = grammar.tokenizeLine("~~~js  ")
     expect(tokens[0]).toEqual value: "~~~js  ", scopes: ["source.gfm", "markup.code.js.gfm",  "support.gfm"]
+
+  it "tokenizes a ``` code block with a language and trailing whitespace", ->
+    {tokens, ruleStack} = grammar.tokenizeLine("```  bash")
+    {tokens} = grammar.tokenizeLine("```  ", ruleStack)
+    expect(tokens[0]).toEqual value: "```  ", scopes: ["source.gfm", "markup.code.shell.gfm", "support.gfm"]
+
+    {tokens, ruleStack} = grammar.tokenizeLine("```js  ")
+    {tokens} = grammar.tokenizeLine("```  ", ruleStack)
+    expect(tokens[0]).toEqual value: "```  ", scopes: ["source.gfm", "markup.code.js.gfm", "support.gfm"]
+
+  it "tokenizes a ~~~ code block with a language and trailing whitespace", ->
+    {tokens, ruleStack} = grammar.tokenizeLine("~~~  bash")
+    {tokens} = grammar.tokenizeLine("~~~  ", ruleStack)
+    expect(tokens[0]).toEqual value: "~~~  ", scopes: ["source.gfm", "markup.code.shell.gfm", "support.gfm"]
+
+    {tokens, ruleStack} = grammar.tokenizeLine("~~~js  ")
+    {tokens} = grammar.tokenizeLine("~~~  ", ruleStack)
+    expect(tokens[0]).toEqual value: "~~~  ", scopes: ["source.gfm", "markup.code.js.gfm", "support.gfm"]
 
   it "tokenizes inline `code` blocks", ->
     {tokens} = grammar.tokenizeLine("`this` is `code`")
@@ -607,12 +641,14 @@ describe "GitHub Flavored Markdown grammar", ->
     |:----------|:---------:|
     | Content 1 | Content 2 |
     """
+
     # Header line
     expect(headerTokens[0]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.outer"]
     expect(headerTokens[1]).toEqual value: " Column 1  ", scopes: ["source.gfm", "table.gfm"]
     expect(headerTokens[2]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.inner"]
     expect(headerTokens[3]).toEqual value: " Column 2  ", scopes: ["source.gfm", "table.gfm"]
     expect(headerTokens[4]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.outer"]
+
     # Alignment line
     expect(alignTokens[0]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.outer"]
     expect(alignTokens[1]).toEqual value: ":", scopes: ["source.gfm", "table.gfm", "border.alignment"]
@@ -622,9 +658,59 @@ describe "GitHub Flavored Markdown grammar", ->
     expect(alignTokens[5]).toEqual value: "---------", scopes: ["source.gfm", "table.gfm", "border.header"]
     expect(alignTokens[6]).toEqual value: ":", scopes: ["source.gfm", "table.gfm", "border.alignment"]
     expect(alignTokens[7]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.outer"]
+
     # Content line
     expect(contentTokens[0]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.outer"]
     expect(contentTokens[1]).toEqual value: " Content 1 ", scopes: ["source.gfm", "table.gfm"]
     expect(contentTokens[2]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.inner"]
     expect(contentTokens[3]).toEqual value: " Content 2 ", scopes: ["source.gfm", "table.gfm"]
     expect(contentTokens[4]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.outer"]
+
+    [headerTokens, emptyLineTokens, headingTokens] = grammar.tokenizeLines """
+    | Column 1  | Column 2\t
+
+    # Heading
+    """
+
+    expect(headerTokens[0]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.outer"]
+    expect(headerTokens[1]).toEqual value: " Column 1  ", scopes: ["source.gfm", "table.gfm"]
+    expect(headerTokens[2]).toEqual value: "|", scopes: ["source.gfm", "table.gfm", "border.pipe.inner"]
+    expect(headerTokens[3]).toEqual value: " Column 2", scopes: ["source.gfm", "table.gfm"]
+    expect(headerTokens[4]).toEqual value: "\t", scopes: ["source.gfm", "table.gfm"]
+
+    expect(headingTokens[0]).toEqual value: "#", scopes: ["source.gfm", "markup.heading.heading-1.gfm", "markup.heading.marker.gfm"]
+    expect(headingTokens[1]).toEqual value: " ", scopes: ["source.gfm", "markup.heading.heading-1.gfm", "markup.heading.space.gfm"]
+    expect(headingTokens[2]).toEqual value: "Heading", scopes: ["source.gfm", "markup.heading.heading-1.gfm"]
+
+  it "tokenizes criticmarkup", ->
+    [addToken, delToken, hlToken, subToken] = grammar.tokenizeLines """
+    Add{++ some text++}
+    Delete{-- some text--}
+    Highlight {==some text==}{>>with comment<<}
+    Replace {~~this~>by that~~}
+    """
+    # Addition
+    expect(addToken[0]).toEqual value: "Add", scopes: ["source.gfm"]
+    expect(addToken[1]).toEqual value: "{++", scopes: ["source.gfm", "critic.gfm.addition", "critic.gfm.addition.marker"]
+    expect(addToken[2]).toEqual value: " some text", scopes: ["source.gfm", "critic.gfm.addition"]
+    expect(addToken[3]).toEqual value: "++}", scopes: ["source.gfm", "critic.gfm.addition", "critic.gfm.addition.marker"]
+    # Deletion
+    expect(delToken[0]).toEqual value: "Delete", scopes: ["source.gfm"]
+    expect(delToken[1]).toEqual value: "{--", scopes: ["source.gfm", "critic.gfm.deletion", "critic.gfm.deletion.marker"]
+    expect(delToken[2]).toEqual value: " some text", scopes: ["source.gfm", "critic.gfm.deletion"]
+    expect(delToken[3]).toEqual value: "--}", scopes: ["source.gfm", "critic.gfm.deletion", "critic.gfm.deletion.marker"]
+    # Comment and highlight
+    expect(hlToken[0]).toEqual value: "Highlight ", scopes: ["source.gfm"]
+    expect(hlToken[1]).toEqual value: "{==", scopes: ["source.gfm", "critic.gfm.highlight", "critic.gfm.highlight.marker"]
+    expect(hlToken[2]).toEqual value: "some text", scopes: ["source.gfm", "critic.gfm.highlight"]
+    expect(hlToken[3]).toEqual value: "==}", scopes: ["source.gfm", "critic.gfm.highlight", "critic.gfm.highlight.marker"]
+    expect(hlToken[4]).toEqual value: "{>>", scopes: ["source.gfm", "critic.gfm.comment", "critic.gfm.comment.marker"]
+    expect(hlToken[5]).toEqual value: "with comment", scopes: ["source.gfm", "critic.gfm.comment"]
+    expect(hlToken[6]).toEqual value: "<<}", scopes: ["source.gfm", "critic.gfm.comment", "critic.gfm.comment.marker"]
+    # Replace
+    expect(subToken[0]).toEqual value: "Replace ", scopes: ["source.gfm"]
+    expect(subToken[1]).toEqual value: "{~~", scopes: ["source.gfm", "critic.gfm.substitution", "critic.gfm.substitution.marker"]
+    expect(subToken[2]).toEqual value: "this", scopes: ["source.gfm", "critic.gfm.substitution"]
+    expect(subToken[3]).toEqual value: "~>", scopes: ["source.gfm", "critic.gfm.substitution", "critic.gfm.substitution.operator"]
+    expect(subToken[4]).toEqual value: "by that", scopes: ["source.gfm", "critic.gfm.substitution"]
+    expect(subToken[5]).toEqual value: "~~}", scopes: ["source.gfm", "critic.gfm.substitution", "critic.gfm.substitution.marker"]

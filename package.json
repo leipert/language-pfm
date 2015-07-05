@@ -1,17 +1,18 @@
 {
   "name": "language-pfm",
-  "version": "0.67.2",
+  "version": "0.77.0",
   "description": "Syntax highlighting and snippets for Pandoc Flavored Markdown (PFM).",
   "repository": "https://github.com/leipert/language-pfm",
   "engines": {
     "atom": "*"
   },
   "devDependencies": {
+    "coffeelint": "^1.10.1",
     "cson": "^2.0.0",
     "gulp": "^3.8.11",
     "gulp-rename": "^1.2.0",
     "gulp-replace": "^0.5.3",
     "lodash": "^3.5",
-    "season": "^5.1.4"
+    "season": "^5.3.0"
   }
 }

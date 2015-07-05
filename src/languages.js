@@ -6,6 +6,14 @@ var raw = [
     'begin': '(?:javascript|js)',
     contentName: 'source.js'
   }, {
+    'begin': '(apib|apiblueprint)',
+    'name': 'markup.code.gfm',
+    'include': 'text.html.markdown.source.gfm.apib'
+  }, {
+    'begin': 'mson',
+    'name': 'markup.code.gfm',
+    'include': 'text.html.markdown.source.gfm.mson'
+  }, {
     'begin': '(?:markdown|mdown|md)',
     'name': 'markup.code.gfm',
     'include': '$self'

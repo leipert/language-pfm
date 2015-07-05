@@ -1,400 +1,729 @@
-name: "Pandoc Markdown"
-scopeName: "source.gfm"
+name: 'Pandoc Markdown'
+scopeName: 'source.gfm'
 fileTypes: [
-  "markdown"
-  "md"
-  "mdown"
-  "mkd"
-  "mkdown"
-  "rmd"
-  "ron"
-  "pmd"
-  "p.md"
+  'markdown'
+  'md'
+  'mdown'
+  'mkd'
+  'mkdown'
+  'rmd'
+  'ron'
+  'pmd'
+  'p.md'
 ]
 patterns: [
   {
-    begin: "<!{0}\\s*([\\w]+)[^>]*\\s*>"
+    begin: '<!{0}\\s*([\\w]+)[^>]*\\s*>'
     beginCaptures:
-      "0":
-        name: "source.html.basic"
+      '0':
+        name: 'source.html.basic'
         patterns: [
           {
-            include: "text.html.basic"
+            include: 'text.html.basic'
           }
         ]
-    end: "<\\s*[/]?\\1\\s*>"
+    end: '<\\s*[/]?\\1\\s*>'
     endCaptures:
-      "0":
-        name: "source.html.basic"
+      '0':
+        name: 'source.html.basic'
         patterns: [
           {
-            include: "text.html.basic"
+            include: 'text.html.basic'
           }
         ]
-    contentName: "source.html.basic"
+    contentName: 'source.html.basic'
     patterns: [
       {
-        include: "$self"
+        include: '$self'
       }
     ]
   }
   {
-    begin: "<!{0}\\s*([\\w]+)[^>]*\\s*>"
+    begin: '<!{0}\\s*([\\w]+)[^>]*\\s*>'
     beginCaptures:
-      "0":
-        name: "source.html.basic"
+      '0':
+        name: 'source.html.basic'
         patterns: [
           {
-            include: "text.html.basic"
+            include: 'text.html.basic'
           }
         ]
-    end: "<\\s*[/]?\\1\\s*>"
+    end: '<\\s*[/]?\\1\\s*>'
     endCaptures:
-      "0":
-        name: "source.html.basic"
+      '0':
+        name: 'source.html.basic'
         patterns: [
           {
-            include: "text.html.basic"
+            include: 'text.html.basic'
           }
         ]
-    contentName: "source.html.basic"
+    contentName: 'source.html.basic'
     patterns: [
       {
-        include: "$self"
+        include: '$self'
       }
     ]
   }
   {
-    name: "markup.math.block.pfm"
-    begin: "(\\${2})"
+    name: 'markup.math.block.pfm'
+    begin: '(\\${2})'
     beginCaptures:
-      "0":
-        name: "support.gfm"
-    end: "\\1"
+      '0':
+        name: 'support.gfm'
+    end: '\\1'
     endCaptures:
-      "0":
-        name: "support.gfm"
+      '0':
+        name: 'support.gfm'
     patterns: [
       {
-        include: "#math"
+        include: '#math'
       }
     ]
   }
   {
-    name: "markup.math.block.pfm"
-    begin: "(?<!\\\\)\\\\\\["
+    name: 'markup.math.block.pfm'
+    begin: '(?<!\\\\)\\\\\\['
     beginCaptures:
-      "0":
-        name: "support.gfm"
-    end: "\\\\\\]"
+      '0':
+        name: 'support.gfm'
+    end: '\\\\\\]'
     endCaptures:
-      "0":
-        name: "support.gfm"
+      '0':
+        name: 'support.gfm'
     patterns: [
       {
-        include: "#math"
+        include: '#math'
       }
     ]
   }
   {
-    name: "markup.definition.block.pfm"
-    begin: "^:   |^ :  |^  : "
+    name: 'markup.definition.block.pfm'
+    begin: '^:   |^ :  |^  : '
     beginCaptures:
-      "0":
-        name: "support.gfm"
-    end: "^(?= {0,3}\\S+.+$)"
+      '0':
+        name: 'support.gfm'
+    end: '^(?= {0,3}\\S+.+$)'
     endCaptures:
-      "0":
-        name: "support.gfm"
-    contentName: "markup.definition.content.pfm"
+      '0':
+        name: 'support.gfm'
+    contentName: 'markup.definition.content.pfm'
     patterns: [
       {
-        include: "$self"
+        include: '$self'
       }
     ]
   }
   {
-    name: "markup.definition.block.pfm"
-    begin: "^~   |^ ~  |^  ~ "
+    name: 'markup.definition.block.pfm'
+    begin: '^~   |^ ~  |^  ~ '
     beginCaptures:
-      "0":
-        name: "support.gfm"
-    end: "^(?= {0,3}\\S+.+$)"
+      '0':
+        name: 'support.gfm'
+    end: '^(?= {0,3}\\S+.+$)'
     endCaptures:
-      "0":
-        name: "support.gfm"
-    contentName: "markup.definition.content.pfm"
+      '0':
+        name: 'support.gfm'
+    contentName: 'markup.definition.content.pfm'
     patterns: [
       {
-        include: "$self"
+        include: '$self'
       }
     ]
   }
   {
-    name: "markup.citation.pfm"
-    match: "(\\[)(.*?-?@[A-z_][\\w:.#$%&\\-+?<>~/]*.*?[^\\\\])(\\])"
+    name: 'markup.citation.pfm'
+    match: '(\\[)(.*?-?@[A-z_][\\w:.#$%&\\-+?<>~/]*.*?[^\\\\])(\\])'
     captures:
-      "1":
-        name: "support.gfm"
-      "2":
+      '1':
+        name: 'support.gfm'
+      '2':
         patterns: [
           {
-            include: "#citation"
+            include: '#citation'
           }
           {
-            include: "#inline"
+            include: '#inline'
           }
         ]
-      "3":
-        name: "support.gfm"
+      '3':
+        name: 'support.gfm'
   }
   {
-    name: "markup.citation.pfm"
-    match: "(@[A-z_][\\w:.#$%&\\-+?<>~/]*?\\s*(\\[).*?(\\]))"
+    name: 'markup.citation.pfm'
+    match: '(@[A-z_][\\w:.#$%&\\-+?<>~/]*?\\s*(\\[).*?(\\]))'
     captures:
-      "0":
+      '0':
         patterns: [
           {
-            include: "#citation"
+            include: '#citation'
           }
           {
-            include: "#inline"
+            include: '#inline'
           }
         ]
-      "1":
-        name: "support.gfm"
-      "2":
-        name: "support.gfm"
+      '1':
+        name: 'support.gfm'
+      '2':
+        name: 'support.gfm'
   }
   {
-    name: "markup.footnote.reference.pfm"
-    match: "(\\[\\^)([\\S]+)(\\])(?!:)"
+    name: 'markup.footnote.reference.pfm'
+    match: '(\\[\\^)([\\S]+)(\\])(?!:)'
     captures:
-      "1":
-        name: "support.gfm"
-      "2":
-        name: "support.gfm"
-      "3":
-        name: "support.gfm"
+      '1':
+        name: 'support.gfm'
+      '2':
+        name: 'support.gfm'
+      '3':
+        name: 'support.gfm'
   }
   {
-    name: "markup.footnote.inline.pfm"
-    match: "(\\^\\[)([^\\^].+|\\^\\S.+)(\\])"
+    name: 'markup.footnote.inline.pfm'
+    match: '(\\^\\[)([^\\^].+|\\^\\S.+)(\\])'
     captures:
-      "1":
-        name: "support.gfm"
-      "2":
+      '1':
+        name: 'support.gfm'
+      '2':
         patterns: [
           {
-            include: "$self"
+            include: '$self'
           }
         ]
-      "3":
-        name: "support.gfm"
+      '3':
+        name: 'support.gfm'
   }
   {
-    match: "\\\\."
-    name: "constant.character.escape.gfm"
+    match: '\\\\.'
+    name: 'constant.character.escape.gfm'
   }
   {
-    match: "(&)[a-zA-Z0-9]+(;)"
-    name: "constant.character.entity.gfm"
+    match: '(&)[a-zA-Z0-9]+(;)'
+    name: 'constant.character.entity.gfm'
     captures:
-      "1":
-        name: "punctuation.definition.entity.gfm"
-      "2":
-        name: "punctuation.definition.entity.gfm"
+      '1':
+        name: 'punctuation.definition.entity.gfm'
+      '2':
+        name: 'punctuation.definition.entity.gfm'
   }
   {
-    match: "(&)#[0-9]+(;)"
-    name: "constant.character.entity.gfm"
+    match: '(&)#[0-9]+(;)'
+    name: 'constant.character.entity.gfm'
     captures:
-      "1":
-        name: "punctuation.definition.entity.gfm"
-      "2":
-        name: "punctuation.definition.entity.gfm"
+      '1':
+        name: 'punctuation.definition.entity.gfm'
+      '2':
+        name: 'punctuation.definition.entity.gfm'
   }
   {
-    match: "(&)#x[0-9a-fA-F]+(;)"
-    name: "constant.character.entity.gfm"
+    match: '(&)#x[0-9a-fA-F]+(;)'
+    name: 'constant.character.entity.gfm'
     captures:
-      "1":
-        name: "punctuation.definition.entity.gfm"
-      "2":
-        name: "punctuation.definition.entity.gfm"
+      '1':
+        name: 'punctuation.definition.entity.gfm'
+      '2':
+        name: 'punctuation.definition.entity.gfm'
   }
   {
-    begin: "\\A---$"
-    end: "^(---|\\.\\.\\.)$"
+    begin: '\\A---$'
+    end: '^(---|\\.\\.\\.)$'
     captures:
-      "0":
-        name: "comment.hr.gfm"
-    name: "front-matter.yaml.gfm"
+      '0':
+        name: 'comment.hr.gfm'
+    name: 'front-matter.yaml.gfm'
     patterns: [
       {
-        include: "source.yaml"
+        include: 'source.yaml'
       }
     ]
   }
   {
-    match: "^\\s*[*]{3,}\\s*$"
-    name: "comment.hr.gfm"
+    match: '^\\s*[*]{3,}\\s*$'
+    name: 'comment.hr.gfm'
   }
   {
-    match: "^\\s*[-]{3,}\\s*$"
-    name: "comment.hr.gfm"
+    match: '^\\s*[-]{3,}\\s*$'
+    name: 'comment.hr.gfm'
   }
   {
-    match: "^\\s*([*+-])[ \\t]+"
+    match: '^\\s*([*+-])[ \\t]+'
     captures:
-      "1":
-        name: "variable.unordered.list.gfm"
+      '1':
+        name: 'variable.unordered.list.gfm'
   }
   {
-    match: "^\\s*(\\d+\\.)[ \\t]+"
+    match: '^\\s*(\\d+\\.)[ \\t]+'
     captures:
-      "1":
-        name: "variable.ordered.list.gfm"
+      '1':
+        name: 'variable.ordered.list.gfm'
   }
   {
-    begin: "^\\s*(>)"
-    end: "^\\s*?$"
+    begin: '^\\s*(>)'
+    end: '^\\s*?$'
     beginCaptures:
-      "1":
-        name: "support.quote.gfm"
-    name: "comment.quote.gfm"
+      '1':
+        name: 'support.quote.gfm'
+    name: 'comment.quote.gfm'
     patterns: [
       {
-        include: "$self"
+        include: '$self'
       }
     ]
   }
   {
-    match: "(?<=^|\\s|\"|'|\\(|\\[)(@)(\\w[-\\w:]*)(?=[\\s\"'.,;\\)\\]])"
+    match: '(?<=^|\\s|"|\'|\\(|\\[)(@)(\\w[-\\w:]*)(?=[\\s"\'.,;\\)\\]])'
     captures:
-      "1":
-        name: "variable.mention.gfm"
-      "2":
-        name: "string.username.gfm"
+      '1':
+        name: 'variable.mention.gfm'
+      '2':
+        name: 'string.username.gfm'
   }
   {
-    match: "(?<=^|\\s|\"|'|\\(|\\[)(#)(\\d+)(?=[\\s\"'\\.,;\\)\\]])"
+    match: '(?<=^|\\s|"|\'|\\(|\\[)(#)(\\d+)(?=[\\s"\'\\.,;\\)\\]])'
     captures:
-      "1":
-        name: "variable.issue.tag.gfm"
-      "2":
-        name: "string.issue.number.gfm"
+      '1':
+        name: 'variable.issue.tag.gfm'
+      '2':
+        name: 'string.issue.number.gfm'
   }
   {
-    match: "(  )$"
+    match: '(  )$'
     captures:
-      "1":
-        name: "linebreak.gfm"
+      '1':
+        name: 'linebreak.gfm'
   }
   {
-    begin: "<!--"
+    begin: '<!--'
     captures:
-      "0":
-        name: "punctuation.definition.comment.gfm"
-    end: "--\\s*>"
-    name: "comment.block.gfm"
+      '0':
+        name: 'punctuation.definition.comment.gfm'
+    end: '--\\s*>'
+    name: 'comment.block.gfm'
   }
   {
-    begin: "^\\|"
-    end: "\\|$"
-    captures:
-      "0":
-        name: "border.pipe.outer"
-    name: "table.gfm"
+    begin: '^\\|'
+    end: '(\\|)?\\s*$'
+    beginCaptures:
+      '0':
+        name: 'border.pipe.outer'
+    endCaptures:
+      '1':
+        name: 'border.pipe.outer'
+    name: 'table.gfm'
     patterns: [
       {
-        match: "(:?)(-+)(:?)"
+        match: '(:?)(-+)(:?)'
         captures:
-          "1":
-            name: "border.alignment"
-          "2":
-            name: "border.header"
-          "3":
-            name: "border.alignment"
+          '1':
+            name: 'border.alignment'
+          '2':
+            name: 'border.header'
+          '3':
+            name: 'border.alignment'
       }
       {
-        match: "\\|"
-        name: "border.pipe.inner"
+        match: '\\|'
+        name: 'border.pipe.inner'
       }
     ]
   }
   {
-    include: "#headings"
+    begin: '{\\+\\+'
+    end: '\\+\\+}'
+    name: 'critic.gfm.addition'
+    captures:
+      '0':
+        name: 'critic.gfm.addition.marker'
   }
   {
-    include: "#inline"
+    begin: '{--'
+    end: '--}'
+    name: 'critic.gfm.deletion'
+    captures:
+      '0':
+        name: 'critic.gfm.deletion.marker'
   }
   {
-    include: "#code"
+    begin: '{=='
+    end: '==}'
+    name: 'critic.gfm.highlight'
+    captures:
+      '0':
+        name: 'critic.gfm.highlight.marker'
+  }
+  {
+    begin: '{>>'
+    end: '<<}'
+    name: 'critic.gfm.comment'
+    captures:
+      '0':
+        name: 'critic.gfm.comment.marker'
+  }
+  {
+    begin: '{~~'
+    end: '~~}'
+    name: 'critic.gfm.substitution'
+    captures:
+      '0':
+        name: 'critic.gfm.substitution.marker'
+    patterns: [
+      {
+        match: '~>'
+        name: 'critic.gfm.substitution.operator'
+      }
+    ]
+  }
+  {
+    include: '#headings'
+  }
+  {
+    include: '#inline'
+  }
+  {
+    include: '#code'
   }
 ]
 repository:
+  inline:
+    patterns: [
+      {
+        include: '#inline-non-emph'
+      }
+      {
+        include: '#inline-emph'
+      }
+    ]
+  'inline-emph':
+    patterns: [
+      {
+        include: '#inline-bold-italic'
+      }
+      {
+        include: '#inline-bold'
+      }
+      {
+        include: '#inline-italic'
+      }
+    ]
+  'inline-non-emph':
+    patterns: [
+      {
+        match: '([_\\*]){4,}(.+?)\\1'
+        name: 'markup.inline.non-emph'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: '#inline'
+              }
+            ]
+      }
+      {
+        name: 'markup.math.inline.pfm'
+        match: '(?<!\\$)(\\$)([^$\\s][^$]+[^\\\\$\\s]|[^\\\\$\\s]+)(\\$)'
+        captures:
+          '1':
+            name: 'support.gfm'
+          '2':
+            patterns: [
+              {
+                include: '#math'
+              }
+            ]
+          '3':
+            name: 'support.gfm'
+      }
+      {
+        name: 'markup.math.inline.pfm'
+        match: '(\\\\\\()([\\S][^)]+)(\\\\\\))'
+        captures:
+          '1':
+            name: 'support.gfm'
+          '2':
+            patterns: [
+              {
+                include: '#math'
+              }
+            ]
+          '3':
+            name: 'support.gfm'
+      }
+      {
+        match: '(\\[!)(\\[)([^\\]]*)(\\])((\\()[^\\)]+(\\)))(\\])(((\\()[^\\)]+(\\)))|((\\[)[^\\]]+(\\])))'
+        name: 'link'
+        captures:
+          '1':
+            name: 'punctuation.definition.begin.gfm'
+          '2':
+            name: 'punctuation.definition.begin.gfm'
+          '3':
+            name: 'entity.gfm'
+          '4':
+            name: 'punctuation.definition.end.gfm'
+          '5':
+            name: 'markup.underline.link.gfm'
+          '6':
+            name: 'punctuation.definition.begin.gfm'
+          '7':
+            name: 'punctuation.definition.end.gfm'
+          '8':
+            name: 'punctuation.definition.end.gfm'
+          '10':
+            name: 'markup.underline.link.gfm'
+          '11':
+            name: 'punctuation.definition.begin.gfm'
+          '12':
+            name: 'punctuation.definition.end.gfm'
+          '13':
+            name: 'markup.underline.link.gfm'
+          '14':
+            name: 'punctuation.definition.begin.gfm'
+          '15':
+            name: 'punctuation.definition.end.gfm'
+      }
+      {
+        match: '(\\[!)(\\[)([^\\]]*)(\\])((\\[)[^\\)]+(\\]))(\\])(((\\()[^\\)]+(\\)))|((\\[)[^\\]]+(\\])))'
+        name: 'link'
+        captures:
+          '1':
+            name: 'punctuation.definition.begin.gfm'
+          '2':
+            name: 'punctuation.definition.begin.gfm'
+          '3':
+            name: 'entity.gfm'
+          '4':
+            name: 'punctuation.definition.end.gfm'
+          '5':
+            name: 'markup.underline.link.gfm'
+          '6':
+            name: 'punctuation.definition.begin.gfm'
+          '7':
+            name: 'punctuation.definition.end.gfm'
+          '8':
+            name: 'punctuation.definition.end.gfm'
+          '10':
+            name: 'markup.underline.link.gfm'
+          '11':
+            name: 'punctuation.definition.begin.gfm'
+          '12':
+            name: 'punctuation.definition.end.gfm'
+          '13':
+            name: 'markup.underline.link.gfm'
+          '14':
+            name: 'punctuation.definition.begin.gfm'
+          '15':
+            name: 'punctuation.definition.end.gfm'
+      }
+      {
+        match: '!?(\\[)([^\\]]*)(\\])((\\()[^\\)]+(\\)))'
+        name: 'link'
+        captures:
+          '1':
+            name: 'punctuation.definition.begin.gfm'
+          '2':
+            name: 'entity.gfm'
+          '3':
+            name: 'punctuation.definition.end.gfm'
+          '4':
+            name: 'markup.underline.link.gfm'
+          '5':
+            name: 'punctuation.definition.begin.gfm'
+          '6':
+            name: 'punctuation.definition.end.gfm'
+      }
+      {
+        match: '!?(\\[)([^\\]]*)(\\])((\\[)[^\\]]*(\\]))'
+        name: 'link'
+        captures:
+          '1':
+            name: 'punctuation.definition.begin.gfm'
+          '2':
+            name: 'entity.gfm'
+          '3':
+            name: 'punctuation.definition.end.gfm'
+          '4':
+            name: 'markup.underline.link.gfm'
+          '5':
+            name: 'punctuation.definition.begin.gfm'
+          '6':
+            name: 'punctuation.definition.end.gfm'
+      }
+      {
+        match: '^\\s*(\\[)([^\\]]+)(\\])\\s*:\\s*<([^>]+)>'
+        name: 'link'
+        captures:
+          '1':
+            name: 'punctuation.definition.begin.gfm'
+          '2':
+            name: 'entity.gfm'
+          '3':
+            name: 'punctuation.definition.end.gfm'
+          '4':
+            name: 'markup.underline.link.gfm'
+      }
+      {
+        match: '^\\s*(\\[)([^\\]]+)(\\])\\s*(:)\\s*(\\S+)'
+        name: 'link'
+        captures:
+          '1':
+            name: 'punctuation.definition.begin.gfm'
+          '2':
+            name: 'entity.gfm'
+          '3':
+            name: 'punctuation.definition.end.gfm'
+          '4':
+            name: 'punctuation.separator.key-value.gfm'
+          '5':
+            name: 'markup.underline.link.gfm'
+      }
+    ]
+  'inline-bold-italic':
+    patterns: [
+      {
+        match: '(?<=[^\\w\\d\\\\_])(___)([^\\s_\\\\]|[^\\s_][^_\\\\]|\\\\{2}|[^\\s_].+?[^_\\\\])(\\1)(?=[^\\w\\d]|_|$)'
+        name: 'markup.inline.bold.italic.gfm'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: '#inline-non-emph'
+              }
+            ]
+      }
+      {
+        match: '(?<=[^\\*\\\\])(\\*{3})([^\\s\\*\\\\]|[^\\s\\*][^\\*\\\\]|\\\\{2}|[^\\s\\*].+?[^\\*\\\\])(\\1)'
+        name: 'markup.inline.bold.italic.gfm'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: '#inline-non-emph'
+              }
+            ]
+      }
+    ]
+  'inline-bold':
+    patterns: [
+      {
+        match: '(?<=[^\\w\\d\\\\]|_)(__)([^\\s_\\\\]|[^\\s_][^_\\\\]|\\\\{2}|[^\\s_].+?[^_\\\\])(\\1)(?=[^\\w\\d]|_|$)'
+        name: 'markup.inline.bold.gfm'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: '#inline-non-emph'
+              }
+              {
+                include: '#inline-italic'
+              }
+            ]
+      }
+      {
+        match: '(?<!\\\\)(\\*{2})([^\\s\\*\\\\]|[^\\s\\*][^\\*\\\\]|\\\\{2}|[^\\s\\*].+?[^\\*\\\\])(\\1)'
+        name: 'markup.inline.bold.gfm'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: '#inline-non-emph'
+              }
+              {
+                include: '#inline-bold'
+              }
+            ]
+      }
+    ]
+  'inline-italic':
+    patterns: [
+      {
+        match: '(?<=[^\\w\\d_\\\\]{2}|__)(_)([^\\s_\\\\]|[^\\s_][^\\\\_]|\\\\{2}|[^\\s_].+?[^_\\\\])(\\1)(?=[^\\w\\d_]|$|_{2,})'
+        name: 'markup.inline.italic.gfm'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: '#inline-non-emph'
+              }
+              {
+                include: '#inline-bold'
+              }
+            ]
+      }
+      {
+        match: '(?<=[^\\*\\\\]{2}|\\*\\*)(\\*)([^\\s\\*\\\\]|[^\\s\\*][^\\*\\\\]|\\\\{2}|[^\\s\\*].+?[^\\*\\\\])(\\1)(?=[^\\*]|\\*{2,}|$)'
+        name: 'markup.inline.italic.gfm'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: '#inline-non-emph'
+              }
+              {
+                include: '#inline-bold'
+              }
+            ]
+      }
+    ]
   citation:
     patterns: [
       {
-        match: "(-?@)([A-z_][\\w:.#$%&\\-+?<>~/]*)"
+        match: '(-?@)([A-z_][\\w:.#$%&\\-+?<>~/]*)'
         captures:
-          "1":
-            name: "variable.mention.gfm"
-          "2":
-            name: "string.username.gfm"
+          '1':
+            name: 'variable.mention.gfm'
+          '2':
+            name: 'string.username.gfm'
       }
     ]
   math:
     patterns: [
       {
         captures:
-          "1":
-            name: "punctuation.definition.constant.math.tex"
-        match: "(\\\\)(s(s(earrow|warrow|lash)|h(ort(downarrow|uparrow|parallel|leftarrow|rightarrow|mid)|arp)|tar|i(gma|m(eq)?)|u(cc(sim|n(sim|approx)|curlyeq|eq|approx)?|pset(neq(q)?|plus(eq)?|eq(q)?)?|rd|m|bset(neq(q)?|plus(eq)?|eq(q)?)?)|p(hericalangle|adesuit)|e(tminus|arrow)|q(su(pset(eq)?|bset(eq)?)|c(up|ap)|uare)|warrow|m(ile|all(s(etminus|mile)|frown)))|h(slash|ook(leftarrow|rightarrow)|eartsuit|bar)|R(sh|ightarrow|e|bag)|Gam(e|ma)|n(s(hort(parallel|mid)|im|u(cc(eq)?|pseteq(q)?|bseteq))|Rightarrow|n(earrow|warrow)|cong|triangle(left(eq(slant)?)?|right(eq(slant)?)?)|i(plus)?|u|p(lus|arallel|rec(eq)?)|e(q|arrow|g|xists)|v(dash|Dash)|warrow|le(ss|q(slant|q)?|ft(arrow|rightarrow))|a(tural|bla)|VDash|rightarrow|g(tr|eq(slant|q)?)|mid|Left(arrow|rightarrow))|c(hi|irc(eq|le(d(circ|S|dash|ast)|arrow(left|right)))?|o(ng|prod|lon|mplement)|dot(s|p)?|u(p|r(vearrow(left|right)|ly(eq(succ|prec)|vee(downarrow|uparrow)?|wedge(downarrow|uparrow)?)))|enterdot|lubsuit|ap)|Xi|Maps(to(char)?|from(char)?)|B(ox|umpeq|bbk)|t(h(ick(sim|approx)|e(ta|refore))|imes|op|wohead(leftarrow|rightarrow)|a(u|lloblong)|riangle(down|q|left(eq(slant)?)?|right(eq(slant)?)?)?)|i(n(t(er(cal|leave))?|plus|fty)?|ota|math)|S(igma|u(pset|bset))|zeta|o(slash|times|int|dot|plus|vee|wedge|lessthan|greaterthan|m(inus|ega)|b(slash|long|ar))|d(i(v(ideontimes)?|a(g(down|up)|mond(suit)?)|gamma)|o(t(plus|eq(dot)?)|ublebarwedge|wn(harpoon(left|right)|downarrows|arrow))|d(ots|agger)|elta|a(sh(v|leftarrow|rightarrow)|leth|gger))|Y(down|up|left|right)|C(up|ap)|u(n(lhd|rhd)|p(silon|harpoon(left|right)|downarrow|uparrows|lus|arrow)|lcorner|rcorner)|jmath|Theta|Im|p(si|hi|i(tchfork)?|erp|ar(tial|allel)|r(ime|o(d|pto)|ec(sim|n(sim|approx)|curlyeq|eq|approx)?)|m)|e(t(h|a)|psilon|q(slant(less|gtr)|circ|uiv)|ll|xists|mptyset)|Omega|D(iamond|ownarrow|elta)|v(d(ots|ash)|ee(bar)?|Dash|ar(s(igma|u(psetneq(q)?|bsetneq(q)?))|nothing|curly(vee|wedge)|t(heta|imes|riangle(left|right)?)|o(slash|circle|times|dot|plus|vee|wedge|lessthan|ast|greaterthan|minus|b(slash|ar))|p(hi|i|ropto)|epsilon|kappa|rho|bigcirc))|kappa|Up(silon|downarrow|arrow)|Join|f(orall|lat|a(t(s(emi|lash)|bslash)|llingdotseq)|rown)|P(si|hi|i)|w(p|edge|r)|l(hd|n(sim|eq(q)?|approx)|ceil|times|ightning|o(ng(left(arrow|rightarrow)|rightarrow|maps(to|from))|zenge|oparrow(left|right))|dot(s|p)|e(ss(sim|dot|eq(qgtr|gtr)|approx|gtr)|q(slant|q)?|ft(slice|harpoon(down|up)|threetimes|leftarrows|arrow(t(ail|riangle))?|right(squigarrow|harpoons|arrow(s|triangle|eq)?))|adsto)|vertneqq|floor|l(c(orner|eil)|floor|l|bracket)?|a(ngle|mbda)|rcorner|bag)|a(s(ymp|t)|ngle|pprox(eq)?|l(pha|eph)|rrownot|malg)|V(dash|vdash)|r(h(o|d)|ceil|times|i(singdotseq|ght(s(quigarrow|lice)|harpoon(down|up)|threetimes|left(harpoons|arrows)|arrow(t(ail|riangle))?|rightarrows))|floor|angle|r(ceil|parenthesis|floor|bracket)|bag)|g(n(sim|eq(q)?|approx)|tr(sim|dot|eq(qless|less)|less|approx)|imel|eq(slant|q)?|vertneqq|amma|g(g)?)|Finv|xi|m(ho|i(nuso|d)|o(o|dels)|u(ltimap)?|p|e(asuredangle|rge)|aps(to|from(char)?))|b(i(n(dnasrepma|ampersand)|g(s(tar|qc(up|ap))|nplus|c(irc|u(p|rly(vee|wedge))|ap)|triangle(down|up)|interleave|o(times|dot|plus)|uplus|parallel|vee|wedge|box))|o(t|wtie|x(slash|circle|times|dot|plus|empty|ast|minus|b(slash|ox|ar)))|u(llet|mpeq)|e(cause|t(h|ween|a))|lack(square|triangle(down|left|right)?|lozenge)|a(ck(s(im(eq)?|lash)|prime|epsilon)|r(o|wedge))|bslash)|L(sh|ong(left(arrow|rightarrow)|rightarrow|maps(to|from))|eft(arrow|rightarrow)|leftarrow|ambda|bag)|Arrownot)\\b"
-        name: "constant.character.math.tex"
+          '1':
+            name: 'punctuation.definition.constant.math.tex'
+        match: '(\\\\)(s(s(earrow|warrow|lash)|h(ort(downarrow|uparrow|parallel|leftarrow|rightarrow|mid)|arp)|tar|i(gma|m(eq)?)|u(cc(sim|n(sim|approx)|curlyeq|eq|approx)?|pset(neq(q)?|plus(eq)?|eq(q)?)?|rd|m|bset(neq(q)?|plus(eq)?|eq(q)?)?)|p(hericalangle|adesuit)|e(tminus|arrow)|q(su(pset(eq)?|bset(eq)?)|c(up|ap)|uare)|warrow|m(ile|all(s(etminus|mile)|frown)))|h(slash|ook(leftarrow|rightarrow)|eartsuit|bar)|R(sh|ightarrow|e|bag)|Gam(e|ma)|n(s(hort(parallel|mid)|im|u(cc(eq)?|pseteq(q)?|bseteq))|Rightarrow|n(earrow|warrow)|cong|triangle(left(eq(slant)?)?|right(eq(slant)?)?)|i(plus)?|u|p(lus|arallel|rec(eq)?)|e(q|arrow|g|xists)|v(dash|Dash)|warrow|le(ss|q(slant|q)?|ft(arrow|rightarrow))|a(tural|bla)|VDash|rightarrow|g(tr|eq(slant|q)?)|mid|Left(arrow|rightarrow))|c(hi|irc(eq|le(d(circ|S|dash|ast)|arrow(left|right)))?|o(ng|prod|lon|mplement)|dot(s|p)?|u(p|r(vearrow(left|right)|ly(eq(succ|prec)|vee(downarrow|uparrow)?|wedge(downarrow|uparrow)?)))|enterdot|lubsuit|ap)|Xi|Maps(to(char)?|from(char)?)|B(ox|umpeq|bbk)|t(h(ick(sim|approx)|e(ta|refore))|imes|op|wohead(leftarrow|rightarrow)|a(u|lloblong)|riangle(down|q|left(eq(slant)?)?|right(eq(slant)?)?)?)|i(n(t(er(cal|leave))?|plus|fty)?|ota|math)|S(igma|u(pset|bset))|zeta|o(slash|times|int|dot|plus|vee|wedge|lessthan|greaterthan|m(inus|ega)|b(slash|long|ar))|d(i(v(ideontimes)?|a(g(down|up)|mond(suit)?)|gamma)|o(t(plus|eq(dot)?)|ublebarwedge|wn(harpoon(left|right)|downarrows|arrow))|d(ots|agger)|elta|a(sh(v|leftarrow|rightarrow)|leth|gger))|Y(down|up|left|right)|C(up|ap)|u(n(lhd|rhd)|p(silon|harpoon(left|right)|downarrow|uparrows|lus|arrow)|lcorner|rcorner)|jmath|Theta|Im|p(si|hi|i(tchfork)?|erp|ar(tial|allel)|r(ime|o(d|pto)|ec(sim|n(sim|approx)|curlyeq|eq|approx)?)|m)|e(t(h|a)|psilon|q(slant(less|gtr)|circ|uiv)|ll|xists|mptyset)|Omega|D(iamond|ownarrow|elta)|v(d(ots|ash)|ee(bar)?|Dash|ar(s(igma|u(psetneq(q)?|bsetneq(q)?))|nothing|curly(vee|wedge)|t(heta|imes|riangle(left|right)?)|o(slash|circle|times|dot|plus|vee|wedge|lessthan|ast|greaterthan|minus|b(slash|ar))|p(hi|i|ropto)|epsilon|kappa|rho|bigcirc))|kappa|Up(silon|downarrow|arrow)|Join|f(orall|lat|a(t(s(emi|lash)|bslash)|llingdotseq)|rown)|P(si|hi|i)|w(p|edge|r)|l(hd|n(sim|eq(q)?|approx)|ceil|times|ightning|o(ng(left(arrow|rightarrow)|rightarrow|maps(to|from))|zenge|oparrow(left|right))|dot(s|p)|e(ss(sim|dot|eq(qgtr|gtr)|approx|gtr)|q(slant|q)?|ft(slice|harpoon(down|up)|threetimes|leftarrows|arrow(t(ail|riangle))?|right(squigarrow|harpoons|arrow(s|triangle|eq)?))|adsto)|vertneqq|floor|l(c(orner|eil)|floor|l|bracket)?|a(ngle|mbda)|rcorner|bag)|a(s(ymp|t)|ngle|pprox(eq)?|l(pha|eph)|rrownot|malg)|V(dash|vdash)|r(h(o|d)|ceil|times|i(singdotseq|ght(s(quigarrow|lice)|harpoon(down|up)|threetimes|left(harpoons|arrows)|arrow(t(ail|riangle))?|rightarrows))|floor|angle|r(ceil|parenthesis|floor|bracket)|bag)|g(n(sim|eq(q)?|approx)|tr(sim|dot|eq(qless|less)|less|approx)|imel|eq(slant|q)?|vertneqq|amma|g(g)?)|Finv|xi|m(ho|i(nuso|d)|o(o|dels)|u(ltimap)?|p|e(asuredangle|rge)|aps(to|from(char)?))|b(i(n(dnasrepma|ampersand)|g(s(tar|qc(up|ap))|nplus|c(irc|u(p|rly(vee|wedge))|ap)|triangle(down|up)|interleave|o(times|dot|plus)|uplus|parallel|vee|wedge|box))|o(t|wtie|x(slash|circle|times|dot|plus|empty|ast|minus|b(slash|ox|ar)))|u(llet|mpeq)|e(cause|t(h|ween|a))|lack(square|triangle(down|left|right)?|lozenge)|a(ck(s(im(eq)?|lash)|prime|epsilon)|r(o|wedge))|bslash)|L(sh|ong(left(arrow|rightarrow)|rightarrow|maps(to|from))|eft(arrow|rightarrow)|leftarrow|ambda|bag)|Arrownot)\\b'
+        name: 'constant.character.math.tex'
       }
       {
         captures:
-          "1":
-            name: "punctuation.definition.constant.math.tex"
-        match: "(\\\\)(sum|prod|coprod|int|oint|bigcap|bigcup|bigsqcup|bigvee|bigwedge|bigodot|bigotimes|bogoplus|biguplus)\\b"
-        name: "constant.character.math.tex"
+          '1':
+            name: 'punctuation.definition.constant.math.tex'
+        match: '(\\\\)(sum|prod|coprod|int|oint|bigcap|bigcup|bigsqcup|bigvee|bigwedge|bigodot|bigotimes|bogoplus|biguplus)\\b'
+        name: 'constant.character.math.tex'
       }
       {
         captures:
-          "1":
-            name: "punctuation.definition.constant.math.tex"
-        match: "(\\\\)(arccos|arcsin|arctan|arg|cos|cosh|cot|coth|csc|deg|det|dim|exp|gcd|hom|inf|ker|lg|lim|liminf|limsup|ln|log|max|min|pr|sec|sin|sinh|sup|tan|tanh)\\b"
-        name: "constant.other.math.tex"
+          '1':
+            name: 'punctuation.definition.constant.math.tex'
+        match: '(\\\\)(arccos|arcsin|arctan|arg|cos|cosh|cot|coth|csc|deg|det|dim|exp|gcd|hom|inf|ker|lg|lim|liminf|limsup|ln|log|max|min|pr|sec|sin|sinh|sup|tan|tanh)\\b'
+        name: 'constant.other.math.tex'
       }
       {
-        begin: "((\\\\)Sexpr(\\{))"
+        begin: '((\\\\)Sexpr(\\{))'
         beginCaptures:
-          "1":
-            name: "support.function.sexpr.math.tex"
-          "2":
-            name: "punctuation.definition.function.math.tex"
-          "3":
-            name: "punctuation.section.embedded.begin.math.tex"
-        contentName: "support.function.sexpr.math.tex"
-        end: "(((\\})))"
+          '1':
+            name: 'support.function.sexpr.math.tex'
+          '2':
+            name: 'punctuation.definition.function.math.tex'
+          '3':
+            name: 'punctuation.section.embedded.begin.math.tex'
+        contentName: 'support.function.sexpr.math.tex'
+        end: '(((\\})))'
         endCaptures:
-          "1":
-            name: "support.function.sexpr.math.tex"
-          "2":
-            name: "punctuation.section.embedded.end.math.tex"
-          "3":
-            name: "source.r"
-        name: "meta.embedded.line.r"
+          '1':
+            name: 'support.function.sexpr.math.tex'
+          '2':
+            name: 'punctuation.section.embedded.end.math.tex'
+          '3':
+            name: 'source.r'
+        name: 'meta.embedded.line.r'
         patterns: [
           {
-            begin: "\\G(?!\\})"
-            end: "(?=\\})"
-            name: "source.r"
+            begin: '\\G(?!\\})'
+            end: '(?=\\})'
+            name: 'source.r'
             patterns: [
               {
-                include: "source.r"
+                include: 'source.r'
               }
             ]
           }
@@ -402,1298 +731,1169 @@ repository:
       }
       {
         captures:
-          "1":
-            name: "punctuation.definition.constant.math.tex"
-        match: "(\\\\)([^a-zA-Z]|[A-Za-z]+)(?=\\b|\\}|\\]|\\^|\\_)"
-        name: "constant.other.general.math.tex"
+          '1':
+            name: 'punctuation.definition.constant.math.tex'
+        match: '(\\\\)([^a-zA-Z]|[A-Za-z]+)(?=\\b|\\}|\\]|\\^|\\_)'
+        name: 'constant.other.general.math.tex'
       }
       {
-        match: "(([0-9]*[\\.][0-9]+)|[0-9]+)"
-        name: "constant.numeric.math.tex"
+        match: '(([0-9]*[\\.][0-9]+)|[0-9]+)'
+        name: 'constant.numeric.math.tex'
       }
       {
-        match: "«press a-z and space for greek letter»[a-zA-Z]*"
-        name: "meta.placeholder.greek.math.tex"
+        match: '«press a-z and space for greek letter»[a-zA-Z]*'
+        name: 'meta.placeholder.greek.math.tex'
       }
       {
-        match: "(?<!\\\\)[{}]"
-        name: "punctuation.definition.arguments"
+        match: '(?<!\\\\)[{}]'
+        name: 'punctuation.definition.arguments'
       }
     ]
   headings:
     patterns: [
       {
-        begin: "^(#{6})(\\s*)"
-        end: "$"
-        name: "markup.heading.heading-6.gfm"
+        begin: '^(#{6})(\\s*)'
+        end: '$'
+        name: 'markup.heading.heading-6.gfm'
         captures:
-          "1":
-            name: "markup.heading.marker.gfm"
-          "2":
-            name: "markup.heading.space.gfm"
+          '1':
+            name: 'markup.heading.marker.gfm'
+          '2':
+            name: 'markup.heading.space.gfm'
         patterns: [
           {
-            include: "#inline"
+            include: '#inline'
           }
         ]
       }
       {
-        begin: "^(#{5})(\\s*)"
-        end: "$"
-        name: "markup.heading.heading-5.gfm"
+        begin: '^(#{5})(\\s*)'
+        end: '$'
+        name: 'markup.heading.heading-5.gfm'
         captures:
-          "1":
-            name: "markup.heading.marker.gfm"
-          "2":
-            name: "markup.heading.space.gfm"
+          '1':
+            name: 'markup.heading.marker.gfm'
+          '2':
+            name: 'markup.heading.space.gfm'
         patterns: [
           {
-            include: "#inline"
+            include: '#inline'
           }
         ]
       }
       {
-        begin: "^(#{4})(\\s*)"
-        end: "$"
-        name: "markup.heading.heading-4.gfm"
+        begin: '^(#{4})(\\s*)'
+        end: '$'
+        name: 'markup.heading.heading-4.gfm'
         captures:
-          "1":
-            name: "markup.heading.marker.gfm"
-          "2":
-            name: "markup.heading.space.gfm"
+          '1':
+            name: 'markup.heading.marker.gfm'
+          '2':
+            name: 'markup.heading.space.gfm'
         patterns: [
           {
-            include: "#inline"
+            include: '#inline'
           }
         ]
       }
       {
-        begin: "^(#{3})(\\s*)"
-        end: "$"
-        name: "markup.heading.heading-3.gfm"
+        begin: '^(#{3})(\\s*)'
+        end: '$'
+        name: 'markup.heading.heading-3.gfm'
         captures:
-          "1":
-            name: "markup.heading.marker.gfm"
-          "2":
-            name: "markup.heading.space.gfm"
+          '1':
+            name: 'markup.heading.marker.gfm'
+          '2':
+            name: 'markup.heading.space.gfm'
         patterns: [
           {
-            include: "#inline"
+            include: '#inline'
           }
         ]
       }
       {
-        begin: "^(#{2})(\\s*)"
-        end: "$"
-        name: "markup.heading.heading-2.gfm"
+        begin: '^(#{2})(\\s*)'
+        end: '$'
+        name: 'markup.heading.heading-2.gfm'
         captures:
-          "1":
-            name: "markup.heading.marker.gfm"
-          "2":
-            name: "markup.heading.space.gfm"
+          '1':
+            name: 'markup.heading.marker.gfm'
+          '2':
+            name: 'markup.heading.space.gfm'
         patterns: [
           {
-            include: "#inline"
+            include: '#inline'
           }
         ]
       }
       {
-        begin: "^(#{1})(\\s*)"
-        end: "$"
-        name: "markup.heading.heading-1.gfm"
+        begin: '^(#{1})(\\s*)'
+        end: '$'
+        name: 'markup.heading.heading-1.gfm'
         captures:
-          "1":
-            name: "markup.heading.marker.gfm"
-          "2":
-            name: "markup.heading.space.gfm"
+          '1':
+            name: 'markup.heading.marker.gfm'
+          '2':
+            name: 'markup.heading.space.gfm'
         patterns: [
           {
-            include: "#inline"
+            include: '#inline'
           }
         ]
-      }
-    ]
-  inline:
-    patterns: [
-      {
-        name: "markup.math.inline.pfm"
-        match: "(?<!\\$)(\\$)([^$\\s][^$]+[^\\\\$\\s]|[^\\\\$\\s]+)(\\$)"
-        captures:
-          "1":
-            name: "support.gfm"
-          "2":
-            patterns: [
-              {
-                include: "#math"
-              }
-            ]
-          "3":
-            name: "support.gfm"
-      }
-      {
-        name: "markup.math.inline.pfm"
-        match: "(\\\\\\()([\\S][^)]+)(\\\\\\))"
-        captures:
-          "1":
-            name: "support.gfm"
-          "2":
-            patterns: [
-              {
-                include: "#math"
-              }
-            ]
-          "3":
-            name: "support.gfm"
-      }
-      {
-        begin: "(?<=^|[^\\w\\d\\*])\\*\\*\\*(?!$|\\*|\\s)"
-        end: "(?<!^|\\s)\\*\\*\\**\\*(?=$|[^\\w|\\d])"
-        name: "markup.bold.italic.gfm"
-      }
-      {
-        begin: "(?<=^|[^\\w\\d_])___(?!$|_|\\s)"
-        end: "(?<!^|\\s)___*_(?=$|[^\\w|\\d])"
-        name: "markup.bold.italic.gfm"
-      }
-      {
-        begin: "(?<=^|[^\\w\\d\\*])\\*\\*(?!$|\\*|\\s)"
-        end: "(?<!^|\\s)\\*\\**\\*(?=$|[^\\w|\\d])"
-        name: "markup.bold.gfm"
-      }
-      {
-        begin: "(?<=^|[^\\w\\d_])__(?!$|_|\\s)"
-        end: "(?<!^|\\s)__*_(?=$|[^\\w|\\d])"
-        name: "markup.bold.gfm"
-      }
-      {
-        begin: "(?<=^|[^\\w\\d\\*])\\*(?!$|\\*|\\s)"
-        end: "(?<!^|\\s)\\**\\*(?=$|[^\\w|\\d])"
-        name: "markup.italic.gfm"
-      }
-      {
-        begin: "(?<=^|[^\\w\\d_\\{\\}])_(?!$|_|\\s)"
-        end: "(?<!^|\\s)_*_(?=$|[^\\w|\\d])"
-        name: "markup.italic.gfm"
-      }
-      {
-        begin: "(?<=^|[^\\w\\d~])~~(?!$|~|\\s)"
-        end: "(?<!^|\\s)~~*~(?=$|[^\\w|\\d])"
-        name: "markup.strike.gfm"
-      }
-      {
-        match: "(:)(\\+1|\\-1|100|1234|8ball|a|ab|abc|abcd|accept|aerial_tramway|airplane|alarm_clock|alien|ambulance|anchor|angel|anger|angry|anguished|ant|apple|aquarius|aries|arrow_backward|arrow_double_down|arrow_double_up|arrow_down|arrow_down_small|arrow_forward|arrow_heading_down|arrow_heading_up|arrow_left|arrow_lower_left|arrow_lower_right|arrow_right|arrow_right_hook|arrow_up|arrow_up_down|arrow_up_small|arrow_upper_left|arrow_upper_right|arrows_clockwise|arrows_counterclockwise|art|articulated_lorry|astonished|atm|b|baby|baby_bottle|baby_chick|baby_symbol|back|baggage_claim|balloon|ballot_box_with_check|bamboo|banana|bangbang|bank|bar_chart|barber|baseball|basketball|bath|bathtub|battery|bear|bee|beer|beers|beetle|beginner|bell|bento|bicyclist|bike|bikini|bird|birthday|black_circle|black_joker|black_medium_small_square|black_medium_square|black_nib|black_small_square|black_square|black_square_button|blossom|blowfish|blue_book|blue_car|blue_heart|blush|boar|boat|bomb|book|bookmark|bookmark_tabs|books|boom|boot|bouquet|bow|bowling|bowtie|boy|bread|bride_with_veil|bridge_at_night|briefcase|broken_heart|bug|bulb|bullettrain_front|bullettrain_side|bus|busstop|bust_in_silhouette|busts_in_silhouette|cactus|cake|calendar|calling|camel|camera|cancer|candy|capital_abcd|capricorn|car|card_index|carousel_horse|cat|cat2|cd|chart|chart_with_downwards_trend|chart_with_upwards_trend|checkered_flag|cherries|cherry_blossom|chestnut|chicken|children_crossing|chocolate_bar|christmas_tree|church|cinema|circus_tent|city_sunrise|city_sunset|cl|clap|clapper|clipboard|clock1|clock10|clock1030|clock11|clock1130|clock12|clock1230|clock130|clock2|clock230|clock3|clock330|clock4|clock430|clock5|clock530|clock6|clock630|clock7|clock730|clock8|clock830|clock9|clock930|closed_book|closed_lock_with_key|closed_umbrella|cloud|clubs|cn|cocktail|coffee|cold_sweat|collision|computer|confetti_ball|confounded|confused|congratulations|construction|construction_worker|convenience_store|cookie|cool|cop|copyright|corn|couple|couple_with_heart|couplekiss|cow|cow2|credit_card|crocodile|crossed_flags|crown|cry|crying_cat_face|crystal_ball|cupid|curly_loop|currency_exchange|curry|custard|customs|cyclone|dancer|dancers|dango|dart|dash|date|de|deciduous_tree|department_store|diamond_shape_with_a_dot_inside|diamonds|disappointed|disappointed_relieved|dizzy|dizzy_face|do_not_litter|dog|dog2|dollar|dolls|dolphin|donut|door|doughnut|dragon|dragon_face|dress|dromedary_camel|droplet|dvd|e\\-mail|ear|ear_of_rice|earth_africa|earth_americas|earth_asia|egg|eggplant|eight|eight_pointed_black_star|eight_spoked_asterisk|electric_plug|elephant|email|end|envelope|es|euro|european_castle|european_post_office|evergreen_tree|exclamation|expressionless|eyeglasses|eyes|facepunch|factory|fallen_leaf|family|fast_forward|fax|fearful|feelsgood|feet|ferris_wheel|file_folder|finnadie|fire|fire_engine|fireworks|first_quarter_moon|first_quarter_moon_with_face|fish|fish_cake|fishing_pole_and_fish|fist|five|flags|flashlight|floppy_disk|flower_playing_cards|flushed|foggy|football|fork_and_knife|fountain|four|four_leaf_clover|fr|free|fried_shrimp|fries|frog|frowning|fu|fuelpump|full_moon|full_moon_with_face|game_die|gb|gem|gemini|ghost|gift|gift_heart|girl|globe_with_meridians|goat|goberserk|godmode|golf|grapes|green_apple|green_book|green_heart|grey_exclamation|grey_question|grimacing|grin|grinning|guardsman|guitar|gun|haircut|hamburger|hammer|hamster|hand|handbag|hankey|hash|hatched_chick|hatching_chick|headphones|hear_no_evil|heart|heart_decoration|heart_eyes|heart_eyes_cat|heartbeat|heartpulse|hearts|heavy_check_mark|heavy_division_sign|heavy_dollar_sign|heavy_exclamation_mark|heavy_minus_sign|heavy_multiplication_x|heavy_plus_sign|helicopter|herb|hibiscus|high_brightness|high_heel|hocho|honey_pot|honeybee|horse|horse_racing|hospital|hotel|hotsprings|hourglass|hourglass_flowing_sand|house|house_with_garden|hurtrealbad|hushed|ice_cream|icecream|id|ideograph_advantage|imp|inbox_tray|incoming_envelope|information_desk_person|information_source|innocent|interrobang|iphone|it|izakaya_lantern|jack_o_lantern|japan|japanese_castle|japanese_goblin|japanese_ogre|jeans|joy|joy_cat|jp|key|keycap_ten|kimono|kiss|kissing|kissing_cat|kissing_closed_eyes|kissing_face|kissing_heart|kissing_smiling_eyes|koala|koko|kr|large_blue_circle|large_blue_diamond|large_orange_diamond|last_quarter_moon|last_quarter_moon_with_face|laughing|leaves|ledger|left_luggage|left_right_arrow|leftwards_arrow_with_hook|lemon|leo|leopard|libra|light_rail|link|lips|lipstick|lock|lock_with_ink_pen|lollipop|loop|loudspeaker|love_hotel|love_letter|low_brightness|m|mag|mag_right|mahjong|mailbox|mailbox_closed|mailbox_with_mail|mailbox_with_no_mail|man|man_with_gua_pi_mao|man_with_turban|mans_shoe|maple_leaf|mask|massage|meat_on_bone|mega|melon|memo|mens|metal|metro|microphone|microscope|milky_way|minibus|minidisc|mobile_phone_off|money_with_wings|moneybag|monkey|monkey_face|monorail|moon|mortar_board|mount_fuji|mountain_bicyclist|mountain_cableway|mountain_railway|mouse|mouse2|movie_camera|moyai|muscle|mushroom|musical_keyboard|musical_note|musical_score|mute|nail_care|name_badge|neckbeard|necktie|negative_squared_cross_mark|neutral_face|new|new_moon|new_moon_with_face|newspaper|ng|nine|no_bell|no_bicycles|no_entry|no_entry_sign|no_good|no_mobile_phones|no_mouth|no_pedestrians|no_smoking|non\\-potable_water|nose|notebook|notebook_with_decorative_cover|notes|nut_and_bolt|o|o2|ocean|octocat|octopus|oden|office|ok|ok_hand|ok_woman|older_man|older_woman|on|oncoming_automobile|oncoming_bus|oncoming_police_car|oncoming_taxi|one|open_file_folder|open_hands|open_mouth|ophiuchus|orange_book|outbox_tray|ox|package|page_facing_up|page_with_curl|pager|palm_tree|panda_face|paperclip|parking|part_alternation_mark|partly_sunny|passport_control|paw_prints|peach|pear|pencil|pencil2|penguin|pensive|performing_arts|persevere|person_frowning|person_with_blond_hair|person_with_pouting_face|phone|pig|pig2|pig_nose|pill|pineapple|pisces|pizza|plus1|point_down|point_left|point_right|point_up|point_up_2|police_car|poodle|poop|post_office|postal_horn|postbox|potable_water|pouch|poultry_leg|pound|pouting_cat|pray|princess|punch|purple_heart|purse|pushpin|put_litter_in_its_place|question|rabbit|rabbit2|racehorse|radio|radio_button|rage|rage1|rage2|rage3|rage4|railway_car|rainbow|raised_hand|raised_hands|raising_hand|ram|ramen|rat|recycle|red_car|red_circle|registered|relaxed|relieved|repeat|repeat_one|restroom|revolving_hearts|rewind|ribbon|rice|rice_ball|rice_cracker|rice_scene|ring|rocket|roller_coaster|rooster|rose|rotating_light|round_pushpin|rowboat|ru|rugby_football|runner|running|running_shirt_with_sash|sa|sagittarius|sailboat|sake|sandal|santa|satellite|satisfied|saxophone|school|school_satchel|scissors|scorpius|scream|scream_cat|scroll|seat|secret|see_no_evil|seedling|seven|shaved_ice|sheep|shell|ship|shipit|shirt|shit|shoe|shower|signal_strength|six|six_pointed_star|ski|skull|sleeping|sleepy|slot_machine|small_blue_diamond|small_orange_diamond|small_red_triangle|small_red_triangle_down|smile|smile_cat|smiley|smiley_cat|smiling_imp|smirk|smirk_cat|smoking|snail|snake|snowboarder|snowflake|snowman|sob|soccer|soon|sos|sound|space_invader|spades|spaghetti|sparkle|sparkler|sparkles|sparkling_heart|speak_no_evil|speaker|speech_balloon|speedboat|squirrel|star|star2|stars|station|statue_of_liberty|steam_locomotive|stew|straight_ruler|strawberry|stuck_out_tongue|stuck_out_tongue_closed_eyes|stuck_out_tongue_winking_eye|sun_with_face|sunflower|sunglasses|sunny|sunrise|sunrise_over_mountains|surfer|sushi|suspect|suspension_railway|sweat|sweat_drops|sweat_smile|sweet_potato|swimmer|symbols|syringe|tada|tanabata_tree|tangerine|taurus|taxi|tea|telephone|telephone_receiver|telescope|tennis|tent|thought_balloon|three|thumbsdown|thumbsup|ticket|tiger|tiger2|tired_face|tm|toilet|tokyo_tower|tomato|tongue|top|tophat|tractor|traffic_light|train|train2|tram|triangular_flag_on_post|triangular_ruler|trident|triumph|trolleybus|trollface|trophy|tropical_drink|tropical_fish|truck|trumpet|tshirt|tulip|turtle|tv|twisted_rightwards_arrows|two|two_hearts|two_men_holding_hands|two_women_holding_hands|u5272|u5408|u55b6|u6307|u6708|u6709|u6e80|u7121|u7533|u7981|u7a7a|uk|umbrella|unamused|underage|unlock|up|us|v|vertical_traffic_light|vhs|vibration_mode|video_camera|video_game|violin|virgo|volcano|vs|walking|waning_crescent_moon|waning_gibbous_moon|warning|watch|water_buffalo|watermelon|wave|wavy_dash|waxing_crescent_moon|waxing_gibbous_moon|wc|weary|wedding|whale|whale2|wheelchair|white_check_mark|white_circle|white_flower|white_large_square|white_medium_small_square|white_medium_square|white_small_square|white_square_button|wind_chime|wine_glass|wink|wolf|woman|womans_clothes|womans_hat|womens|worried|wrench|x|yellow_heart|yen|yum|zap|zero|zzz)(:)"
-        name: "string.emoji.gfm"
-        captures:
-          "1":
-            name: "string.emoji.start.gfm"
-          "2":
-            name: "string.emoji.word.gfm"
-          "3":
-            name: "string.emoji.end.gfm"
-      }
-      {
-        match: "(\\[!)(\\[)([^\\]]*)(\\])((\\()[^\\)]+(\\)))(\\])(((\\()[^\\)]+(\\)))|((\\[)[^\\]]+(\\])))"
-        name: "link"
-        captures:
-          "1":
-            name: "punctuation.definition.begin.gfm"
-          "2":
-            name: "punctuation.definition.begin.gfm"
-          "3":
-            name: "entity.gfm"
-          "4":
-            name: "punctuation.definition.end.gfm"
-          "5":
-            name: "markup.underline.link.gfm"
-          "6":
-            name: "punctuation.definition.begin.gfm"
-          "7":
-            name: "punctuation.definition.end.gfm"
-          "8":
-            name: "punctuation.definition.end.gfm"
-          "10":
-            name: "markup.underline.link.gfm"
-          "11":
-            name: "punctuation.definition.begin.gfm"
-          "12":
-            name: "punctuation.definition.end.gfm"
-          "13":
-            name: "markup.underline.link.gfm"
-          "14":
-            name: "punctuation.definition.begin.gfm"
-          "15":
-            name: "punctuation.definition.end.gfm"
-      }
-      {
-        match: "(\\[!)(\\[)([^\\]]*)(\\])((\\[)[^\\)]+(\\]))(\\])(((\\()[^\\)]+(\\)))|((\\[)[^\\]]+(\\])))"
-        name: "link"
-        captures:
-          "1":
-            name: "punctuation.definition.begin.gfm"
-          "2":
-            name: "punctuation.definition.begin.gfm"
-          "3":
-            name: "entity.gfm"
-          "4":
-            name: "punctuation.definition.end.gfm"
-          "5":
-            name: "markup.underline.link.gfm"
-          "6":
-            name: "punctuation.definition.begin.gfm"
-          "7":
-            name: "punctuation.definition.end.gfm"
-          "8":
-            name: "punctuation.definition.end.gfm"
-          "10":
-            name: "markup.underline.link.gfm"
-          "11":
-            name: "punctuation.definition.begin.gfm"
-          "12":
-            name: "punctuation.definition.end.gfm"
-          "13":
-            name: "markup.underline.link.gfm"
-          "14":
-            name: "punctuation.definition.begin.gfm"
-          "15":
-            name: "punctuation.definition.end.gfm"
-      }
-      {
-        match: "!?(\\[)([^\\]]*)(\\])((\\()[^\\)]+(\\)))"
-        name: "link"
-        captures:
-          "1":
-            name: "punctuation.definition.begin.gfm"
-          "2":
-            name: "entity.gfm"
-          "3":
-            name: "punctuation.definition.end.gfm"
-          "4":
-            name: "markup.underline.link.gfm"
-          "5":
-            name: "punctuation.definition.begin.gfm"
-          "6":
-            name: "punctuation.definition.end.gfm"
-      }
-      {
-        match: "!?(\\[)([^\\]]*)(\\])((\\[)[^\\]]*(\\]))"
-        name: "link"
-        captures:
-          "1":
-            name: "punctuation.definition.begin.gfm"
-          "2":
-            name: "entity.gfm"
-          "3":
-            name: "punctuation.definition.end.gfm"
-          "4":
-            name: "markup.underline.link.gfm"
-          "5":
-            name: "punctuation.definition.begin.gfm"
-          "6":
-            name: "punctuation.definition.end.gfm"
-      }
-      {
-        match: "^\\s*(\\[)([^\\]]+)(\\])\\s*:\\s*<([^>]+)>"
-        name: "link"
-        captures:
-          "1":
-            name: "punctuation.definition.begin.gfm"
-          "2":
-            name: "entity.gfm"
-          "3":
-            name: "punctuation.definition.end.gfm"
-          "4":
-            name: "markup.underline.link.gfm"
-      }
-      {
-        match: "^\\s*(\\[)([^\\]]+)(\\])\\s*(:)\\s*(\\S+)"
-        name: "link"
-        captures:
-          "1":
-            name: "punctuation.definition.begin.gfm"
-          "2":
-            name: "entity.gfm"
-          "3":
-            name: "punctuation.definition.end.gfm"
-          "4":
-            name: "punctuation.separator.key-value.gfm"
-          "5":
-            name: "markup.underline.link.gfm"
       }
     ]
   code:
     patterns: [
       {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:coffee-?(?:script)?)|(\\{.*\\.coffee-?(?:script)?[^\\}]*\\}))\\s*)$"
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:coffee-?(?:script)?)|(\\{.*\\.coffee-?(?:script)?[^\\}]*\\}))\\s*)$'
         beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
+          '1':
+            name: 'support.gfm'
+          '4':
             patterns: [
               {
-                include: "source.css.less"
+                include: 'source.css.less'
               }
             ]
-        end: "^\\s*\\2\\3*$"
+        end: '^\\s*\\2\\3*$'
         endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.coffee.gfm"
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.coffee.gfm'
         patterns: [
           {
-            include: "source.coffee"
+            include: 'source.coffee'
           }
         ]
-        contentName: "source.coffee"
+        contentName: 'source.coffee'
       }
       {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.coffee-?(?:script)?[^\\}]*\\})"
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.coffee-?(?:script)?[^\\}]*\\})'
         captures:
-          "2":
+          '2':
             patterns: [
               {
-                include: "source.coffee"
+                include: 'source.coffee'
               }
             ]
-          "3":
+          '3':
             patterns: [
               {
-                include: "source.css.less"
+                include: 'source.css.less'
               }
             ]
-        name: "markup.code.coffee.gfm"
+        name: 'markup.code.coffee.gfm'
       }
       {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:(?:javascript|js))|(\\{.*\\.(?:javascript|js)[^\\}]*\\}))\\s*)$"
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(?:javascript|js))|(\\{.*\\.(?:javascript|js)[^\\}]*\\}))\\s*)$'
         beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
+          '1':
+            name: 'support.gfm'
+          '4':
             patterns: [
               {
-                include: "source.css.less"
+                include: 'source.css.less'
               }
             ]
-        end: "^\\s*\\2\\3*$"
+        end: '^\\s*\\2\\3*$'
         endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.js.gfm"
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.js.gfm'
         patterns: [
           {
-            include: "source.js"
+            include: 'source.js'
           }
         ]
-        contentName: "source.js"
+        contentName: 'source.js'
       }
       {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.(?:javascript|js)[^\\}]*\\})"
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:javascript|js)[^\\}]*\\})'
         captures:
-          "2":
+          '2':
             patterns: [
               {
-                include: "source.js"
+                include: 'source.js'
               }
             ]
-          "3":
+          '3':
             patterns: [
               {
-                include: "source.css.less"
+                include: 'source.css.less'
               }
             ]
-        name: "markup.code.js.gfm"
+        name: 'markup.code.js.gfm'
       }
       {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:(?:markdown|mdown|md))|(\\{.*\\.(?:markdown|mdown|md)[^\\}]*\\}))\\s*)$"
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(apib|apiblueprint))|(\\{.*\\.(apib|apiblueprint)[^\\}]*\\}))\\s*)$'
         beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
+          '1':
+            name: 'support.gfm'
+          '4':
             patterns: [
               {
-                include: "source.css.less"
+                include: 'source.css.less'
               }
             ]
-        end: "^\\s*\\2\\3*$"
+        end: '^\\s*\\2\\3*$'
         endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.gfm"
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.gfm'
         patterns: [
           {
-            include: "$self"
-          }
-        ]
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.(?:markdown|mdown|md)[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "$self"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:json)|(\\{.*\\.json[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.json.gfm"
-        patterns: [
-          {
-            include: "source.json"
-          }
-        ]
-        contentName: "source.json"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.json[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.json"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.json.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:css)|(\\{.*\\.css[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.css.gfm"
-        patterns: [
-          {
-            include: "source.css"
-          }
-        ]
-        contentName: "source.css"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.css[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.css"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.css.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:less)|(\\{.*\\.less[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.less.gfm"
-        patterns: [
-          {
-            include: "source.css.less"
-          }
-        ]
-        contentName: "source.css.less"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.less[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.less.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:xml)|(\\{.*\\.xml[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.xml.gfm"
-        patterns: [
-          {
-            include: "text.xml"
-          }
-        ]
-        contentName: "text.xml"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.xml[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "text.xml"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.xml.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:(?:ruby|rb))|(\\{.*\\.(?:ruby|rb)[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.ruby.gfm"
-        patterns: [
-          {
-            include: "source.ruby"
-          }
-        ]
-        contentName: "source.ruby"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.(?:ruby|rb)[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.ruby"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.ruby.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:java)|(\\{.*\\.java[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.java.gfm"
-        patterns: [
-          {
-            include: "source.java"
-          }
-        ]
-        contentName: "source.java"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.java[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.java"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.java.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:erlang)|(\\{.*\\.erlang[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.erlang.gfm"
-        patterns: [
-          {
-            include: "source.erlang"
-          }
-        ]
-        contentName: "source.erlang"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.erlang[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.erlang"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.erlang.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:go(?:lang)?)|(\\{.*\\.go(?:lang)?[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.go.gfm"
-        patterns: [
-          {
-            include: "source.go"
-          }
-        ]
-        contentName: "source.go"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.go(?:lang)?[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.go"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.go.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:cs(?:harp)?)|(\\{.*\\.cs(?:harp)?[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.cs.gfm"
-        patterns: [
-          {
-            include: "source.cs"
-          }
-        ]
-        contentName: "source.cs"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.cs(?:harp)?[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.cs"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.cs.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:php)|(\\{.*\\.php[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.php.gfm"
-        patterns: [
-          {
-            include: "source.php"
-          }
-        ]
-        contentName: "source.php"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.php[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.php"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.php.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:(?:sh|bash))|(\\{.*\\.(?:sh|bash)[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.shell.gfm"
-        patterns: [
-          {
-            include: "source.shell"
-          }
-        ]
-        contentName: "source.shell"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.(?:sh|bash)[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.shell"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.shell.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:py(?:thon)?)|(\\{.*\\.py(?:thon)?[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.python.gfm"
-        patterns: [
-          {
-            include: "source.python"
-          }
-        ]
-        contentName: "source.python"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.py(?:thon)?[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.python"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.python.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:c)|(\\{.*\\.c[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.c.gfm"
-        patterns: [
-          {
-            include: "source.c"
-          }
-        ]
-        contentName: "source.c"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.c[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.c"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.c.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:c(?:pp|\\+\\+))|(\\{.*\\.c(?:pp|\\+\\+)[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.cpp.gfm"
-        patterns: [
-          {
-            include: "source.cpp"
-          }
-        ]
-        contentName: "source.cpp"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.c(?:pp|\\+\\+)[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.cpp"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.cpp.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:(?:objc|objective-c))|(\\{.*\\.(?:objc|objective-c)[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.objc.gfm"
-        patterns: [
-          {
-            include: "source.objc"
-          }
-        ]
-        contentName: "source.objc"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.(?:objc|objective-c)[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.objc"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.objc.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:haskell)|(\\{.*\\.haskell[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.haskell.gfm"
-        patterns: [
-          {
-            include: "source.haskell"
-          }
-        ]
-        contentName: "source.haskell"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.haskell[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "source.haskell"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.haskell.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:html)|(\\{.*\\.html[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.html.gfm"
-        patterns: [
-          {
-            include: "text.html.basic"
-          }
-        ]
-        contentName: "source.html.basic"
-      }
-      {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.html[^\\}]*\\})"
-        captures:
-          "2":
-            patterns: [
-              {
-                include: "text.html.basic"
-              }
-            ]
-          "3":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        name: "markup.code.html.gfm"
-      }
-      {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:(?:la)?tex)|(\\{.*\\.(?:la)?tex[^\\}]*\\}))\\s*)$"
-        beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
-            patterns: [
-              {
-                include: "source.css.less"
-              }
-            ]
-        end: "^\\s*\\2\\3*$"
-        endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.latex.gfm"
-        patterns: [
-          {
-            include: "text.tex.latex"
+            include: 'text.html.markdown.source.gfm.apib'
           }
         ]
       }
       {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.(?:la)?tex[^\\}]*\\})"
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(apib|apiblueprint)[^\\}]*\\})'
         captures:
-          "2":
+          '2':
             patterns: [
               {
-                include: "text.tex.latex"
+                include: 'text.html.markdown.source.gfm.apib'
               }
             ]
-          "3":
+          '3':
             patterns: [
               {
-                include: "source.css.less"
+                include: 'source.css.less'
               }
             ]
-        name: "markup.code.latex.gfm"
+        name: 'markup.code.gfm'
       }
       {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:ya?ml)|(\\{.*\\.ya?ml[^\\}]*\\}))\\s*)$"
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:mson)|(\\{.*\\.mson[^\\}]*\\}))\\s*)$'
         beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
+          '1':
+            name: 'support.gfm'
+          '4':
             patterns: [
               {
-                include: "source.css.less"
+                include: 'source.css.less'
               }
             ]
-        end: "^\\s*\\2\\3*$"
+        end: '^\\s*\\2\\3*$'
         endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.yaml.gfm"
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.gfm'
         patterns: [
           {
-            include: "source.yaml"
+            include: 'text.html.markdown.source.gfm.mson'
           }
         ]
-        contentName: "source.yaml"
       }
       {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.ya?ml[^\\}]*\\})"
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.mson[^\\}]*\\})'
         captures:
-          "2":
+          '2':
             patterns: [
               {
-                include: "source.yaml"
+                include: 'text.html.markdown.source.gfm.mson'
               }
             ]
-          "3":
+          '3':
             patterns: [
               {
-                include: "source.css.less"
+                include: 'source.css.less'
               }
             ]
-        name: "markup.code.yaml.gfm"
+        name: 'markup.code.gfm'
       }
       {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:elixir)|(\\{.*\\.elixir[^\\}]*\\}))\\s*)$"
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(?:markdown|mdown|md))|(\\{.*\\.(?:markdown|mdown|md)[^\\}]*\\}))\\s*)$'
         beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
+          '1':
+            name: 'support.gfm'
+          '4':
             patterns: [
               {
-                include: "source.css.less"
+                include: 'source.css.less'
               }
             ]
-        end: "^\\s*\\2\\3*$"
+        end: '^\\s*\\2\\3*$'
         endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.elixir.gfm"
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.gfm'
         patterns: [
           {
-            include: "source.elixir"
+            include: '$self'
           }
         ]
-        contentName: "source.elixir"
       }
       {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.elixir[^\\}]*\\})"
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:markdown|mdown|md)[^\\}]*\\})'
         captures:
-          "2":
+          '2':
             patterns: [
               {
-                include: "source.elixir"
+                include: '$self'
               }
             ]
-          "3":
+          '3':
             patterns: [
               {
-                include: "source.css.less"
+                include: 'source.css.less'
               }
             ]
-        name: "markup.code.elixir.gfm"
+        name: 'markup.code.gfm'
       }
       {
-        begin: "^\\s*(((`|~){3,})\\s*(?:(?:(?:diff|patch|rej))|(\\{.*\\.(?:diff|patch|rej)[^\\}]*\\}))\\s*)$"
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:json)|(\\{.*\\.json[^\\}]*\\}))\\s*)$'
         beginCaptures:
-          "1":
-            name: "support.gfm"
-          "4":
+          '1':
+            name: 'support.gfm'
+          '4':
             patterns: [
               {
-                include: "source.css.less"
+                include: 'source.css.less'
               }
             ]
-        end: "^\\s*\\2\\3*$"
+        end: '^\\s*\\2\\3*$'
         endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.code.diff.gfm"
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.json.gfm'
         patterns: [
           {
-            include: "source.diff"
+            include: 'source.json'
           }
         ]
-        contentName: "source.diff"
+        contentName: 'source.json'
       }
       {
-        match: "(`+)(.+)\\1\\s*(\\{.*\\.(?:diff|patch|rej)[^\\}]*\\})"
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.json[^\\}]*\\})'
         captures:
-          "2":
+          '2':
             patterns: [
               {
-                include: "source.diff"
+                include: 'source.json'
               }
             ]
-          "3":
+          '3':
             patterns: [
               {
-                include: "source.css.less"
+                include: 'source.css.less'
               }
             ]
-        name: "markup.code.diff.gfm"
+        name: 'markup.code.json.gfm'
       }
       {
-        begin: "^\\s*((`|~){3,})\\s*.*\\s*$"
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:css)|(\\{.*\\.css[^\\}]*\\}))\\s*)$'
         beginCaptures:
-          "0":
-            name: "support.gfm"
-        end: "^\\s*\\1\\2*$"
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
         endCaptures:
-          "0":
-            name: "support.gfm"
-        name: "markup.raw.gfm"
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.css.gfm'
+        patterns: [
+          {
+            include: 'source.css'
+          }
+        ]
+        contentName: 'source.css'
       }
       {
-        begin: "(`+)(?!$)"
-        end: "\\1"
-        name: "markup.raw.gfm"
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.css[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.css'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.css.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:less)|(\\{.*\\.less[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.less.gfm'
+        patterns: [
+          {
+            include: 'source.css.less'
+          }
+        ]
+        contentName: 'source.css.less'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.less[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.less.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:xml)|(\\{.*\\.xml[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.xml.gfm'
+        patterns: [
+          {
+            include: 'text.xml'
+          }
+        ]
+        contentName: 'text.xml'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.xml[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'text.xml'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.xml.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(?:ruby|rb))|(\\{.*\\.(?:ruby|rb)[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.ruby.gfm'
+        patterns: [
+          {
+            include: 'source.ruby'
+          }
+        ]
+        contentName: 'source.ruby'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:ruby|rb)[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.ruby'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.ruby.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:java)|(\\{.*\\.java[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.java.gfm'
+        patterns: [
+          {
+            include: 'source.java'
+          }
+        ]
+        contentName: 'source.java'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.java[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.java'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.java.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:erlang)|(\\{.*\\.erlang[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.erlang.gfm'
+        patterns: [
+          {
+            include: 'source.erlang'
+          }
+        ]
+        contentName: 'source.erlang'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.erlang[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.erlang'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.erlang.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:go(?:lang)?)|(\\{.*\\.go(?:lang)?[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.go.gfm'
+        patterns: [
+          {
+            include: 'source.go'
+          }
+        ]
+        contentName: 'source.go'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.go(?:lang)?[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.go'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.go.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:cs(?:harp)?)|(\\{.*\\.cs(?:harp)?[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.cs.gfm'
+        patterns: [
+          {
+            include: 'source.cs'
+          }
+        ]
+        contentName: 'source.cs'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.cs(?:harp)?[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.cs'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.cs.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:php)|(\\{.*\\.php[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.php.gfm'
+        patterns: [
+          {
+            include: 'source.php'
+          }
+        ]
+        contentName: 'source.php'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.php[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.php'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.php.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(?:sh|bash))|(\\{.*\\.(?:sh|bash)[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.shell.gfm'
+        patterns: [
+          {
+            include: 'source.shell'
+          }
+        ]
+        contentName: 'source.shell'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:sh|bash)[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.shell'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.shell.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:py(?:thon)?)|(\\{.*\\.py(?:thon)?[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.python.gfm'
+        patterns: [
+          {
+            include: 'source.python'
+          }
+        ]
+        contentName: 'source.python'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.py(?:thon)?[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.python'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.python.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:c)|(\\{.*\\.c[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.c.gfm'
+        patterns: [
+          {
+            include: 'source.c'
+          }
+        ]
+        contentName: 'source.c'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.c[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.c'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.c.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:c(?:pp|\\+\\+))|(\\{.*\\.c(?:pp|\\+\\+)[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.cpp.gfm'
+        patterns: [
+          {
+            include: 'source.cpp'
+          }
+        ]
+        contentName: 'source.cpp'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.c(?:pp|\\+\\+)[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.cpp'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.cpp.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(?:objc|objective-c))|(\\{.*\\.(?:objc|objective-c)[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.objc.gfm'
+        patterns: [
+          {
+            include: 'source.objc'
+          }
+        ]
+        contentName: 'source.objc'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:objc|objective-c)[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.objc'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.objc.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:haskell)|(\\{.*\\.haskell[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.haskell.gfm'
+        patterns: [
+          {
+            include: 'source.haskell'
+          }
+        ]
+        contentName: 'source.haskell'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.haskell[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.haskell'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.haskell.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:html)|(\\{.*\\.html[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.html.gfm'
+        patterns: [
+          {
+            include: 'text.html.basic'
+          }
+        ]
+        contentName: 'source.html.basic'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.html[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'text.html.basic'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.html.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(?:la)?tex)|(\\{.*\\.(?:la)?tex[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.latex.gfm'
+        patterns: [
+          {
+            include: 'text.tex.latex'
+          }
+        ]
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:la)?tex[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'text.tex.latex'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.latex.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:ya?ml)|(\\{.*\\.ya?ml[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.yaml.gfm'
+        patterns: [
+          {
+            include: 'source.yaml'
+          }
+        ]
+        contentName: 'source.yaml'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.ya?ml[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.yaml'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.yaml.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:elixir)|(\\{.*\\.elixir[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.elixir.gfm'
+        patterns: [
+          {
+            include: 'source.elixir'
+          }
+        ]
+        contentName: 'source.elixir'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.elixir[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.elixir'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.elixir.gfm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(?:diff|patch|rej))|(\\{.*\\.(?:diff|patch|rej)[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '1':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.diff.gfm'
+        patterns: [
+          {
+            include: 'source.diff'
+          }
+        ]
+        contentName: 'source.diff'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:diff|patch|rej)[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.diff'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.diff.gfm'
+      }
+      {
+        begin: '^\\s*((`|~){3,})\\s*.*\\s*$'
+        beginCaptures:
+          '0':
+            name: 'support.gfm'
+        end: '^\\s*\\1\\2*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.raw.gfm'
+      }
+      {
+        begin: '(`+)(?!$)'
+        end: '\\1'
+        name: 'markup.raw.gfm'
       }
     ]

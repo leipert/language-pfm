@@ -84,36 +84,6 @@
       }
     ]
   }
-  {
-    'name': 'markup.math.inline.pfm'
-    'match': '(?<!\\$)(\\$)([^$\\s][^$]+[^\\\\$\\s]|[^\\\\$\\s]+)(\\$)'
-    'captures':
-      '1':
-        'name': 'support.gfm'
-      '2':
-        'patterns': [
-          {
-            'include': '#math'
-          }
-        ]
-      '3':
-        'name': 'support.gfm'
-  }
-  {
-    'name': 'markup.math.inline.pfm'
-    'match': '(\\\\\\()([\\S][^)]+)(\\\\\\))'
-    'captures':
-      '1':
-        'name': 'support.gfm'
-      '2':
-        'patterns': [
-          {
-            'include': '#math'
-          }
-        ]
-      '3':
-        'name': 'support.gfm'
-  }
     {
       'name': 'markup.definition.block.pfm'
       'begin': '^:   |^ :  |^  : '
@@ -212,6 +182,150 @@
     }
 ]
 'repository':
+  'inline':
+    'patterns': [
+      { 'include': '#inline-non-emph' }
+      { 'include': '#inline-emph'}
+    ]
+  'inline-emph':
+    'patterns': [
+      {
+        'include': '#inline-bold-italic'
+      }
+      {
+        'include': '#inline-bold'
+      }
+      {
+        'include': '#inline-italic'
+      }
+    ]
+  'inline-non-emph':
+    'patterns': [
+      {
+        'match': '([_\\*]){4,}(.+?)\\1',
+        'name': 'markup.inline.non-emph',
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#inline'
+              }
+            ]
+      }
+      {
+        'name': 'markup.math.inline.pfm'
+        'match': '(?<!\\$)(\\$)([^$\\s][^$]+[^\\\\$\\s]|[^\\\\$\\s]+)(\\$)'
+        'captures':
+          '1':
+            'name': 'support.gfm'
+          '2':
+            'patterns': [
+              {
+                'include': '#math'
+              }
+            ]
+          '3':
+            'name': 'support.gfm'
+      }
+      {
+        'name': 'markup.math.inline.pfm'
+        'match': '(\\\\\\()([\\S][^)]+)(\\\\\\))'
+        'captures':
+          '1':
+            'name': 'support.gfm'
+          '2':
+            'patterns': [
+              {
+                'include': '#math'
+              }
+            ]
+          '3':
+            'name': 'support.gfm'
+      }
+    ]
+  'inline-bold-italic':
+    'patterns': [
+      {
+        'match': '(?<=[^\\w\\d\\\\_])(___)([^\\s_\\\\]|[^\\s_][^_\\\\]|\\\\{2}|[^\\s_].+?[^_\\\\])(\\1)(?=[^\\w\\d]|_|$)',
+        'name': 'markup.inline.bold.italic.gfm',
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#inline-non-emph'
+              }
+            ]
+      }
+      {
+        'match': '(?<=[^\\*\\\\])(\\*{3})([^\\s\\*\\\\]|[^\\s\\*][^\\*\\\\]|\\\\{2}|[^\\s\\*].+?[^\\*\\\\])(\\1)',
+        'name': 'markup.inline.bold.italic.gfm',
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#inline-non-emph'
+              }
+            ]
+      }
+    ]
+  'inline-bold':
+    'patterns': [
+      {
+        'match': '(?<=[^\\w\\d\\\\]|_)(__)([^\\s_\\\\]|[^\\s_][^_\\\\]|\\\\{2}|[^\\s_].+?[^_\\\\])(\\1)(?=[^\\w\\d]|_|$)',
+        'name': 'markup.inline.bold.gfm',
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#inline-non-emph'
+              }, {
+                'include': '#inline-italic'
+              }
+            ]
+      }
+      {
+        'match': '(?<!\\\\)(\\*{2})([^\\s\\*\\\\]|[^\\s\\*][^\\*\\\\]|\\\\{2}|[^\\s\\*].+?[^\\*\\\\])(\\1)',
+        'name': 'markup.inline.bold.gfm',
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#inline-non-emph'
+              }, {
+                'include': '#inline-bold'
+              }
+            ]
+      }
+    ]
+  'inline-italic':
+    'patterns': [
+      {
+        'match': '(?<=[^\\w\\d_\\\\]{2}|__)(_)([^\\s_\\\\]|[^\\s_][^\\\\_]|\\\\{2}|[^\\s_].+?[^_\\\\])(\\1)(?=[^\\w\\d_]|$|_{2,})',
+        'name': 'markup.inline.italic.gfm',
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#inline-non-emph'
+              }, {
+                'include': '#inline-bold'
+              }
+            ]
+      }
+      {
+        'match': '(?<=[^\\*\\\\]{2}|\\*\\*)(\\*)([^\\s\\*\\\\]|[^\\s\\*][^\\*\\\\]|\\\\{2}|[^\\s\\*].+?[^\\*\\\\])(\\1)(?=[^\\*]|\\*{2,}|$)',
+        'name': 'markup.inline.italic.gfm',
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#inline-non-emph'
+              }, {
+                'include': '#inline-bold'
+              }
+            ]
+      }
+    ]
   'citation':
     'patterns': [
       {
