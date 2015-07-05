@@ -77,7 +77,7 @@ var testMap = [
   {
     name: 'variable.mention',
     order: 0,
-    repository: 'inline-no-emphasis'
+    repository: 'citations'
   },
   {
     name: 'variable.issue',

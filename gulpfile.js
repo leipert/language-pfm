@@ -22,7 +22,10 @@ gulp.task('copyFiles', function() {
 
 gulp.task('fixTests', function() {
   return gulp.src('spec/gfm-spec.coffee')
-    .pipe(replace('it ', 'xit '))
+    .pipe(replace(/(it "tokenizes mentions")/g, "x$1"))
+    .pipe(replace(/(it "tokenizes ([*_]{3})bold italic\2 text")/g,"x$1"))
+    .pipe(replace(/(it "tokenizes ([*_]{2})bold\2 text")/g,"x$1"))
+    .pipe(replace(/(it "tokenizes ([*_]{1})italic\2 text")/g,"x$1"))
     .pipe(replace('activatePackage("language-gfm")', 'activatePackage("language-pfm")'))
     .pipe(rename({
       basename: 'gfm-fixed-spec'
@@ -68,7 +71,7 @@ gulp.task('build.grammars', ['copyFiles'], function(cb) {
 
   ret.name = pfm.name;
 
-  var repos = ['single-line', 'block', 'inline'];
+  var repos = ['block', 'inline', 'single-line'];
 
   ret.patterns = _(generateInclude(repos))
     .union(pfm.patterns)

@@ -40,9 +40,6 @@
             'name': 'support.gfm'
           '2':
             'name': 'support.gfm'
-      },
-      {
-        'include': '#citation-internal'
       }
     ]
   'citation-internal':

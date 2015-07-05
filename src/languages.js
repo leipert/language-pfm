@@ -91,7 +91,7 @@ var raw = [
 
 var _ = require('lodash');
 
-var template = _.template('{"begin":"^\\\\s*(((`|~){3,})\\\\s*(?:(?:<%= begin %>)|(\\\\{.*\\\\.<%= begin %>[^\\\\}]*\\\\}))\\\\s*)$","beginCaptures":{"1":{"name":"support.gfm"},"4":{"patterns":[{"include":"source.css.less"}]}},"end":"^\\\\s*\\\\2\\\\3*$","endCaptures":{"0":{"name":"support.gfm"}},"name":"<%= name %>","patterns":[{"include":"<%= include %>"}]}');
+var template = _.template('{"begin":"^\\\\s*(((`|~){3,})\\\\s*(?:(?:<%= begin %>)|(\\\\{.*\\\\.<%= begin %>[^\\\\}]*\\\\}))\\\\s*)$","beginCaptures":{"0":{"name":"support.gfm"},"4":{"patterns":[{"include":"source.css.less"}]}},"end":"^\\\\s*\\\\2\\\\3*\\\\s*$","endCaptures":{"0":{"name":"support.gfm"}},"name":"<%= name %>","patterns":[{"include":"<%= include %>"}]}');
 
 var template2 = _.template('{"match":"(`+)(.+)\\\\1\\\\s*(\\\\{.*\\\\.<%= begin %>[^\\\\}]*\\\\})","captures":{"2":{"patterns":[{"include":"<%= include %>"}]},"3":{"patterns":[{"include":"source.css.less"}]}},"name":"<%= name %>"}');
 
@@ -175,7 +175,7 @@ raw = [
           'name': 'support.gfm'
         }
       },
-      'end': '^\\s*\\1\\2*$',
+      'end': '^\\s*(\\1\\2*\\s*)$',
       'endCaptures': {
         '0': {
           'name': 'support.gfm'
