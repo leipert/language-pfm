@@ -2,6 +2,29 @@ var _ = require('lodash');
 
 var testMap = [
   {
+    name: 'markup.bold',
+    ignore: true
+  },
+  {
+    // TODO: Move to own
+    name: 'markup.strike',
+    order: 0,
+    repository: 'emphasis-block'
+  },
+  {
+    name: 'string.emoji.gfm',
+    order: 0,
+    repository: 'inline-no-emphasis'
+  },
+  {
+    name: 'markup.italic',
+    ignore: true
+  },
+  {
+    name: 'markup.code',
+    ignore: true
+  },
+  {
     name: 'constant.character',
     order: 0,
     repository: 'inline-no-emphasis'
@@ -15,6 +38,11 @@ var testMap = [
     name: 'comment.hr',
     order: 0,
     repository: 'single-line'
+  },
+  {
+    name: 'link',
+    order: 0,
+    repository: 'inline-no-emphasis'
   },
   {
     name: 'comment.quote',
@@ -74,6 +102,9 @@ module.exports = function(ret) {
           return _.startsWith(name, r.name);
         });
         if (rule) {
+          if(rule.ignore){
+            return false;
+          }
           p.order = rule.order
           if (ret.repository.hasOwnProperty(rule.repository)) {
             ret.repository[rule.repository].patterns.push(p);
