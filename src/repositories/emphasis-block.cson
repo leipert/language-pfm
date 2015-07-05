@@ -18,7 +18,7 @@
   'bold-italic-block':
     'patterns': [
       {
-        'begin': '^(\\*\\*\\*)(?!\\*|\\s)'
+        'begin': '^(\\*\\*\\*)(?>[^* \t])'
         'end': '(\\1)|^$'
         'name': 'markup.bold.italic.gfm'
         'patterns': [
@@ -30,7 +30,7 @@
   'bold-block':
     'patterns': [
       {
-        'begin': '^(\\*\\*)(?!\\*|\\s)'
+        'begin': '^(\\*\\*)(?>[^* \t])'
         'end': '(\\1)|^$'
         'name': 'markup.bold.gfm'
         'patterns': [
@@ -43,7 +43,7 @@
   'italic-block':
     'patterns': [
       {
-        'begin': '^(\\*)(?!\\*|\\s)'
+        'begin': '^(\\*)(?>[^* \t])'
         'end': '(\\1)(?!\\*)|^$'
         'name': 'markup.italic.gfm'
         'patterns': [

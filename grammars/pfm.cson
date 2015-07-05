@@ -506,7 +506,7 @@ repository:
   'bold-italic-block':
     patterns: [
       {
-        begin: '^(\\*\\*\\*)(?!\\*|\\s)'
+        begin: '^(\\*\\*\\*)(?>[^* \t])'
         end: '(\\1)|^$'
         name: 'markup.bold.italic.gfm'
         patterns: [
@@ -522,7 +522,7 @@ repository:
   'bold-block':
     patterns: [
       {
-        begin: '^(\\*\\*)(?!\\*|\\s)'
+        begin: '^(\\*\\*)(?>[^* \t])'
         end: '(\\1)|^$'
         name: 'markup.bold.gfm'
         patterns: [
@@ -541,7 +541,7 @@ repository:
   'italic-block':
     patterns: [
       {
-        begin: '^(\\*)(?!\\*|\\s)'
+        begin: '^(\\*)(?>[^* \t])'
         end: '(\\1)(?!\\*)|^$'
         name: 'markup.italic.gfm'
         patterns: [
@@ -736,8 +736,8 @@ repository:
           '1':
             name: 'variable.unordered.list.gfm'
           '2':
-        patterns: [
-          {
+            patterns: [
+              {
                 include: '#inline'
               }
             ]
@@ -764,8 +764,8 @@ repository:
               {
                 match: '@'
                 name: 'variable.mention.gfm'
-          }
-        ]
+              }
+            ]
           '3':
             name: 'variable.ordered.list.gfm'
       }

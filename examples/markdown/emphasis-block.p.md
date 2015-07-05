@@ -15,7 +15,7 @@ $$
 TEST
 ***
 
-**TEST *x+y* **
+**TEST *$x+y$* **
 **
 
 ***TEST
