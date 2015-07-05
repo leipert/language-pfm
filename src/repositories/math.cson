@@ -1,0 +1,88 @@
+'extend-repository-patterns':
+  'inline-no-emphasis': [
+    { 'include': '#math-inline'}
+  ]
+  'block-no-emphasis': [
+    { 'include': '#math-block'}
+  ]
+'repository':
+  'math-block':
+    'patterns': [
+      # A math block with dollar signs:
+      # $$
+      # x + y
+      # $$
+      {
+        'name': 'markup.math.block.pfm'
+        'begin': '(\\${2})'
+        'beginCaptures':
+          '0':
+            'name': 'support.gfm'
+        'end': '\\1'
+        'endCaptures':
+          '0':
+            'name': 'support.gfm'
+        'patterns': [
+          {
+            'include': '#math-syntax'
+          }
+        ]
+      }
+      # A math block with paranthesis:
+      # \[
+      # x + y
+      # \]
+      {
+        'name': 'markup.math.block.pfm'
+        'begin': '(?<!\\\\)\\\\\\['
+        'beginCaptures':
+          '0':
+            'name': 'support.gfm'
+        'end': '\\\\\\]'
+        'endCaptures':
+          '0':
+            'name': 'support.gfm'
+        'patterns': [
+          {
+            'include': '#math'
+          }
+        ]
+      }
+    ]
+  'math-inline':
+    'patterns': [
+      {
+        # Inline math with dollar signs:
+        # $x + y$
+        'name': 'markup.math.inline.pfm'
+        'match': '(?<!\\$)(\\$)([^$\\s][^$]+[^\\\\$\\s]|[^\\\\$\\s]+)(\\$)'
+        'captures':
+          '1':
+            'name': 'support.gfm'
+          '2':
+            'patterns': [
+              {
+                'include': '#math-syntax'
+              }
+            ]
+          '3':
+            'name': 'support.gfm'
+      }
+      {
+        # Inline math with brackets:
+        # \[x + y\]
+        'name': 'markup.math.inline.pfm'
+        'match': '(\\\\\\()([\\S][^)]+)(\\\\\\))'
+        'captures':
+          '1':
+            'name': 'support.gfm'
+          '2':
+            'patterns': [
+              {
+                'include': '#math-syntax'
+              }
+            ]
+          '3':
+            'name': 'support.gfm'
+      }
+    ]

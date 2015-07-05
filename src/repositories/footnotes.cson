@@ -1,0 +1,34 @@
+'extend-repository-patterns':
+  'block-no-emphasis': [
+    { 'include': '#footnotes'}
+  ]
+'repository':
+  'footnotes':
+    'patterns': [
+      {
+        'name': 'markup.footnote.reference.pfm'
+        'match': '(\\[\\^)([\\S]+)(\\])(?!:)'
+        'captures':
+          '1':
+            'name': 'support.gfm'
+          '2':
+            'name': 'support.gfm'
+          '3':
+            'name': 'support.gfm'
+      }
+      {
+        'name': 'markup.footnote.inline.pfm'
+        'match': '(\\^\\[)([^\\^].+|\\^\\S.+)(\\])'
+        'captures':
+          '1':
+            'name': 'support.gfm'
+          '2':
+            'patterns': [
+              {
+                'include':'$self'
+              }
+            ]
+          '3':
+            'name': 'support.gfm'
+      }
+    ]

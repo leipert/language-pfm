@@ -1,0 +1,58 @@
+'extend-repository-patterns':
+  'inline-no-emphasis': [
+    { 'include': '#citations'}
+  ]
+'repository':
+  'citations':
+    'patterns': [
+      {
+        'name': 'markup.citation.pfm'
+        'match': '(\\[)(.*?-?@[A-z_][\\w:.#$%&\\-+?<>~/]*.*?[^\\\\])(\\])'
+        'captures':
+          '1':
+            'name': 'support.gfm'
+          '2':
+            'patterns': [
+              {
+                'include': '#citation-internal'
+              },
+              {
+                'include': '#inline'
+              }
+            ]
+          '3':
+            'name': 'support.gfm'
+      }
+      {
+        'name': 'markup.citation.pfm'
+        'match': '(@[A-z_][\\w:.#$%&\\-+?<>~/]*?\\s*(\\[).*?(\\]))'
+        'captures':
+          '0':
+            'patterns': [
+              {
+                'include': '#citation-internal'
+              },
+              {
+                'include': '#inline'
+              }
+            ]
+          '1':
+            'name': 'support.gfm'
+          '2':
+            'name': 'support.gfm'
+      },
+      {
+        'include': '#citation-internal'
+      }
+    ]
+  'citation-internal':
+    'patterns': [
+      {
+        'match': '(-?@)([A-z_][\\w:.#$%&\\-+?<>~/]*)'
+        'captures':
+          '1':
+            'name': 'variable.mention.gfm'
+          '2':
+            'name': 'string.username.gfm'
+      }
+    ]

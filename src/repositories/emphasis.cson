@@ -1,0 +1,114 @@
+'extend-repository-patterns':
+  'inline': [
+    { 'include': '#emphasis-inline'}
+  ]
+  'inline-no-emphasis': [
+      {
+        # Blocks starting with four _ or * are no emphasis-inline
+        'order': 0,
+        'match': '([_\\*]){4,}(.+?)\\1',
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#inline'
+              }
+            ]
+      }
+    ]
+'repository':
+  'emphasis-inline':
+    'patterns': [
+      {
+        'include': '#bold-italic-inline'
+      }
+      {
+        'include': '#bold-inline'
+      }
+      {
+        'include': '#italic-inline'
+      }
+    ]
+  'bold-italic-inline':
+    'patterns': [
+      {
+        'match': '(?<=[^\\w\\d\\\\_])(___)([^\\s_\\\\]|[^\\s_][^_\\\\]|\\\\{2}|[^\\s_].+?[^_\\\\])(\\1)(?=[^\\w\\d]|_|$)',
+        'name': 'markup.inline.bold.italic.gfm',
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#inline-no-emphasis'
+              }
+            ]
+      }
+      {
+        'match': '(?<=[^\\*\\\\])(\\*{3})([^\\s\\*\\\\]|[^\\s\\*][^\\*\\\\]|\\\\{2}|[^\\s\\*].+?[^\\*\\\\])(\\1)',
+        'name': 'markup.inline.bold.italic.gfm',
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#inline-no-emphasis'
+              }
+            ]
+      }
+    ]
+  'bold-inline':
+    'patterns': [
+      {
+        'match': '(?<=[^\\w\\d\\\\]|_)(__)([^\\s_\\\\]|[^\\s_][^_\\\\]|\\\\{2}|[^\\s_].+?[^_\\\\])(\\1)(?=[^\\w\\d]|_|$)',
+        'name': 'markup.inline.bold.gfm',
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#inline-no-emphasis'
+              }, {
+                'include': '#italic-inline'
+              }
+            ]
+      }
+      {
+        'match': '(?<!\\\\)(\\*{2})([^\\s\\*\\\\]|[^\\s\\*][^\\*\\\\]|\\\\{2}|[^\\s\\*].+?[^\\*\\\\])(\\1)',
+        'name': 'markup.inline.bold.gfm',
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#inline-no-emphasis'
+              }, {
+                'include': '#bold-inline'
+              }
+            ]
+      }
+    ]
+  'italic-inline':
+    'patterns': [
+      {
+        'match': '(?<=[^\\w\\d_\\\\]{2}|__)(_)([^\\s_\\\\]|[^\\s_][^\\\\_]|\\\\{2}|[^\\s_].+?[^_\\\\])(\\1)(?=[^\\w\\d_]|$|_{2,})',
+        'name': 'markup.inline.italic.gfm',
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#inline-no-emphasis'
+              }, {
+                'include': '#bold-inline'
+              }
+            ]
+      }
+      {
+        'match': '(?<=[^\\*\\\\]{2}|\\*\\*)(\\*)([^\\s\\*\\\\]|[^\\s\\*][^\\*\\\\]|\\\\{2}|[^\\s\\*].+?[^\\*\\\\])(\\1)(?=[^\\*]|\\*{2,}|$)',
+        'name': 'markup.inline.italic.gfm',
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#inline-no-emphasis'
+              }, {
+                'include': '#bold-inline'
+              }
+            ]
+      }
+    ]

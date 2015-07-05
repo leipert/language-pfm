@@ -1,0 +1,38 @@
+'extend-repository-patterns':
+  'block-no-emphasis': [
+    { 'include': '#html-block'}
+  ]
+'repository':
+  'html-block':
+    'patterns': [
+      {
+        # HTML block:
+        # <tag>
+        # Content can be in markdown
+        # </tag>
+        'begin': '<!{0}\\s*([\\w]+)[^>]*\\s*>'
+        'beginCaptures':
+          '0':
+            'name': 'source.html.basic'
+            'patterns': [
+              {
+                'include': 'text.html.basic'
+              }
+            ]
+        'end': '<\\s*[/]?\\1\\s*>'
+        'endCaptures':
+          '0':
+            'name': 'source.html.basic'
+            'patterns': [
+              {
+                'include': 'text.html.basic'
+              }
+            ]
+        'contentName': 'source.html.basic'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+    ]

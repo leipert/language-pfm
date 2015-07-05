@@ -1,0 +1,55 @@
+'extend-repository-patterns':
+  'block': [
+    { 'include': '#emphasis-block'}
+  ]
+'repository':
+  'emphasis-block':
+    'patterns': [
+      {
+        'include': '#bold-italic-block'
+      }
+      {
+        'include': '#bold-block'
+      }
+      {
+        'include': '#italic-block'
+      }
+    ]
+  'bold-italic-block':
+    'patterns': [
+      {
+        'begin': '^(\\*\\*\\*)(?!\\*|\\s)'
+        'end': '(\\1)|^$'
+        'name': 'markup.bold.italic.gfm'
+        'patterns': [
+          { 'include': '#math-block'}
+          { 'include': '#inline'}
+        ]
+      }
+    ]
+  'bold-block':
+    'patterns': [
+      {
+        'begin': '^(\\*\\*)(?!\\*|\\s)'
+        'end': '(\\1)|^$'
+        'name': 'markup.bold.gfm'
+        'patterns': [
+          { 'include': '#math-block'}
+          { 'include': '#italic-block'}
+          { 'include': '#inline'}
+        ]
+      }
+    ]
+  'italic-block':
+    'patterns': [
+      {
+        'begin': '^(\\*)(?!\\*|\\s)'
+        'end': '(\\1)(?!\\*)|^$'
+        'name': 'markup.italic.gfm'
+        'patterns': [
+          { 'include': '#math-block'}
+          { 'include': '#bold-block'}
+          { 'include': '#inline'}
+        ]
+      }
+    ]

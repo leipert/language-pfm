@@ -96,7 +96,7 @@ var template = _.template('{"begin":"^\\\\s*(((`|~){3,})\\\\s*(?:(?:<%= begin %>
 var template2 = _.template('{"match":"(`+)(.+)\\\\1\\\\s*(\\\\{.*\\\\.<%= begin %>[^\\\\}]*\\\\})","captures":{"2":{"patterns":[{"include":"<%= include %>"}]},"3":{"patterns":[{"include":"source.css.less"}]}},"name":"<%= name %>"}');
 
 
-languages = _.flatten(_.map(raw, function(language) {
+languages = _.map(raw, function(language) {
   if (!language.include) {
     language.include = language.contentName;
   }
@@ -105,23 +105,23 @@ languages = _.flatten(_.map(raw, function(language) {
     language.name = 'markup.code.' + language.name + '.gfm'
   }
 
-  var parsed = JSON.parse(template(language))
-  var parsed2 = JSON.parse(template2(language))
+  var block = JSON.parse(template(language))
+  var inline = JSON.parse(template2(language))
 
   if (language.contentName) {
-    parsed.contentName = language.contentName;
+    block.contentName = language.contentName;
   }
 
   if (language.include === 'empty') {
-    delete parsed.patterns;
-    delete parsed2.patterns;
+    delete block.patterns;
+    delete inline.patterns;
   }
 
-  return [parsed, parsed2];
-}))
+  return {block: block, inline: inline};
+})
 
-raw = [
-  {
+raw = [ {
+  block: {
     'begin': '^\\s*((`|~){3,})\\s*.*\\s*$',
     'beginCaptures': {
       '0': {
@@ -135,11 +135,17 @@ raw = [
       }
     },
     'name': 'markup.raw.gfm'
-  }, {
+  }, inline: {
     'begin': '(`+)(?!$)',
     'end': '\\1',
     'name': 'markup.raw.gfm'
   }
+}
 ];
 
-module.exports = _.union(languages, raw)
+languages = _.union(languages, raw);
+
+module.exports = {
+inline: _.pluck(languages, 'inline'),
+block:  _.pluck(languages, 'block')
+}

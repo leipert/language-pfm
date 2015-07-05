@@ -1,0 +1,25 @@
+'extend-repository-patterns':
+  'block-no-emphasis': [
+    { 'include': '#list-definitions'}
+  ]
+'repository':
+  'list-definitions':
+    'patterns': [
+      {
+        'name': 'markup.definition.block.pfm'
+        'begin': '^[:~]   |^ [:~]  |^  [:~] '
+        'beginCaptures':
+          '0':
+            'name': 'support.gfm'
+        'end': '^(?= {0,3}\\S+.+$)'
+        'endCaptures':
+          '0':
+            'name': 'support.gfm'
+        'contentName': 'markup.definition.content.pfm'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+    ]

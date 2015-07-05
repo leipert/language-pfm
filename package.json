@@ -9,6 +9,7 @@
   "devDependencies": {
     "coffeelint": "^1.10.1",
     "cson": "^2.0.0",
+    "glob": "^5.0.13",
     "gulp": "^3.8.11",
     "gulp-rename": "^1.2.0",
     "gulp-replace": "^0.5.3",
