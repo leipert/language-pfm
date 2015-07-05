@@ -13,50 +13,46 @@ fileTypes: [
 ]
 patterns: [
   {
-    include: '#block'
+    include: '#single-line'
   }
   {
-    include: '#headings'
+    include: '#block'
   }
   {
     include: '#inline'
   }
-  {
-    match: '^\\s*([*+-])[ \\t]+'
-    captures:
-      '1':
-        name: 'variable.unordered.list.gfm'
-  }
-  {
-    match: '^\\s*(\\d+\\.)[ \\t]+'
-    captures:
-      '1':
-        name: 'variable.ordered.list.gfm'
-  }
-  {
-    match: '(?<=^|\\s|"|\'|\\(|\\[)(@)(\\w[-\\w:]*)(?=[\\s"\'.,;\\)\\]])'
-    captures:
-      '1':
-        name: 'variable.mention.gfm'
-      '2':
-        name: 'string.username.gfm'
-  }
-  {
-    match: '(?<=^|\\s|"|\'|\\(|\\[)(#)(\\d+)(?=[\\s"\'\\.,;\\)\\]])'
-    captures:
-      '1':
-        name: 'variable.issue.tag.gfm'
-      '2':
-        name: 'string.issue.number.gfm'
-  }
-  {
-    match: '(  )$'
-    captures:
-      '1':
-        name: 'linebreak.gfm'
-  }
 ]
 repository:
+  'single-line':
+    patterns: [
+      {
+        include: '#headings'
+      }
+      {
+        match: '^\\s*[*]{3,}\\s*$'
+        name: 'comment.hr.gfm'
+        order: 0
+      }
+      {
+        match: '^\\s*[-]{3,}\\s*$'
+        name: 'comment.hr.gfm'
+        order: 0
+      }
+      {
+        match: '^\\s*([*+-])[ \\t]+'
+        captures:
+          '1':
+            name: 'variable.unordered.list.gfm'
+        order: 0
+      }
+      {
+        match: '^\\s*(\\d+\\.)[ \\t]+'
+        captures:
+          '1':
+            name: 'variable.ordered.list.gfm'
+        order: 0
+      }
+    ]
   inline:
     patterns: [
       {
@@ -258,6 +254,31 @@ repository:
             name: 'punctuation.definition.entity.gfm'
           '2':
             name: 'punctuation.definition.entity.gfm'
+        order: 0
+      }
+      {
+        match: '(?<=^|\\s|"|\'|\\(|\\[)(@)(\\w[-\\w:]*)(?=[\\s"\'.,;\\)\\]])'
+        captures:
+          '1':
+            name: 'variable.mention.gfm'
+          '2':
+            name: 'string.username.gfm'
+        order: 0
+      }
+      {
+        match: '(?<=^|\\s|"|\'|\\(|\\[)(#)(\\d+)(?=[\\s"\'\\.,;\\)\\]])'
+        captures:
+          '1':
+            name: 'variable.issue.tag.gfm'
+          '2':
+            name: 'string.issue.number.gfm'
+        order: 0
+      }
+      {
+        match: '(  )$'
+        captures:
+          '1':
+            name: 'linebreak.gfm'
         order: 0
       }
     ]
@@ -799,7 +820,7 @@ repository:
             name: 'support.gfm'
         patterns: [
           {
-            include: '#math'
+            include: '#math-syntax'
           }
         ]
       }

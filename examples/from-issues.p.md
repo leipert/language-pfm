@@ -1,3 +1,16 @@
+## Issue #5
+
+According to \cite{a.j,_marley_m._johnson_j.t._bigger}, Pandoc is awesome
+
+\test{}
+
+#### Other part
+
+We can have some nice equations:
+
+$$
+\hat{\mu}= \frac{\sum_{i=1}^n w_i RR_i}{\sum_{i=1}^n w_i}, \,\,\,\,\,\,\,\, \frac{1}{\hat{\lambda}}= \frac{1}{n} \sum_{i=1}^n w_i \left( \frac{1}{RR_i}-\frac{1}{\hat{\mu}} \right)
+$$
 
 ## Issue #4
 

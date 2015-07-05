@@ -35,28 +35,54 @@ var testMap = [
     name: 'critic.gfm',
     order: 0,
     repository: 'block-no-emphasis'
+  },
+  {
+    name: 'variable.unordered',
+    order: 0,
+    repository: 'single-line'
+  },
+  {
+    name: 'variable.ordered',
+    order: 0,
+    repository: 'single-line'
+  },
+  {
+    name: 'variable.mention',
+    order: 0,
+    repository: 'inline-no-emphasis'
+  },
+  {
+    name: 'variable.issue',
+    order: 0,
+    repository: 'inline-no-emphasis'
+  },
+  {
+    name: 'linebreak',
+    order: 0,
+    repository: 'inline-no-emphasis'
   }
 ]
 
 
-module.exports = function(ret){
+module.exports = function(ret) {
 
   ret.patterns = _.chain(ret.patterns)
-    .map( function(p) {
-      if (p.name) {
-        var rule = _.find(testMap, function(r){
-          return _.startsWith(p.name, r.name);
+    .map(function(p) {
+      var name = p.name || _.get(p, 'captures.1.name', false)
+      if (name) {
+        var rule = _.find(testMap, function(r) {
+          return _.startsWith(name, r.name);
         });
-        if(rule){
+        if (rule) {
           p.order = rule.order
-          if(ret.repository.hasOwnProperty(rule.repository)){
+          if (ret.repository.hasOwnProperty(rule.repository)) {
             ret.repository[rule.repository].patterns.push(p);
           } else {
-            console.warn('Repository missing: '+rule.repository);
+            console.warn('Repository missing: ' + rule.repository);
           }
           return false
-        }else{
-          console.warn('Mapping missing for '+p.name);
+        } else {
+          console.warn('Mapping missing for ' + name);
           return p;
         }
       } else if (!p.include) {

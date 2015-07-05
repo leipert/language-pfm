@@ -32,8 +32,6 @@ gulp.task('fixTests', function() {
 
 gulp.task('build.grammars', ['copyFiles'], function(cb) {
 
-  console.warn(addPatternsToRepository)
-
   var grammarPath = path.resolve(__dirname, 'grammars', 'pfm.cson');
 
   var gfm = CSON.readFileSync(grammarPath);
@@ -46,7 +44,7 @@ gulp.task('build.grammars', ['copyFiles'], function(cb) {
 
   repositories.push(
     createRepository('code', languages.inline, languages.block)
-    );
+  );
 
   _.forEach(repositories, function(r) {
     _.forEach(r.repository, function(repo, key) {
@@ -70,7 +68,7 @@ gulp.task('build.grammars', ['copyFiles'], function(cb) {
 
   ret.name = pfm.name;
 
-  var repos = ['block', 'headings', 'inline'];
+  var repos = ['single-line', 'block', 'inline'];
 
   ret.patterns = _(generateInclude(repos))
     .union(pfm.patterns)
@@ -94,8 +92,6 @@ gulp.task('build.grammars', ['copyFiles'], function(cb) {
     patterns: _(languages)
       .value()
   }
-
-  //console.warn(_.pluck(codeRepository.patterns, 'name'))
 
   ret.repository = pfm.repository;
   ret.repository.headings = headingRepository;

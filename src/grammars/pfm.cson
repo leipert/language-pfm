@@ -1,6 +1,10 @@
 'name': 'Pandoc Markdown'
 'patterns': []
 'repository':
+  'single-line':
+    'patterns': [
+      { 'include': '#headings' }
+      ]
   'inline':
     'patterns': [
       { 'include': '#inline-no-emphasis' }
