@@ -662,14 +662,14 @@ repository:
     patterns: [
       {
         name: 'markup.footnote.reference.pfm'
-        match: '(\\[\\^)([\\S]+)(\\])(?!:)'
+        match: '(\\[)(\\^[\\S]+)(\\])(?!:)'
         captures:
           '1':
-            name: 'support.gfm'
+            name: 'punctuation.definition.begin.gfm'
           '2':
-            name: 'support.gfm'
+            name: 'entity.gfm'
           '3':
-            name: 'support.gfm'
+            name: 'punctuation.definition.end.gfm'
       }
       {
         name: 'markup.footnote.inline.pfm'
@@ -685,6 +685,19 @@ repository:
             ]
           '3':
             name: 'support.gfm'
+      }
+      {
+        match: '^\\s*(\\[)(\\^[\\S]+)(\\])\\s*(:)\\s*(?=\\S+)'
+        name: 'markup.footnote.reference.pfm'
+        captures:
+          '1':
+            name: 'punctuation.definition.begin.gfm'
+          '2':
+            name: 'entity.gfm'
+          '3':
+            name: 'punctuation.definition.end.gfm'
+          '4':
+            name: 'punctuation.separator.key-value.gfm'
       }
     ]
   'html-block':

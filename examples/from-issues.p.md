@@ -14,7 +14,7 @@ $$
 
 ## Issue #4
 
-This is a testing document for testing purposes only. This is a testing document for testing purposes only.[^1] This is a testing document for testing purposes only. This is a testing document for testing purposes only.
+This is a testing document for testing purposes only.[^1] This is a testing document for testing purposes only.
 
 [^1]: This is a footnote.
 
