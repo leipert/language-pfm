@@ -25,8 +25,12 @@ var testMap = [
     ignore: true
   },
   {
+    name: 'markup.raw',
+    ignore: true
+  },
+  {
     name: 'constant.character',
-    order: 0,
+    order: 100,
     repository: 'inline-no-emphasis'
   },
   {

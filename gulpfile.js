@@ -71,7 +71,13 @@ gulp.task('build.grammars', ['copyFiles'], function(cb) {
 
   ret.name = pfm.name;
 
-  var repos = ['block', 'inline', 'single-line'];
+  var repos = [
+    'block-no-emphasis',
+    'inline-no-emphasis',
+    'single-line',
+    'emphasis-inline',
+    'emphasis-block'
+    ];
 
   ret.patterns = _(generateInclude(repos))
     .union(pfm.patterns)
@@ -95,11 +101,9 @@ gulp.task('build.grammars', ['copyFiles'], function(cb) {
 
   ret.repository = pfm.repository;
   ret.repository.headings = headingRepository;
-  //ret.repository.code = codeRepository;
 
   ret.patterns = _(ret.patterns)
     .reject(isHeading)
-    .reject(startsWith('markup.raw'))
     .value();
 
   ret = addPatternsToRepository(ret);
@@ -107,10 +111,28 @@ gulp.task('build.grammars', ['copyFiles'], function(cb) {
   ret.fileTypes.push('pmd');
   ret.fileTypes.push('p.md')
 
+  ret.repository = _.chain(ret.repository)
+    .mapValues(function(r, key){
+      r.patterns = _.chain(r.patterns)
+        .map(function(x){
+            x.order = x.order ? x.order : 1000;
+            return x;
+        })
+        .sortBy('order')
+        .map(function(x){
+          delete x.order;
+          return x;
+        })
+        .value();
+      return r;
+    })
+    .value();
+
   var string = CSON.stringify(ret)
     .replace(/'/g, "\\'")
     .replace(/([^\\])"/g, "$1'")
     .replace(/\\"/g, '"');
+
   fs.writeFileSync(grammarPath, string);
 
   cb();

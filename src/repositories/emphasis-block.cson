@@ -1,7 +1,3 @@
-'extend-repository-patterns':
-  'block': [
-    { 'include': '#emphasis-block'}
-  ]
 'repository':
   'emphasis-block':
     'patterns': [

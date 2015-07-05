@@ -7,15 +7,10 @@
       ]
   'inline':
     'patterns': [
-      { 'include': '#inline-no-emphasis' }
-    ]
-  'block':
-    'patterns': [
-      { 'include': '#block-no-emphasis' }
+      {'include': '#inline-no-emphasis'}
+      {'include': '#emphasis-inline'}
     ]
   'inline-no-emphasis':
     'patterns': []
   'block-no-emphasis':
-    'patterns': [
-      { 'include': '#code'}
-    ]
+    'patterns': []

@@ -14,6 +14,10 @@ var raw = [
     'name': 'markup.code.gfm',
     'include': 'text.html.markdown.source.gfm.mson'
   }, {
+    'begin': 'sql',
+    'name': 'markup.code.sql.gfm',
+    'include': 'source.sql'
+  }, {
     'begin': '(?:markdown|mdown|md)',
     'name': 'markup.code.gfm',
     'include': '$self'
@@ -181,11 +185,13 @@ raw = [
           'name': 'support.gfm'
         }
       },
+      order: 2000,
       'name': 'markup.raw.gfm'
     },
     inline: {
       'begin': '(`+)(?!$)',
       'end': '\\1',
+      order: 2000,
       'name': 'markup.raw.gfm'
     }
   }
