@@ -11,13 +11,18 @@ files in Atom. This was forked from [atoms language-gfm](https://github.com/atom
 
 **Supported Pandoc Features**
 
+This package supports a lot of [some quirks](docs/supported-features). Here are the highlights:
+
 * Math highlighting `$...$` and `\(...\)` and block `$$...$$` and `\[...\]` (copied from [language-latex](https://atom.io/packages/language-latex))
-* [Definition Lists]
+* [Definition Lists] & [fancy lists]
 * [Raw HTML] with [inline markdown]
 * [Footnotes] & [Inline-Footnotes]
 * [Citations]
-* ... more to come!
+* ... many more
 
+There are [some quirks](docs/known-issues), but these should not affect your daily to much
+
+[fancy lists]: http://johnmacfarlane.net/pandoc/README.html#extension-fancy_lists
 [Citations]: http://johnmacfarlane.net/pandoc/README.html#extension-citations
 [Footnotes]: http://johnmacfarlane.net/pandoc/README.html#extension-footnotes
 [Inline-Footnotes]: http://johnmacfarlane.net/pandoc/README.html#extension-inline_notes
@@ -25,7 +30,7 @@ files in Atom. This was forked from [atoms language-gfm](https://github.com/atom
 [Raw HTML]: http://johnmacfarlane.net/pandoc/README.html#extension-raw_html
 [inline markdown]: http://johnmacfarlane.net/pandoc/README.html#extension-markdown_in_html_blocks
 
-**Works great with other ATOM pandoc related packages**
+**Works great with other pandoc related packages**
 
 * [Autocomplete Bibtex] brings citation autocompletion
 * [Pen Paper Coffee] is a good looking theme for markdown editing

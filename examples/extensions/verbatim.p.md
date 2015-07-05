@@ -4,6 +4,8 @@
 
 Example:
 
+`<$>`{.haskell}
+
 `qsort [] = []` {#mycode .haskell .numberLines startFrom="100"}
 
 
