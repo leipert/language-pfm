@@ -11,7 +11,7 @@ files in Atom. This was forked from [atoms language-gfm](https://github.com/atom
 
 **Supported Pandoc Features**
 
-This package supports a lot of [some quirks](docs/supported-features). Here are the highlights:
+This package supports a lot of [pandoc features](https://github.com/leipert/language-pfm/blob/dist/docs/supported-features.md). Here are the highlights:
 
 * Math highlighting `$...$` and `\(...\)` and block `$$...$$` and `\[...\]` (copied from [language-latex](https://atom.io/packages/language-latex))
 * [Definition Lists] & [fancy lists]
@@ -20,7 +20,7 @@ This package supports a lot of [some quirks](docs/supported-features). Here are 
 * [Citations]
 * ... many more
 
-There are [some quirks](docs/known-issues), but these should not affect your daily to much
+There are [some quirks](https://github.com/leipert/language-pfm/blob/dist/docs/known-issues.md), but these should not affect your daily work to much.
 
 [fancy lists]: http://johnmacfarlane.net/pandoc/README.html#extension-fancy_lists
 [Citations]: http://johnmacfarlane.net/pandoc/README.html#extension-citations
@@ -34,7 +34,7 @@ There are [some quirks](docs/known-issues), but these should not affect your dai
 
 * [Autocomplete Bibtex] brings citation autocompletion
 * [Pen Paper Coffee] is a good looking theme for markdown editing
-* [Markdown Preview Plus] is a wonderful markdown preview with Mathjax support, hopefully able to work with pandoc natively soon: [#27]
+* [Markdown Preview Plus] is a wonderful markdown preview with Mathjax support, hopefully able to work with pandoc natively soon: [#41]
 
 [Autocomplete Bibtex]: https://atom.io/packages/autocomplete-bibtex
 
@@ -42,4 +42,4 @@ There are [some quirks](docs/known-issues), but these should not affect your dai
 
 [Markdown Preview Plus]: https://atom.io/packages/markdown-preview-plus
 
-[#27]: https://github.com/Galadirith/markdown-preview-plus/pull/27
+[#27]: https://github.com/Galadirith/markdown-preview-plus/pull/41
