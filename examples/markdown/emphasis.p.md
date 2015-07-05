@@ -194,3 +194,15 @@ Middle should not be highlighted:
 + __asd \*neither is this* asd__
 
 + __asd \_neither is this_ asd__
+
+#### Start of lines
+
+*$x+y$*
+ *$x+y$*
+  *$x+y$*
+**$x+y$**
+ **$x+y$**
+  **$x+y$**
+***$x+y$***
+ ***$x+y$***
+  ***$x+y$***

@@ -25,16 +25,14 @@ Example:
 
 Term 1
 
-:   Definition 1
-
+:   Definition 1 with *inline markup*
 
 Term 2 with *inline markup*
 
 :   Definition 2
 
-        { some code, part of Definition 2 }
     ```
-    asdasdasd  
+    some code, part of Definition 2  
     ```
     Third paragraph of *definition 2*.
 
@@ -46,7 +44,7 @@ with lazy continuation.
   Second paragraph of the definition.
 
 Term 1
-  ~ Definition 1
+ ~  Definition 1
 
 Term 2
   ~ Definition 2a

@@ -8,6 +8,16 @@ Example:
 
 ### extension-tex_math_dollars & extension-tex_math_single_backslash & extension-tex_math_double_backslash
 
+<!-- TODO:
+
+Anything between two $ characters will be treated as TeX math. The opening $ must have a non-space character immediately to its right, while the closing $ must have a non-space character immediately to its left, and must not be followed immediately by a digit.
+
+-->
+
+Example:
+
+No math $20,000 and $30,000, \$50000\$
+
 Inline Math should work with `$` $\frac{\frac{x+y}{2}}{y}$
 and `\(` \(\frac{x+y}{y}\)
 

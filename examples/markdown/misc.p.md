@@ -27,10 +27,11 @@ This is smart:
 > 1. This is a list inside a block quote.
 > 2. Second item.
 
-> This is a block quote. This
+> **This is a block quote**. This
 paragraph has two lines.
 
-> 1. This is a list inside a block quote.
+> This is a list inside a block quote
+1. First.
 2. Second item.
 
 > This is a block quote.

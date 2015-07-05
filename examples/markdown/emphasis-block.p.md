@@ -8,17 +8,22 @@ x+y
 $$
 **
 
+You can write me like
+**this,
+okay?
+**
+
 *TEST
 *
 
 *
-TEST
+$x+y$
 ***
 
-**TEST *x+y* **
-**
+**TEST *$x+y$* **
 
 ***TEST
+$x+y$
 ***
 
 
@@ -39,8 +44,8 @@ as
 Not fully written:
 
 **should
-
 fail
+
 **
 
 Works not:
