@@ -70,7 +70,7 @@ gulp.task('build.grammars', ['copyFiles'], function(cb) {
 
   ret.name = pfm.name;
 
-  var repos = ['block', 'headings', 'inline', 'code'];
+  var repos = ['block', 'headings', 'inline'];
 
   ret.patterns = _(generateInclude(repos))
     .union(pfm.patterns)
@@ -100,7 +100,7 @@ gulp.task('build.grammars', ['copyFiles'], function(cb) {
   ret.repository = pfm.repository;
   ret.repository.headings = headingRepository;
   ret.repository['inline-no-emphasis'].patterns = _.union(ret.repository['inline-no-emphasis'].patterns, inlineRepository);
-  ret.repository.code = codeRepository;
+  //ret.repository.code = codeRepository;
 
   ret.patterns = _(ret.patterns)
     .reject(isCode)

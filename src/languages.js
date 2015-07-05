@@ -117,35 +117,83 @@ languages = _.map(raw, function(language) {
     delete inline.patterns;
   }
 
-  return {block: block, inline: inline};
+  return {
+    block: block,
+    inline: inline
+  };
 })
 
-raw = [ {
-  block: {
-    'begin': '^\\s*((`|~){3,})\\s*.*\\s*$',
-    'beginCaptures': {
-      '0': {
-        'name': 'support.gfm'
-      }
+raw = [
+  {
+    block: {
+      begin: '^\\s*(((`|~){3,})\\s*(?:(?:r|knitr)|(\\{.*\\.(?:r|knitr)[^\\}]*\\})|(\\{r[^\\}]*\\}))\\s*)$',
+      beginCaptures: {
+        '1': {
+          name: 'support.gfm'
+        },
+        '4': {
+          patterns: [
+            {
+              include: 'source.css.less'
+            }
+          ]
+        }
+      },
+      end: '^\\s*\\2\\3*$',
+      endCaptures: {
+        '0': {
+          name: 'support.gfm'
+        }
+      },
+      name: 'markup.code.yaml.gfm',
+      patterns: [
+        {
+          include: 'source.r'
+        }
+      ],
+      contentName: 'source.r'
     },
-    'end': '^\\s*\\1\\2*$',
-    'endCaptures': {
-      '0': {
-        'name': 'support.gfm'
+    inline: {
+      name: 'markup.code.knitr.gfm',
+      'match': '(`+)r\\s+(.+)\\1',
+      captures: {
+        '2': {
+          patterns: [
+            {
+              include: 'source.r'
+            }
+          ]
+        }
       }
+    }
+  },
+  {
+    block: {
+      'begin': '^\\s*((`|~){3,})\\s*.*\\s*$',
+      'beginCaptures': {
+        '0': {
+          'name': 'support.gfm'
+        }
+      },
+      'end': '^\\s*\\1\\2*$',
+      'endCaptures': {
+        '0': {
+          'name': 'support.gfm'
+        }
+      },
+      'name': 'markup.raw.gfm'
     },
-    'name': 'markup.raw.gfm'
-  }, inline: {
-    'begin': '(`+)(?!$)',
-    'end': '\\1',
-    'name': 'markup.raw.gfm'
+    inline: {
+      'begin': '(`+)(?!$)',
+      'end': '\\1',
+      'name': 'markup.raw.gfm'
+    }
   }
-}
 ];
 
 languages = _.union(languages, raw);
 
 module.exports = {
-inline: _.pluck(languages, 'inline'),
-block:  _.pluck(languages, 'block')
+  inline: _.pluck(languages, 'inline'),
+  block: _.pluck(languages, 'block')
 }
