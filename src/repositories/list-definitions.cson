@@ -6,20 +6,14 @@
   'list-definitions':
     'patterns': [
       {
-        'name': 'markup.definition.block.pfm'
-        'begin': '^[:~]   |^ [:~]  |^  [:~] '
-        'beginCaptures':
-          '0':
-            'name': 'support.gfm'
-        'end': '^(?= {0,3}\\S+.+$)'
-        'endCaptures':
-          '0':
-            'name': 'support.gfm'
-        'contentName': 'markup.definition.content.pfm'
-        'patterns': [
-          {
-            'include': '$self'
-          }
-        ]
+        'name': 'markup.definition.pfm'
+        'match': '^([:~]   |^ [:~]  |^  [:~] )(\\S.*)'
+        'captures':
+          '1':
+            'name': 'variable.unordered.list.gfm'
+          '2':
+            'patterns': [
+              { 'include': '#inline'}
+            ]
       }
     ]

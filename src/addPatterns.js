@@ -71,8 +71,7 @@ var testMap = [
   },
   {
     name: 'variable.ordered',
-    order: 0,
-    repository: 'single-line'
+    ignore: true
   },
   {
     name: 'variable.mention',

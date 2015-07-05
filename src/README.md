@@ -1,20 +1,26 @@
-# Pandoc flavored Markdown package [![wercker status](https://app.wercker.com/status/e2bfecae6e8a971093516b3b3ddd4721/s/dist "wercker status")](https://app.wercker.com/project/bykey/e2bfecae6e8a971093516b3b3ddd4721)
+# Pandoc flavored Markdown package [![wercker status](https://app.wercker.com/status/e2bfecae6e8a971093516b3b3ddd4721/s/master "wercker status")](https://app.wercker.com/project/bykey/e2bfecae6e8a971093516b3b3ddd4721)
 ![screen shot 2015-03-14 at 15 36 12](https://cloud.githubusercontent.com/assets/2906107/6652065/f9d4048a-ca60-11e4-8c3f-c490c68b6559.png)
 
 Adds syntax highlighting and snippets to [Pandoc flavored Markdown](http://johnmacfarlane.net/pandoc/README.html)
 files in Atom. This was forked from [atoms language-gfm](https://github.com/atom/language-gfm). The goal is to maintain compatibility with the **Github Flavored Markdown** package while adding as much pandoc functionality as possible.
 
-In order for `language-pfm` to work you have to disable `language-gfm`.
+**Setting `language-pfm` as default**
 
-This package has it's own math highlighting, copied from: [language-latex](https://atom.io/packages/language-latex).
+* Disable `language-gfm`, all `.md` files will be highlighted using this package.
+* Or rename pandoc flavored markdown files to `.p.md` or `.pmd`
 
 **Supported Pandoc Features**
 
-* Math syntax with inline `$...$` and `\(...\)` and block `$$...$$` and `\[...\]`
+* Math highlighting `$...$` and `\(...\)` and block `$$...$$` and `\[...\]` (copied from [language-latex](https://atom.io/packages/language-latex))
 * [Definition Lists]
 * [Raw HTML] with [inline markdown]
+* [Footnotes] & [Inline-Footnotes]
+* [Citations]
 * ... more to come!
 
+[Citations]: http://johnmacfarlane.net/pandoc/README.html#extension-citations
+[Footnotes]: http://johnmacfarlane.net/pandoc/README.html#extension-footnotes
+[Inline-Footnotes]: http://johnmacfarlane.net/pandoc/README.html#extension-inline_notes
 [Definition Lists]: http://johnmacfarlane.net/pandoc/README.html#extension-definition_lists
 [Raw HTML]: http://johnmacfarlane.net/pandoc/README.html#extension-raw_html
 [inline markdown]: http://johnmacfarlane.net/pandoc/README.html#extension-markdown_in_html_blocks

@@ -1,0 +1,30 @@
+'extend-repository-patterns':
+  'single-line': [
+    { 'include': '#list-ordered', order: 100 }
+  ]
+'repository':
+  'list-ordered':
+    'patterns': [
+      {
+        'match': '^\\s*(\\(?(?:(?:M{0,4}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})|m{0,4}(?:cm|cd|d?c{0,3})(?:xc|xl|l?x{0,3})(?:ix|iv|v?i{0,3})|\\d+|#|[A-z])[.)]))[ \\t]+'
+        'captures':
+          '1':
+            'name': 'variable.ordered.list.gfm'
+      }
+      {
+        'match': '^\\s*(\\()(@[\\w_]*)(\\))[ \\t]+'
+        'captures':
+          '1':
+            'name': 'variable.ordered.list.gfm'
+          '2':
+            'patterns': [
+              {'include': '#citations'},
+              {
+                'match': '@'
+                'name': 'variable.mention.gfm'
+              }
+            ]
+          '3':
+            'name': 'variable.ordered.list.gfm'
+      }
+    ]

@@ -3,7 +3,7 @@
 'repository':
   'single-line':
     'patterns': [
-      { 'include': '#headings' }
+      { 'include': '#headings', order: 250 }
       ]
   'inline':
     'patterns': [
