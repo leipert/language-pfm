@@ -66,6 +66,8 @@ H~2~O is a liquid.  2^10^ is 1024.
 
 P~a\ cat~, not P~a cat~
 
+P^a\ cat^, not P^a cat^
+
 ----------------------------------------
 
 ### extension-raw_html \& extension-markdown_in_html_blocks
