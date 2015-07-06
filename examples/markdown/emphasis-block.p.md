@@ -50,6 +50,9 @@ fail
 
 Works not:
 
+this is a **multiline
+emphasis**
+
 *TEST
 correctly
 **

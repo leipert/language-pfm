@@ -23,4 +23,4 @@ I like several of their flavors of ice cream:
 This should not work:
 
 > This is a block quote.
->> Nested.
+> > Nested.
