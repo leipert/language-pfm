@@ -1187,6 +1187,23 @@ repository:
         name: 'markup.code.python.gfm'
       }
       {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.swift[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.swift'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.swift.gfm'
+      }
+      {
         match: '(`+)(.+)\\1\\s*(\\{.*\\.c[^\\}]*\\})'
         captures:
           '2':
@@ -1767,6 +1784,29 @@ repository:
           }
         ]
         contentName: 'source.python'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:swift)|(\\{.*\\.swift[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '0':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*\\s*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.swift.gfm'
+        patterns: [
+          {
+            include: 'source.swift'
+          }
+        ]
+        contentName: 'source.swift'
       }
       {
         begin: '^\\s*(((`|~){3,})\\s*(?:(?:c)|(\\{.*\\.c[^\\}]*\\}))\\s*)$'

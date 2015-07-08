@@ -58,6 +58,9 @@ var raw = [
     'begin': 'py(?:thon)?',
     contentName: 'source.python'
   }, {
+    'begin': 'swift',
+    contentName: 'source.swift'
+  }, {
     'begin': 'c',
     contentName: 'source.c'
   }, {
