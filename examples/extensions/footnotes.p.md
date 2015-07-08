@@ -1,7 +1,20 @@
 ### extension-footnotes & extension-inline_notes
 
-Example:
+Issues:
 
+bla bla^[@ab]
+
+bla [...] bla^[@ab]
+
+bla [...] bla^[@a]
+
+> bla bla^[@ab]
+
+> bla [...] bla^[@ab]
+
+> bla [...] bla^[@a]
+
+Example:
 
 Inline Note^[S.175]
 
