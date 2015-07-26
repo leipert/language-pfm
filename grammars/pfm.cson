@@ -966,6 +966,23 @@ repository:
         name: 'markup.code.sql.gfm'
       }
       {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.clojure[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.clojure'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.clojure.gfm'
+      }
+      {
         match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:markdown|mdown|md)[^\\}]*\\})'
         captures:
           '2':
@@ -1484,6 +1501,28 @@ repository:
         patterns: [
           {
             include: 'source.sql'
+          }
+        ]
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:clojure)|(\\{.*\\.clojure[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '0':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*\\s*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.clojure.gfm'
+        patterns: [
+          {
+            include: 'source.clojure'
           }
         ]
       }

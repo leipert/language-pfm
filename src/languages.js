@@ -17,6 +17,11 @@ var raw = [
     'begin': 'sql',
     'name': 'markup.code.sql.gfm',
     'include': 'source.sql'
+  },
+  {
+    'begin': 'clojure',
+    'name': 'markup.code.clojure.gfm',
+    'include': 'source.clojure'
   }, {
     'begin': '(?:markdown|mdown|md)',
     'name': 'markup.code.gfm',
