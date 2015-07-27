@@ -1,6 +1,6 @@
 {
   "name": "language-pfm",
-  "version": "0.80.0",
+  "version": "0.81.0",
   "description": "Syntax highlighting and snippets for Pandoc Flavored Markdown (PFM).",
   "repository": "https://github.com/leipert/language-pfm",
   "engines": {
