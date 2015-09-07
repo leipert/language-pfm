@@ -881,7 +881,7 @@ repository:
   'code-inline':
     patterns: [
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.coffee-?(?:script)?[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:coffee-?(?:script)?)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -898,7 +898,7 @@ repository:
         name: 'markup.code.coffee.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:javascript|js)[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:(?:javascript|js))[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -915,7 +915,58 @@ repository:
         name: 'markup.code.js.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.(apib|apiblueprint)[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:(?:rust|rs))[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.rust'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.rust.gfm'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:elm)[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.elm'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.elm.gfm'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:julia)[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.julia'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.julia.gfm'
+      }
+      {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:(?:apib|apiblueprint))[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -932,7 +983,7 @@ repository:
         name: 'markup.code.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.mson[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:mson)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -949,7 +1000,7 @@ repository:
         name: 'markup.code.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.sql[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:sql)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -966,7 +1017,7 @@ repository:
         name: 'markup.code.sql.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.clojure[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:clojure)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -983,7 +1034,7 @@ repository:
         name: 'markup.code.clojure.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:markdown|mdown|md)[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:(?:markdown|mdown|md))[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1000,7 +1051,7 @@ repository:
         name: 'markup.code.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.json[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:json)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1017,7 +1068,7 @@ repository:
         name: 'markup.code.json.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.css[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:css)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1034,7 +1085,7 @@ repository:
         name: 'markup.code.css.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.less[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:less)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1051,7 +1102,7 @@ repository:
         name: 'markup.code.less.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.xml[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:xml)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1068,7 +1119,7 @@ repository:
         name: 'markup.code.xml.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:ruby|rb)[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:(?:ruby|rb))[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1085,7 +1136,7 @@ repository:
         name: 'markup.code.ruby.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.java[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:java)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1102,7 +1153,7 @@ repository:
         name: 'markup.code.java.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.erlang[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:erlang)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1119,7 +1170,7 @@ repository:
         name: 'markup.code.erlang.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.go(?:lang)?[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:go(?:lang)?)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1136,7 +1187,7 @@ repository:
         name: 'markup.code.go.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.cs(?:harp)?[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:cs(?:harp)?)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1153,7 +1204,7 @@ repository:
         name: 'markup.code.cs.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.php[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:php)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1170,7 +1221,7 @@ repository:
         name: 'markup.code.php.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:sh|bash)[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:(?:sh|bash))[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1187,7 +1238,7 @@ repository:
         name: 'markup.code.shell.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.py(?:thon)?[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:py(?:thon)?)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1204,7 +1255,7 @@ repository:
         name: 'markup.code.python.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.swift[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:swift)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1221,7 +1272,7 @@ repository:
         name: 'markup.code.swift.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.c[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:c)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1238,7 +1289,7 @@ repository:
         name: 'markup.code.c.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.c(?:pp|\\+\\+)[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:c(?:pp|\\+\\+))[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1255,7 +1306,7 @@ repository:
         name: 'markup.code.cpp.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:objc|objective-c)[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:(?:objc|objective-c))[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1272,7 +1323,7 @@ repository:
         name: 'markup.code.objc.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.haskell[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:haskell)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1289,7 +1340,7 @@ repository:
         name: 'markup.code.haskell.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.html[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:html)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1306,7 +1357,7 @@ repository:
         name: 'markup.code.html.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:la)?tex[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:(?:la)?tex)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1323,7 +1374,7 @@ repository:
         name: 'markup.code.latex.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.ya?ml[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:ya?ml)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1340,7 +1391,7 @@ repository:
         name: 'markup.code.yaml.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.elixir[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:elixir)[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1357,7 +1408,7 @@ repository:
         name: 'markup.code.elixir.gfm'
       }
       {
-        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?:diff|patch|rej)[^\\}]*\\})'
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.(?i:(?:diff|patch|rej))[^\\}]*\\})'
         captures:
           '2':
             patterns: [
@@ -1393,7 +1444,7 @@ repository:
   'code-block':
     patterns: [
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:coffee-?(?:script)?)|(\\{.*\\.coffee-?(?:script)?[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:coffee-?(?:script)?)|(\\{.*\\.(?i:coffee-?(?:script)?)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1416,7 +1467,7 @@ repository:
         contentName: 'source.coffee'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(?:javascript|js))|(\\{.*\\.(?:javascript|js)[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:(?:javascript|js))|(\\{.*\\.(?i:(?:javascript|js))[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1439,7 +1490,76 @@ repository:
         contentName: 'source.js'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(apib|apiblueprint))|(\\{.*\\.(apib|apiblueprint)[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:(?:rust|rs))|(\\{.*\\.(?i:(?:rust|rs))[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '0':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*\\s*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.rust.gfm'
+        patterns: [
+          {
+            include: 'source.rust'
+          }
+        ]
+        contentName: 'source.rust'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:elm)|(\\{.*\\.(?i:elm)[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '0':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*\\s*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.elm.gfm'
+        patterns: [
+          {
+            include: 'source.elm'
+          }
+        ]
+        contentName: 'source.elm'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:julia)|(\\{.*\\.(?i:julia)[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '0':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*\\s*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.julia.gfm'
+        patterns: [
+          {
+            include: 'source.julia'
+          }
+        ]
+        contentName: 'source.julia'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:(?:apib|apiblueprint))|(\\{.*\\.(?i:(?:apib|apiblueprint))[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1461,7 +1581,7 @@ repository:
         ]
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:mson)|(\\{.*\\.mson[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:mson)|(\\{.*\\.(?i:mson)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1483,7 +1603,7 @@ repository:
         ]
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:sql)|(\\{.*\\.sql[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:sql)|(\\{.*\\.(?i:sql)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1505,7 +1625,7 @@ repository:
         ]
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:clojure)|(\\{.*\\.clojure[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:clojure)|(\\{.*\\.(?i:clojure)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1527,7 +1647,7 @@ repository:
         ]
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(?:markdown|mdown|md))|(\\{.*\\.(?:markdown|mdown|md)[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:(?:markdown|mdown|md))|(\\{.*\\.(?i:(?:markdown|mdown|md))[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1549,7 +1669,7 @@ repository:
         ]
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:json)|(\\{.*\\.json[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:json)|(\\{.*\\.(?i:json)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1572,7 +1692,7 @@ repository:
         contentName: 'source.json'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:css)|(\\{.*\\.css[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:css)|(\\{.*\\.(?i:css)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1595,7 +1715,7 @@ repository:
         contentName: 'source.css'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:less)|(\\{.*\\.less[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:less)|(\\{.*\\.(?i:less)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1618,7 +1738,7 @@ repository:
         contentName: 'source.css.less'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:xml)|(\\{.*\\.xml[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:xml)|(\\{.*\\.(?i:xml)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1641,7 +1761,7 @@ repository:
         contentName: 'text.xml'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(?:ruby|rb))|(\\{.*\\.(?:ruby|rb)[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:(?:ruby|rb))|(\\{.*\\.(?i:(?:ruby|rb))[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1664,7 +1784,7 @@ repository:
         contentName: 'source.ruby'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:java)|(\\{.*\\.java[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:java)|(\\{.*\\.(?i:java)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1687,7 +1807,7 @@ repository:
         contentName: 'source.java'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:erlang)|(\\{.*\\.erlang[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:erlang)|(\\{.*\\.(?i:erlang)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1710,7 +1830,7 @@ repository:
         contentName: 'source.erlang'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:go(?:lang)?)|(\\{.*\\.go(?:lang)?[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:go(?:lang)?)|(\\{.*\\.(?i:go(?:lang)?)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1733,7 +1853,7 @@ repository:
         contentName: 'source.go'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:cs(?:harp)?)|(\\{.*\\.cs(?:harp)?[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:cs(?:harp)?)|(\\{.*\\.(?i:cs(?:harp)?)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1756,7 +1876,7 @@ repository:
         contentName: 'source.cs'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:php)|(\\{.*\\.php[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:php)|(\\{.*\\.(?i:php)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1779,7 +1899,7 @@ repository:
         contentName: 'source.php'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(?:sh|bash))|(\\{.*\\.(?:sh|bash)[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:(?:sh|bash))|(\\{.*\\.(?i:(?:sh|bash))[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1802,7 +1922,7 @@ repository:
         contentName: 'source.shell'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:py(?:thon)?)|(\\{.*\\.py(?:thon)?[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:py(?:thon)?)|(\\{.*\\.(?i:py(?:thon)?)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1825,7 +1945,7 @@ repository:
         contentName: 'source.python'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:swift)|(\\{.*\\.swift[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:swift)|(\\{.*\\.(?i:swift)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1848,7 +1968,7 @@ repository:
         contentName: 'source.swift'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:c)|(\\{.*\\.c[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:c)|(\\{.*\\.(?i:c)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1871,7 +1991,7 @@ repository:
         contentName: 'source.c'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:c(?:pp|\\+\\+))|(\\{.*\\.c(?:pp|\\+\\+)[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:c(?:pp|\\+\\+))|(\\{.*\\.(?i:c(?:pp|\\+\\+))[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1894,7 +2014,7 @@ repository:
         contentName: 'source.cpp'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(?:objc|objective-c))|(\\{.*\\.(?:objc|objective-c)[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:(?:objc|objective-c))|(\\{.*\\.(?i:(?:objc|objective-c))[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1917,7 +2037,7 @@ repository:
         contentName: 'source.objc'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:haskell)|(\\{.*\\.haskell[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:haskell)|(\\{.*\\.(?i:haskell)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1940,7 +2060,7 @@ repository:
         contentName: 'source.haskell'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:html)|(\\{.*\\.html[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:html)|(\\{.*\\.(?i:html)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1963,7 +2083,7 @@ repository:
         contentName: 'source.html.basic'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(?:la)?tex)|(\\{.*\\.(?:la)?tex[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:(?:la)?tex)|(\\{.*\\.(?i:(?:la)?tex)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -1985,7 +2105,7 @@ repository:
         ]
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:ya?ml)|(\\{.*\\.ya?ml[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:ya?ml)|(\\{.*\\.(?i:ya?ml)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -2008,7 +2128,7 @@ repository:
         contentName: 'source.yaml'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:elixir)|(\\{.*\\.elixir[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:elixir)|(\\{.*\\.(?i:elixir)[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'
@@ -2031,7 +2151,7 @@ repository:
         contentName: 'source.elixir'
       }
       {
-        begin: '^\\s*(((`|~){3,})\\s*(?:(?:(?:diff|patch|rej))|(\\{.*\\.(?:diff|patch|rej)[^\\}]*\\}))\\s*)$'
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?i:(?:diff|patch|rej))|(\\{.*\\.(?i:(?:diff|patch|rej))[^\\}]*\\}))\\s*)$'
         beginCaptures:
           '0':
             name: 'support.gfm'

@@ -6,7 +6,16 @@ var raw = [
     'begin': '(?:javascript|js)',
     contentName: 'source.js'
   }, {
-    'begin': '(apib|apiblueprint)',
+    'begin': '(?:rust|rs)',
+    contentName: 'source.rust'
+  }, {
+    'begin': 'elm',
+    contentName: 'source.elm'
+  }, {
+    'begin': 'julia',
+    contentName: 'source.julia'
+  }, {
+    'begin': '(?:apib|apiblueprint)',
     'name': 'markup.code.gfm',
     'include': 'text.html.markdown.source.gfm.apib'
   }, {
@@ -17,8 +26,7 @@ var raw = [
     'begin': 'sql',
     'name': 'markup.code.sql.gfm',
     'include': 'source.sql'
-  },
-  {
+  }, {
     'begin': 'clojure',
     'name': 'markup.code.clojure.gfm',
     'include': 'source.clojure'
@@ -103,9 +111,9 @@ var raw = [
 
 var _ = require('lodash');
 
-var template = _.template('{"begin":"^\\\\s*(((`|~){3,})\\\\s*(?:(?:<%= begin %>)|(\\\\{.*\\\\.<%= begin %>[^\\\\}]*\\\\}))\\\\s*)$","beginCaptures":{"0":{"name":"support.gfm"},"4":{"patterns":[{"include":"source.css.less"}]}},"end":"^\\\\s*\\\\2\\\\3*\\\\s*$","endCaptures":{"0":{"name":"support.gfm"}},"name":"<%= name %>","patterns":[{"include":"<%= include %>"}]}');
+var fencedTemplate = _.template('{"begin":"^\\\\s*(((`|~){3,})\\\\s*(?:(?i:<%= begin %>)|(\\\\{.*\\\\.(?i:<%= begin %>)[^\\\\}]*\\\\}))\\\\s*)$","beginCaptures":{"0":{"name":"support.gfm"},"4":{"patterns":[{"include":"source.css.less"}]}},"end":"^\\\\s*\\\\2\\\\3*\\\\s*$","endCaptures":{"0":{"name":"support.gfm"}},"name":"<%= name %>","patterns":[{"include":"<%= include %>"}]}');
 
-var template2 = _.template('{"match":"(`+)(.+)\\\\1\\\\s*(\\\\{.*\\\\.<%= begin %>[^\\\\}]*\\\\})","captures":{"2":{"patterns":[{"include":"<%= include %>"}]},"3":{"patterns":[{"include":"source.css.less"}]}},"name":"<%= name %>"}');
+var inlineTemplate = _.template('{"match":"(`+)(.+)\\\\1\\\\s*(\\\\{.*\\\\.(?i:<%= begin %>)[^\\\\}]*\\\\})","captures":{"2":{"patterns":[{"include":"<%= include %>"}]},"3":{"patterns":[{"include":"source.css.less"}]}},"name":"<%= name %>"}');
 
 
 languages = _.map(raw, function(language) {
@@ -117,8 +125,8 @@ languages = _.map(raw, function(language) {
     language.name = 'markup.code.' + language.name + '.gfm'
   }
 
-  var block = JSON.parse(template(language))
-  var inline = JSON.parse(template2(language))
+  var block = JSON.parse(fencedTemplate(language))
+  var inline = JSON.parse(inlineTemplate(language))
 
   if (language.contentName) {
     block.contentName = language.contentName;
