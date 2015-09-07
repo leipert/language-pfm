@@ -1204,6 +1204,23 @@ repository:
         name: 'markup.code.python.gfm'
       }
       {
+        match: '(`+)(.+)\\1\\s*(\\{.*\\.jl[^\\}]*\\})'
+        captures:
+          '2':
+            patterns: [
+              {
+                include: 'source.julia'
+              }
+            ]
+          '3':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        name: 'markup.code.julia.gfm'
+      }
+      {
         match: '(`+)(.+)\\1\\s*(\\{.*\\.swift[^\\}]*\\})'
         captures:
           '2':
@@ -1823,6 +1840,29 @@ repository:
           }
         ]
         contentName: 'source.python'
+      }
+      {
+        begin: '^\\s*(((`|~){3,})\\s*(?:(?:julia)|(\\{.*\\.julia[^\\}]*\\}))\\s*)$'
+        beginCaptures:
+          '0':
+            name: 'support.gfm'
+          '4':
+            patterns: [
+              {
+                include: 'source.css.less'
+              }
+            ]
+        end: '^\\s*\\2\\3*\\s*$'
+        endCaptures:
+          '0':
+            name: 'support.gfm'
+        name: 'markup.code.julia.gfm'
+        patterns: [
+          {
+            include: 'source.julia'
+          }
+        ]
+        contentName: 'source.julia'
       }
       {
         begin: '^\\s*(((`|~){3,})\\s*(?:(?:swift)|(\\{.*\\.swift[^\\}]*\\}))\\s*)$'
