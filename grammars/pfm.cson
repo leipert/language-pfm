@@ -813,7 +813,7 @@ repository:
   'math-block':
     patterns: [
       {
-        name: 'markup.math.block.pfm'
+        name: 'string.other.math.block.tex'
         begin: '(\\${2})'
         beginCaptures:
           '0':
@@ -824,12 +824,12 @@ repository:
             name: 'support.gfm'
         patterns: [
           {
-            include: '#math-syntax'
+            include: 'text.tex.latex'
           }
         ]
       }
       {
-        name: 'markup.math.block.pfm'
+        name: 'string.other.math.block.tex'
         begin: '(?<!\\\\)\\\\\\['
         beginCaptures:
           '0':
@@ -840,7 +840,7 @@ repository:
             name: 'support.gfm'
         patterns: [
           {
-            include: '#math-syntax'
+            include: 'text.tex.latex'
           }
         ]
       }
@@ -848,7 +848,7 @@ repository:
   'math-inline':
     patterns: [
       {
-        name: 'markup.math.inline.pfm'
+        name: 'string.other.math.inline.tex'
         match: '(?<!\\$)(\\$)([^$\\s][^$]+[^\\\\$\\s]|[^\\\\$\\s]+)(\\$)'
         captures:
           '1':
@@ -856,14 +856,14 @@ repository:
           '2':
             patterns: [
               {
-                include: '#math-syntax'
+                include: 'text.tex.latex'
               }
             ]
           '3':
             name: 'support.gfm'
       }
       {
-        name: 'markup.math.inline.pfm'
+        name: 'string.other.math.inline.tex'
         match: '(\\\\\\()([\\S][^)]+)(\\\\\\))'
         captures:
           '1':
@@ -871,7 +871,7 @@ repository:
           '2':
             patterns: [
               {
-                include: '#math-syntax'
+                include: 'text.tex.latex'
               }
             ]
           '3':
