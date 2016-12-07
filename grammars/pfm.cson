@@ -1,5 +1,5 @@
 name: 'Pandoc Markdown'
-scopeName: 'source.gfm'
+scopeName: 'source.pfm'
 fileTypes: [
   'markdown'
   'md'
